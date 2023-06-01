@@ -1,0 +1,30 @@
+.main {
+    height: 500px;
+    width: 1000px;
+    border: 1px black solid;
+    margin: auto;
+
+    &__title {
+        height: 50px;
+        width: 100px;
+        position: absolute;
+
+        h2 {
+            margin: 13px;
+        }
+    }
+        .titles {
+            height: 300px;
+            width: 1000px;
+            border: 1px black solid;
+            display: flex;
+
+            &__article{
+                height: 200px;
+                width: 300px;
+                border: 1px black solid;
+            }
+
+        }
+    }
+

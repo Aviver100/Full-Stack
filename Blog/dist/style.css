@@ -1,0 +1,80 @@
+body {
+  font-family: "Open Sans", sans-serif;
+}
+body .main {
+  height: 360px;
+  width: 180px;
+  margin: auto;
+  background-image: url(https://img.freepik.com/free-vector/gradient-blue-abstract-technology-background_23-2149213765.jpg);
+  border-radius: 20px;
+  border-style: solid;
+}
+body .back {
+  border: solid #818181 1px;
+  border-radius: 4px;
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  margin: 20px;
+}
+body .back .backicon {
+  height: 7px;
+  width: 6px;
+  margin: 6px;
+}
+body .title {
+  position: absolute;
+  margin: 40px 22px;
+  color: white;
+  font-size: 14px;
+  font-weight: 200;
+  height: 15px;
+}
+body .title .wellcome {
+  font-weight: 900;
+}
+body .box {
+  height: 100px;
+  width: 70px;
+  border-radius: 10px;
+  position: absolute;
+}
+body .ar {
+  margin: 120px 20px;
+  background-color: white;
+}
+body .ar .icon {
+  height: 20px;
+  margin: 30px 25px;
+}
+body .ar .armode {
+  margin: -22px 19px;
+}
+body .txt {
+  font-weight: bold;
+  font-size: 7px;
+}
+body .custom {
+  margin: 170px 100px;
+  background: rgba(255, 255, 255, 0.25);
+}
+body .custom .icon {
+  height: 25px;
+  margin: 30px 25px;
+}
+body .custom .customtxt {
+  margin: -25px 22px;
+  color: white;
+}
+body .next {
+  background-color: aqua;
+  border-radius: 50%;
+  width: 25px;
+  height: 25px;
+  position: absolute;
+  margin: 320px 0px 1px 140px;
+}
+body .next .nexticon {
+  height: 55%;
+  margin: 6px;
+}

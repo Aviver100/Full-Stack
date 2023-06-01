@@ -1,0 +1,106 @@
+$position: absolute;
+$font-size: 7px;
+
+body {
+
+    font-family: 'Open Sans', sans-serif;
+
+    .main {
+        height: 360px;
+        width: 180px;
+        margin: auto;
+        background-image: url(https://img.freepik.com/free-vector/gradient-blue-abstract-technology-background_23-2149213765.jpg);
+        border-radius: 20px;
+        border-style: solid;
+    }
+
+    .back {
+        border: solid rgb(129, 129, 129) 1px;
+        border-radius: 4px;
+        width: 20px;
+        height: 20px;
+        position: $position;
+        margin: 20px;
+
+        .backicon {
+            height: 7px;
+            width: 6px;
+            margin: 6px;
+        }
+    }
+
+    .title {
+        position: $position;
+        margin: 40px 22px;
+        color: white;
+        font-size: 14px;
+        font-weight: 200;
+        height: 15px;
+
+        .wellcome {
+            font-weight: 900;
+        }
+    }
+
+    .box {
+        height: 100px;
+        width: 70px;
+        border-radius: 10px;
+        position: $position;
+
+    }
+
+    .ar {
+        margin: 120px 20px;
+        background-color: white;
+
+        .icon {
+            height: 20px;
+            margin: 30px 25px;
+        }
+
+        .armode {
+            margin: -22px 19px;
+
+        }
+    }
+
+    .txt {
+        font-weight: bold;
+        font-size: $font-size;
+    }
+
+    .custom {
+
+        margin: 170px 100px;
+        background: rgba(255, 255, 255, 0.25);
+
+        .icon {
+            height: 25px;
+            margin: 30px 25px;
+        }
+
+        .customtxt {
+            margin: -25px 22px;
+            color: white;
+
+        }
+
+
+    }
+
+    .next {
+        background-color: aqua;
+        border-radius: 50%;
+        width: 25px;
+        height: 25px;
+        position: $position;
+        margin: 320px 0px 1px 140px;
+
+        .nexticon {
+            height: 55%;
+            margin: 6px;
+        }
+    }
+
+}

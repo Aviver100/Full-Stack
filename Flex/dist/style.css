@@ -1,0 +1,25 @@
+.main {
+  height: 500px;
+  width: 1000px;
+  border: 1px black solid;
+  margin: auto;
+}
+.main__title {
+  height: 50px;
+  width: 100px;
+  position: absolute;
+}
+.main__title h2 {
+  margin: 13px;
+}
+.main .titles {
+  height: 300px;
+  width: 1000px;
+  border: 1px black solid;
+  display: flex;
+}
+.main .titles__article {
+  height: 200px;
+  width: 300px;
+  border: 1px black solid;
+}

@@ -1,0 +1,197 @@
+$position: absolute;
+$font-size: 7px;
+
+body{
+    font-family: 'Inter', sans-serif;
+    font-weight: bold;
+.main{
+    height: 360px;
+    width: 180px;
+    margin: auto;
+    border-radius: 20px;
+    border-style: solid;
+
+    .title{
+        width: 80px;
+    .hash{
+        
+        font-size: $font-size;
+        color: blue;
+        margin: 15px;
+    }
+    h2{
+        margin: -10px 15px;
+        width: 60px;
+    }
+
+    .bell{
+        border: solid rgb(185, 185, 185) 1px;
+        border-radius: 4px;
+        width: 20px;
+        height: 20px;
+        position: $position;
+        margin-left: 140px;
+        margin-top: -30px;
+        
+        .backicon{
+            height: 50%;
+            width: 50%;
+            margin: 28%;
+             
+        } 
+     }
+  }
+
+.mainpic{
+    height: 140px;
+    width: 140px;
+    background-image: url(https://cdn.dribbble.com/users/1516344/screenshots/6617658/17_liquidbackgrounds_2_1600x1200_1_4x.jpg?compress=1&resize=1000x750&vertical=top);
+    border-radius: 15px;
+    margin: 20px;
+    margin-bottom: 0px;
+
+    .txt{
+        font-size: $font-size;
+        position: $position;
+        color: white;
+        font-weight: 400;
+        width: auto;
+    }
+    .writer{ 
+        padding-left: 25px;
+        padding-top: 60px;
+    }
+    .writerpic{
+        height: 10px;
+        border-radius: 5px;
+        margin: 66px 10px;
+        position: $position;
+    }
+    .min{
+        padding-left: 100px;
+        padding-top: 60px;
+    }
+    .title{
+        font-size: 10px;
+        margin: 85px 10px;
+        font-weight: 500;
+    }
+    .subtitle{
+        font-size: $font-size;
+        margin: 103px 10px;
+    }
+
+    
+}
+
+    .categories{
+    width: 180px;
+    height: 32px;
+    position: relative;
+
+    .block{
+        font-size: 6px;
+        border-radius: 5px ;
+        width: 55px;
+        height: 20px;
+        margin-left: 20px;
+        background-color: rgb(241, 241, 241);
+        position: $position;
+        margin-top: $font-size;
+        
+        .txtblock{
+            margin: 5px;
+            width: 35px;
+        }
+    }
+    .funny{
+        margin-left: 20px;
+    }
+    .sports{
+        margin-left: 85px;
+    }
+    .food{
+        margin-left: 150px;
+        border-radius: 5px 0px 0px 5px ;
+        width: 30px;
+    }
+  }
+.bottom{
+    height: 105px;
+    width: 180px;
+    
+    .popular{
+        font-size: 8px;
+        margin-left: 20px;
+        margin-top: 10px;
+    }
+    .news{
+        width: 150px;
+        height: 50px;
+        margin: auto;
+
+        img{
+            height: 100%;
+            
+            border-radius: 5px;
+        }
+        
+        .writerpic{
+            height: 10px;
+            border-radius: 5px;
+            margin: 5px;
+            position: absolute
+        }
+        .writer{
+         margin-top: -49px;
+         margin-left: 70px;
+         font-size: $font-size;   
+         font-weight: 100;
+        }
+        .title{
+            font-size: 8px;
+            width: 100px;
+            margin-left: 55px; 
+            margin-top: -2px;      
+        }
+        .time{
+            color:rgb(197, 196, 196);
+            font-size: 5px;
+            font-weight: 200;
+            margin-left: 55px; 
+            margin-top: -4px;
+        }
+        
+    }
+.menu{
+
+    height: 25px;
+    
+    .icon{
+    height: 12px;
+    margin-left: 15px;
+    margin-top: 15px;    
+    }
+    .message{
+    margin-left: 50px;
+
+        }
+    .scan{
+        height:25px;
+        width: 25px;
+        background-color: rgb(35, 0, 235);
+        border-radius: 50px;
+        position: $position;
+        margin-top: -24px;
+        margin-left: 75px;
+        box-shadow: 0px 3px 8px 0px rgb(35, 0, 235);;
+
+        .icon{
+            margin: 7px;
+        }
+
+    }
+}
+}
+}
+}

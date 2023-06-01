@@ -1,0 +1,172 @@
+body {
+  font-family: "Inter", sans-serif;
+  font-weight: bold;
+}
+body .main {
+  height: 360px;
+  width: 180px;
+  margin: auto;
+  border-radius: 20px;
+  border-style: solid;
+}
+body .main .title {
+  width: 80px;
+}
+body .main .title .hash {
+  font-size: 7px;
+  color: blue;
+  margin: 15px;
+}
+body .main .title h2 {
+  margin: -10px 15px;
+  width: 60px;
+}
+body .main .title .bell {
+  border: solid #b9b9b9 1px;
+  border-radius: 4px;
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  margin-left: 140px;
+  margin-top: -30px;
+}
+body .main .title .bell .backicon {
+  height: 50%;
+  width: 50%;
+  margin: 28%;
+}
+body .main .mainpic {
+  height: 140px;
+  width: 140px;
+  background-image: url(https://cdn.dribbble.com/users/1516344/screenshots/6617658/17_liquidbackgrounds_2_1600x1200_1_4x.jpg?compress=1&resize=1000x750&vertical=top);
+  border-radius: 15px;
+  margin: 20px;
+  margin-bottom: 0px;
+}
+body .main .mainpic .txt {
+  font-size: 7px;
+  position: absolute;
+  color: white;
+  font-weight: 400;
+  width: auto;
+}
+body .main .mainpic .writer {
+  padding-left: 25px;
+  padding-top: 60px;
+}
+body .main .mainpic .writerpic {
+  height: 10px;
+  border-radius: 5px;
+  margin: 66px 10px;
+  position: absolute;
+}
+body .main .mainpic .min {
+  padding-left: 100px;
+  padding-top: 60px;
+}
+body .main .mainpic .title {
+  font-size: 10px;
+  margin: 85px 10px;
+  font-weight: 500;
+}
+body .main .mainpic .subtitle {
+  font-size: 7px;
+  margin: 103px 10px;
+}
+body .main .categories {
+  width: 180px;
+  height: 32px;
+  position: relative;
+}
+body .main .categories .block {
+  font-size: 6px;
+  border-radius: 5px;
+  width: 55px;
+  height: 20px;
+  margin-left: 20px;
+  background-color: #f1f1f1;
+  position: absolute;
+  margin-top: 7px;
+}
+body .main .categories .block .txtblock {
+  margin: 5px;
+  width: 35px;
+}
+body .main .categories .funny {
+  margin-left: 20px;
+}
+body .main .categories .sports {
+  margin-left: 85px;
+}
+body .main .categories .food {
+  margin-left: 150px;
+  border-radius: 5px 0px 0px 5px;
+  width: 30px;
+}
+body .main .bottom {
+  height: 105px;
+  width: 180px;
+}
+body .main .bottom .popular {
+  font-size: 8px;
+  margin-left: 20px;
+  margin-top: 10px;
+}
+body .main .bottom .news {
+  width: 150px;
+  height: 50px;
+  margin: auto;
+}
+body .main .bottom .news img {
+  height: 100%;
+  border-radius: 5px;
+}
+body .main .bottom .news .writerpic {
+  height: 10px;
+  border-radius: 5px;
+  margin: 5px;
+  position: absolute;
+}
+body .main .bottom .news .writer {
+  margin-top: -49px;
+  margin-left: 70px;
+  font-size: 7px;
+  font-weight: 100;
+}
+body .main .bottom .news .title {
+  font-size: 8px;
+  width: 100px;
+  margin-left: 55px;
+  margin-top: -2px;
+}
+body .main .bottom .news .time {
+  color: #c5c4c4;
+  font-size: 5px;
+  font-weight: 200;
+  margin-left: 55px;
+  margin-top: -4px;
+}
+body .main .bottom .menu {
+  height: 25px;
+}
+body .main .bottom .menu .icon {
+  height: 12px;
+  margin-left: 15px;
+  margin-top: 15px;
+}
+body .main .bottom .menu .message {
+  margin-left: 50px;
+}
+body .main .bottom .menu .scan {
+  height: 25px;
+  width: 25px;
+  background-color: #2300eb;
+  border-radius: 50px;
+  position: absolute;
+  margin-top: -24px;
+  margin-left: 75px;
+  box-shadow: 0px 3px 8px 0px #2300eb;
+}
+body .main .bottom .menu .scan .icon {
+  margin: 7px;
+}
