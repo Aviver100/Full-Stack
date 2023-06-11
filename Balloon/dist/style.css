@@ -20,7 +20,7 @@ body {
   position: relative;
   bottom: 0px;
   display: inline-block;
-  animation: slide-top 12s ease-in both;
+  animation: slide-top 22s ease-in both;
   animation-iteration-count: infinite;
 }
 .main__balloons img {
@@ -36,8 +36,7 @@ body {
   }
 }
 .main__balloons .one {
-  animation: one_balloon;
-  animation: slide-top 14s ease-in both;
+  animation: slide-top 17s ease-in both;
 }
 @keyframes one_balloon {
   0% {
@@ -48,10 +47,20 @@ body {
   }
 }
 .main__balloons .two {
-  animation: two_balloon;
-  animation: slide-top 11s ease-in both;
+  animation: slide-top 20s ease-in both;
 }
 @keyframes two_balloon {
+  0% {
+    transform: translateY(520%);
+  }
+  100% {
+    transform: translateY(-400%);
+  }
+}
+.main__balloons .three {
+  animation: slide-top 18s ease-in both;
+}
+@keyframes three_balloon {
   0% {
     transform: translateY(520%);
   }
