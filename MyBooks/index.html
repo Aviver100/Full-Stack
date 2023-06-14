@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>הסיפרייה שלי</title>
+ <link rel="stylesheet" href="./dist/style.css">
+</head>
+<body>
+  <h1>ניהול הסיפרייה שלי</h1>
+
+  <h2>הוסף ע"י ברקוד</h2>
+  <form id="addBookForm">
+    <!-- <label for="isbn">הזן ברקוד:</label> -->
+    <input type="text" id="isbn" name="isbn" required>
+    <button type="submit">הוסף</button>
+  </form>
+
+  <h2>חפש ספר</h2>
+  <form id="searchBookForm">
+    <!-- <label for="searchQuery">חיפוש ספר:</label> -->
+    <input type="text" id="searchQuery" name="searchQuery" required>
+    <button type="submit">חיפוש</button>
+  </form>
+
+  <div id="searchResults" class="search-results"></div>
+
+  <h2>הספרים שלי</h2>
+  <table id="bookList">
+    <tr>
+      <th>שם</th>
+      <th>מחבר</th>
+      <th>ברקוד</th>
+    </tr>
+  </table>
+
+  <script>
+    const addBookForm = document.getElementById('addBookForm');
+    const searchBookForm = document.getElementById('searchBookForm');
+    const bookList = document.getElementById('bookList');
+    const searchResults = document.getElementById('searchResults');
+
+    addBookForm.addEventListener('submit', function(event) {
+      event.preventDefault();
+
+      const isbnInput = document.getElementById('isbn');
+      const isbn = isbnInput.value.trim();
+
+      isbnInput.value = '';
+
+      fetchBookByISBN(isbn);
+    });
+
+    searchBookForm.addEventListener('submit', function(event) {
+      event.preventDefault();
+
+      const searchQueryInput = document.getElementById('searchQuery');
+      const searchQuery = searchQueryInput.value.trim();
+
+      searchQueryInput.value = '';
+
+      searchBooksByName(searchQuery);
+    });
+
+    function fetchBookByISBN(isbn) {
+      fetch(`https://www.googleapis.com/books/v1/volumes?q=isbn:${isbn}`)
+        .then(response => response.json())
+        .then(data => {
+          if (data.totalItems > 0) {
+            const book = data.items[0].volumeInfo;
+
+            addBookToTable(book.title, book.authors ? book.authors.join(', ') : 'Unknown', isbn);
+          } else {
+            alert('Book not found!');
+          }
+        })
+        .catch(error => {
+          console.error(error);
+          alert('An error occurred while fetching book data.');
+        });
+    }
+
+    function searchBooksByName(searchQuery) {
+      fetch(`https://www.googleapis.com/books/v1/volumes?q=${searchQuery}`)
+        .then(response => response.json())
+        .then(data => {
+          displaySearchResults(data.items);
+        })
+        .catch(error => {
+          console.error(error);
+          alert('An error occurred while fetching search results.');
+        });
+    }
+
+    function displaySearchResults(books) {
+      searchResults.innerHTML = '';
+
+      if (books && books.length > 0) {
+        const resultsList = document.createElement('ul');
+
+        books.forEach(book => {
+          const title = book.volumeInfo.title || 'Unknown';
+          const authors = book.volumeInfo.authors ? book.volumeInfo.authors.join(', ') : 'Unknown';
+          const isbn = book.volumeInfo.industryIdentifiers ? book.volumeInfo.industryIdentifiers[0].identifier : '';
+
+          const listItem = document.createElement('li');
+          const addButton = document.createElement('button');
+          addButton.textContent = 'הוסף לרשימה שלי';
+
+          addButton.addEventListener('click', function() {
+            addBookToTable(title, authors, isbn);
+          });
+
+          listItem.innerHTML = `<strong>${title}</strong> by ${authors} (ISBN: ${isbn})`;
+          listItem.appendChild(addButton);
+          resultsList.appendChild(listItem);
+        });
+
+        searchResults.appendChild(resultsList);
+      } else {
+        searchResults.textContent = 'לא נמצאו תוצאות.';
+      }
+    }
+
+    function addBookToTable(title, author, isbn) {
+      const row = bookList.insertRow(-1);
+      const titleCell = row.insertCell(0);
+      const authorCell = row.insertCell(1);
+      const isbnCell = row.insertCell(2);
+
+      titleCell.textContent = title;
+      authorCell.textContent = author;
+      isbnCell.textContent = isbn;
+    }
+  </script>
+</body>
+</html>

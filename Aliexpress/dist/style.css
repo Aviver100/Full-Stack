@@ -37,16 +37,16 @@ body {
   padding-right: 22px;
   display: flex;
 }
-.main__bar__button__arrow {
+.main__bar__button img {
   height: 8px;
   width: 8px;
   margin-left: -4px;
   margin-top: 18px;
 }
 .main__bar__button__icon {
-  height: 18px;
-  width: 22px;
-  margin-top: 11px;
+  height: 18px !important;
+  width: 22px !important;
+  margin-top: 11px !important;
 }
 .main__search {
   width: 100%;
@@ -173,7 +173,8 @@ body {
   margin-top: 20px;
   width: 700px;
   height: 190px;
-  background-image: url(https://answers.unity.com/storage/temp/135164-fade.png);
+  background: #180024;
+  background: linear-gradient(90deg, #180024 0%, #bf446e 0%, #0070ff 100%);
 }
 .main__center__boxes__sales__salesdown h4 {
   position: absolute;
