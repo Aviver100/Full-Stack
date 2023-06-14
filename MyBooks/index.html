@@ -1,42 +1,74 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>הסיפרייה שלי</title>
- <link rel="stylesheet" href="./dist/style.css">
+  <title>Library Book Management</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    th, td {
+      padding: 8px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+    th {
+      background-color: #f2f2f2;
+    }
+    form {
+      margin-bottom: 20px;
+    }
+    input[type="text"] {
+      width: 200px;
+    }
+    button[type="submit"] {
+      margin-left: 10px;
+    }
+    .search-results {
+      margin-top: 20px;
+    }
+  </style>
 </head>
 <body>
-  <h1>ניהול הסיפרייה שלי</h1>
+  <h1>Library Book Management</h1>
 
-  <h2>הוסף ע"י ברקוד</h2>
+  <h2>Add a Book</h2>
   <form id="addBookForm">
-    <!-- <label for="isbn">הזן ברקוד:</label> -->
+    <label for="isbn">ISBN:</label>
     <input type="text" id="isbn" name="isbn" required>
-    <button type="submit">הוסף</button>
+    <button type="submit">Add Book</button>
   </form>
 
-  <h2>חפש ספר</h2>
+  <h2>Search Book</h2>
   <form id="searchBookForm">
-    <!-- <label for="searchQuery">חיפוש ספר:</label> -->
+    <label for="searchQuery">Search by Book Name:</label>
     <input type="text" id="searchQuery" name="searchQuery" required>
-    <button type="submit">חיפוש</button>
+    <button type="submit">Search</button>
   </form>
 
   <div id="searchResults" class="search-results"></div>
 
-  <h2>הספרים שלי</h2>
+  <h2>Book List</h2>
   <table id="bookList">
     <tr>
-      <th>שם</th>
-      <th>מחבר</th>
-      <th>ברקוד</th>
+      <th>Title</th>
+      <th>Author</th>
+      <th>ISBN</th>
     </tr>
   </table>
+
+  <button id="saveTableBtn">Save Table</button>
 
   <script>
     const addBookForm = document.getElementById('addBookForm');
     const searchBookForm = document.getElementById('searchBookForm');
     const bookList = document.getElementById('bookList');
     const searchResults = document.getElementById('searchResults');
+    const saveTableBtn = document.getElementById('saveTableBtn');
 
     addBookForm.addEventListener('submit', function(event) {
       event.preventDefault();
@@ -58,6 +90,10 @@
       searchQueryInput.value = '';
 
       searchBooksByName(searchQuery);
+    });
+
+    saveTableBtn.addEventListener('click', function() {
+      saveTableLocally();
     });
 
     function fetchBookByISBN(isbn) {
@@ -103,7 +139,7 @@
 
           const listItem = document.createElement('li');
           const addButton = document.createElement('button');
-          addButton.textContent = 'הוסף לרשימה שלי';
+          addButton.textContent = 'Add to Book List';
 
           addButton.addEventListener('click', function() {
             addBookToTable(title, authors, isbn);
@@ -116,7 +152,7 @@
 
         searchResults.appendChild(resultsList);
       } else {
-        searchResults.textContent = 'לא נמצאו תוצאות.';
+        searchResults.textContent = 'No results found.';
       }
     }
 
@@ -130,6 +166,32 @@
       authorCell.textContent = author;
       isbnCell.textContent = isbn;
     }
+
+    function saveTableLocally() {
+      const tableData = Array.from(bookList.rows).map(row => {
+        const [titleCell, authorCell, isbnCell] = row.cells;
+        return {
+          title: titleCell.textContent,
+          author: authorCell.textContent,
+          isbn: isbnCell.textContent
+        };
+      });
+
+      localStorage.setItem('bookTable', JSON.stringify(tableData));
+      alert('Book table saved locally.');
+    }
+
+    function loadTableFromLocal() {
+      const tableData = JSON.parse(localStorage.getItem('bookTable'));
+
+      if (tableData && tableData.length > 0) {
+        tableData.forEach(book => {
+          addBookToTable(book.title, book.author, book.isbn);
+        });
+      }
+    }
+
+    loadTableFromLocal();
   </script>
 </body>
 </html>
