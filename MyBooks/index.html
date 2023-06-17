@@ -1,197 +1,67 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Library Book Management</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 20px;
-    }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-    }
-    th, td {
-      padding: 8px;
-      text-align: left;
-      border-bottom: 1px solid #ddd;
-    }
-    th {
-      background-color: #f2f2f2;
-    }
-    form {
-      margin-bottom: 20px;
-    }
-    input[type="text"] {
-      width: 200px;
-    }
-    button[type="submit"] {
-      margin-left: 10px;
-    }
-    .search-results {
-      margin-top: 20px;
-    }
-  </style>
+  <title>הספרייה שלי</title>
+  <link rel="stylesheet" href="./dist/style.css">
 </head>
 <body>
-  <h1>Library Book Management</h1>
+  <h1>ניהול הספרייה שלי</h1>
 
-  <h2>Add a Book</h2>
+  <!-- <h2>Add a Book</h2> -->
   <form id="addBookForm">
-    <label for="isbn">ISBN:</label>
+    <!-- <label for="isbn">ISBN:</label>
     <input type="text" id="isbn" name="isbn" required>
-    <button type="submit">Add Book</button>
+    <button type="submit">Add Book</button> -->
+  </form>
+<Br></Br>
+  <h2>חפש ספר</h2>
+  <form id="searchBookForm">
+    <!-- <label for="searchQuery">Search by Book Name:</label> -->
+    <input type="text" id="searchQuery" name="searchQuery" required>
+    <button type="submit">חפש</button>
   </form>
 
-  <h2>Search Book</h2>
-  <form id="searchBookForm">
-    <label for="searchQuery">Search by Book Name:</label>
-    <input type="text" id="searchQuery" name="searchQuery" required>
-    <button type="submit">Search</button>
-  </form>
+  <button onclick="showAddManuallyForm()">הוסף ספר ידנית</button>
+
+  <div id="addManuallyForm" style="display: none;">
+    <h3>הוסף ספר</h3>
+    <label for="titleInput">שם:</label>
+    <input type="text" id="titleInput" required>
+  
+    <label for="authorInput">סופר:</label>
+    <input type="text" id="authorInput" required>
+  
+    <label for="isbnInput">ברקוד:</label>
+    <input type="text" id="isbnInput" required>
+  
+    <button onclick="addManually(event)">הוסף</button>
+  </div>
 
   <div id="searchResults" class="search-results"></div>
 
-  <h2>Book List</h2>
-  <table id="bookList">
+  <h2>רשימת הספרים שלי</h2>
+
+  <div>
+  <input type="text" id="searchInput" placeholder="הזן שם של ספר או סופר..." onkeydown="handleSearch(event)">
+  <button onclick="searchBooks()">חפש בספרייה</button>
+</div>
+
+  
+  <table id="bookList" dir="rtl">
     <tr>
-      <th>Title</th>
-      <th>Author</th>
-      <th>ISBN</th>
+      <th>שם</th>
+      <th>סופר</th>
+      <th>ברקוד</th>
+      <th>סטטוס</th>
+      <th>שם השואל</th>
+      <th>טלפון</th>
+      <th>השאלה</th>
     </tr>
   </table>
+  
 
-  <button id="saveTableBtn">Save Table</button>
+  <button id="saveTableBtn">שמור טבלה</button>
 
-  <script>
-    const addBookForm = document.getElementById('addBookForm');
-    const searchBookForm = document.getElementById('searchBookForm');
-    const bookList = document.getElementById('bookList');
-    const searchResults = document.getElementById('searchResults');
-    const saveTableBtn = document.getElementById('saveTableBtn');
-
-    addBookForm.addEventListener('submit', function(event) {
-      event.preventDefault();
-
-      const isbnInput = document.getElementById('isbn');
-      const isbn = isbnInput.value.trim();
-
-      isbnInput.value = '';
-
-      fetchBookByISBN(isbn);
-    });
-
-    searchBookForm.addEventListener('submit', function(event) {
-      event.preventDefault();
-
-      const searchQueryInput = document.getElementById('searchQuery');
-      const searchQuery = searchQueryInput.value.trim();
-
-      searchQueryInput.value = '';
-
-      searchBooksByName(searchQuery);
-    });
-
-    saveTableBtn.addEventListener('click', function() {
-      saveTableLocally();
-    });
-
-    function fetchBookByISBN(isbn) {
-      fetch(`https://www.googleapis.com/books/v1/volumes?q=isbn:${isbn}`)
-        .then(response => response.json())
-        .then(data => {
-          if (data.totalItems > 0) {
-            const book = data.items[0].volumeInfo;
-
-            addBookToTable(book.title, book.authors ? book.authors.join(', ') : 'Unknown', isbn);
-          } else {
-            alert('Book not found!');
-          }
-        })
-        .catch(error => {
-          console.error(error);
-          alert('An error occurred while fetching book data.');
-        });
-    }
-
-    function searchBooksByName(searchQuery) {
-      fetch(`https://www.googleapis.com/books/v1/volumes?q=${searchQuery}`)
-        .then(response => response.json())
-        .then(data => {
-          displaySearchResults(data.items);
-        })
-        .catch(error => {
-          console.error(error);
-          alert('An error occurred while fetching search results.');
-        });
-    }
-
-    function displaySearchResults(books) {
-      searchResults.innerHTML = '';
-
-      if (books && books.length > 0) {
-        const resultsList = document.createElement('ul');
-
-        books.forEach(book => {
-          const title = book.volumeInfo.title || 'Unknown';
-          const authors = book.volumeInfo.authors ? book.volumeInfo.authors.join(', ') : 'Unknown';
-          const isbn = book.volumeInfo.industryIdentifiers ? book.volumeInfo.industryIdentifiers[0].identifier : '';
-
-          const listItem = document.createElement('li');
-          const addButton = document.createElement('button');
-          addButton.textContent = 'Add to Book List';
-
-          addButton.addEventListener('click', function() {
-            addBookToTable(title, authors, isbn);
-          });
-
-          listItem.innerHTML = `<strong>${title}</strong> by ${authors} (ISBN: ${isbn})`;
-          listItem.appendChild(addButton);
-          resultsList.appendChild(listItem);
-        });
-
-        searchResults.appendChild(resultsList);
-      } else {
-        searchResults.textContent = 'No results found.';
-      }
-    }
-
-    function addBookToTable(title, author, isbn) {
-      const row = bookList.insertRow(-1);
-      const titleCell = row.insertCell(0);
-      const authorCell = row.insertCell(1);
-      const isbnCell = row.insertCell(2);
-
-      titleCell.textContent = title;
-      authorCell.textContent = author;
-      isbnCell.textContent = isbn;
-    }
-
-    function saveTableLocally() {
-      const tableData = Array.from(bookList.rows).map(row => {
-        const [titleCell, authorCell, isbnCell] = row.cells;
-        return {
-          title: titleCell.textContent,
-          author: authorCell.textContent,
-          isbn: isbnCell.textContent
-        };
-      });
-
-      localStorage.setItem('bookTable', JSON.stringify(tableData));
-      alert('Book table saved locally.');
-    }
-
-    function loadTableFromLocal() {
-      const tableData = JSON.parse(localStorage.getItem('bookTable'));
-
-      if (tableData && tableData.length > 0) {
-        tableData.forEach(book => {
-          addBookToTable(book.title, book.author, book.isbn);
-        });
-      }
-    }
-
-    loadTableFromLocal();
-  </script>
+  <script src="myscript2.js"></script>
 </body>
 </html>

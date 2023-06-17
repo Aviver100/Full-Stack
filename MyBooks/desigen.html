@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>מערכת ניהול ספרים</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      direction: rtl;
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    #container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    #addManuallyForm {
+      display: none;
+    }
+
+    #searchInput {
+      margin-bottom: 10px;
+    }
+
+    #bookList {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+    }
+
+    #bookList th,
+    #bookList td {
+      padding: 8px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+
+    #bookList th {
+      background-color: #f2f2f2;
+    }
+
+    #searchResults ul {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    #searchResults li {
+      margin-bottom: 10px;
+    }
+
+    #searchResults strong {
+      font-weight: bold;
+    }
+
+    .button {
+      background-color: #4CAF50;
+      color: white;
+      padding: 8px 16px;
+      border: none;
+      cursor: pointer;
+      margin-right: 5px;
+    }
+
+    .button:hover {
+      background-color: #45a049;
+    }
+
+    .form-field {
+      display: flex;
+      margin-bottom: 10px;
+    }
+
+    .form-field label {
+      width: 100px;
+    }
+
+    .form-field input[type="text"] {
+      flex: 1;
+      padding: 5px;
+    }
+
+    .form-field button {
+      margin-left: 10px;
+    }
+
+    /* Responsive Styling */
+    @media only screen and (max-width: 600px) {
+      .form-field {
+        flex-direction: column;
+      }
+
+      .form-field label {
+        width: 100%;
+      }
+
+      .form-field button {
+        margin-left: 0;
+        margin-top: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="container">
+    <h1>מערכת ניהול ספרים</h1>
+
+    <form id="addBookForm">
+      <div class="form-field">
+        <label for="isbn">ISBN:</label>
+        <input type="text" id="isbn">
+        <button type="submit" class="button">הוסף ספר</button>
+      </div>
+    </form>
+
+    <form id="searchBookForm">
+      <div class="form-field">
+        <label for="searchQuery">חיפוש:</label>
+        <input type="text" id="searchQuery">
+        <button type="submit" class="button">חפש</button>
+      </div>
+    </form>
+
+    <div id="searchResults"></div>
+
+    <table id="bookList">
+      <thead>
+        <tr>
+          <th>כותרת</th>
+          <th>מחבר</th>
+          <th>ISBN</th>
+          <th>סטטוס</th>
+          <th>שם השאלה</th>
+          <th>טלפון השאלה</th>
+          <th>פעולה</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+
+    <button id="saveTableBtn" class="button">שמור טבלה</button>
+  </div>
+
+  <script>
+    const addBookForm = document.getElementById('addBookForm');
+    const searchBookForm = document.getElementById('searchBookForm');
+    const bookList = document.querySelector('#bookList tbody');
+    const searchResults = document.getElementById('searchResults');
+    const saveTableBtn = document.getElementById('saveTableBtn');
+
+    addBookForm.addEventListener('submit', function (event) {
+      event.preventDefault();
+
+      const isbnInput = document.getElementById('isbn');
+      const isbn = isbnInput.value.trim();
+
+      isbnInput.value = '';
+
+      fetchBookByISBN(isbn);
+    });
+
+    searchBookForm.addEventListener('submit', function (event) {
+      event.preventDefault();
+
+      const searchQueryInput = document.getElementById('searchQuery');
+      const searchQuery = searchQueryInput.value.trim();
+
+      searchQueryInput.value = '';
+
+      searchBooksByName(searchQuery);
+    });
+
+    saveTableBtn.addEventListener('click', function () {
+      saveTableLocally();
+    });
+
+    function fetchBookByISBN(isbn) {
+      fetch(`https://www.googleapis.com/books/v1/volumes?q=isbn:${isbn}`)
+        .then(response => response.json())
+        .then(data => {
+          if (data.totalItems > 0) {
+            const book = data.items[0].volumeInfo;
+
+            addBookToTable(book.title, book.authors ? book.authors.join(', ') : 'לא ידוע', isbn);
+          } else {
+            alert('הספר לא נמצא!');
+          }
+        })
+        .catch(error => {
+          console.error(error);
+          alert('אירעה שגיאה במהלך גיבוב הספר.');
+        });
+    }
+
+    function searchBooksByName(searchQuery) {
+      fetch(`https://www.googleapis.com/books/v1/volumes?q=${searchQuery}`)
+        .then(response => response.json())
+        .then(data => {
+          displaySearchResults(data.items);
+        })
+        .catch(error => {
+          console.error(error);
+          alert('אירעה שגיאה במהלך גיבוב תוצאות החיפוש.');
+        });
+    }
+
+    function displaySearchResults(books) {
+      searchResults.innerHTML = '';
+
+      if (books && books.length > 0) {
+        const resultsList = document.createElement('ul');
+
+        books.forEach(book => {
+          const title = book.volumeInfo.title || 'לא ידוע';
+          const authors = book.volumeInfo.authors ? book.volumeInfo.authors.join(', ') : 'לא ידוע';
+          const isbn = book.volumeInfo.industryIdentifiers ? book.volumeInfo.industryIdentifiers[0].identifier : '';
+
+          const listItem = document.createElement('li');
+          const addButton = document.createElement('button');
+          addButton.textContent = 'הוסף לרשימת הספרים';
+          addButton.classList.add('button');
+
+          addButton.addEventListener('click', function () {
+            addBookToTable(title, authors, isbn);
+          });
+
+          listItem.innerHTML = `<strong>${title}</strong> מאת ${authors} (ISBN: ${isbn})`;
+          listItem.appendChild(addButton);
+          resultsList.appendChild(listItem);
+        });
+
+        searchResults.appendChild(resultsList);
+      } else {
+        searchResults.textContent = 'לא נמצאו תוצאות.';
+      }
+    }
+
+    function addBookToTable(title, author, isbn) {
+      const row = bookList.insertRow(-1);
+      const titleCell = row.insertCell(0);
+      const authorCell = row.insertCell(1);
+      const isbnCell = row.insertCell(2);
+      const statusCell = row.insertCell(3);
+      const borrowerNameCell = row.insertCell(4);
+      const borrowerPhoneCell = row.insertCell(5);
+      const actionCell = row.insertCell(6);
+
+      titleCell.textContent = title;
+      authorCell.textContent = author;
+      isbnCell.textContent = isbn;
+      statusCell.textContent = "זמין";
+      borrowerNameCell.textContent = "";
+      borrowerPhoneCell.textContent = "";
+
+      const borrowButton = document.createElement('button');
+      borrowButton.textContent = statusCell.textContent === "זמין" ? "לשאול" : "להחזיר";
+      borrowButton.classList.add('button');
+
+      borrowButton.addEventListener('click', function () {
+        if (statusCell.textContent === "זמין") {
+          const borrowerName = prompt("הזן את שם השאלה:");
+          const borrowerPhone = prompt("הזן את מספר הטלפון של השאלה:");
+
+          if (borrowerName && borrowerPhone) {
+            statusCell.textContent = "הושאל";
+            borrowerNameCell.textContent = borrowerName;
+            borrowerPhoneCell.textContent = borrowerPhone;
+            borrowButton.textContent = "להחזיר";
+          }
+        } else if (statusCell.textContent === "הושאל") {
+          const returnConfirmation = confirm("הספר הזה מושאל כרגע. האם אתה רוצה להחזירו?");
+
+          if (returnConfirmation) {
+            statusCell.textContent = "זמין";
+            borrowerNameCell.textContent = "";
+            borrowerPhoneCell.textContent = "";
+            borrowButton.textContent = "לשאול";
+          }
+        }
+      });
+
+      actionCell.appendChild(borrowButton);
+
+      const filter = document.getElementById('searchQuery').value.toLowerCase();
+      if (title.toLowerCase().includes(filter)) {
+        row.style.display = '';
+      } else {
+        row.style.display = 'none';
+      }
+    }
+
+    function saveTableLocally() {
+      const tableData = Array.from(bookList.rows).map(row => {
+        const [titleCell, authorCell, isbnCell] = row.cells;
+        return {
+          title: titleCell.textContent,
+          author: authorCell.textContent,
+          isbn: isbnCell.textContent
+        };
+      });
+
+      localStorage.setItem('bookTable', JSON.stringify(tableData));
+      alert('טבלת הספרים נשמרה מקומית.');
+    }
+
+    function loadTableFromLocal() {
+      const tableData = JSON.parse(localStorage.getItem('bookTable'));
+
+      if (tableData && tableData.length > 0) {
+        tableData.forEach(book => {
+          addBookToTable(book.title, book.author, book.isbn);
+        });
+      }
+    }
+
+    loadTableFromLocal();
+  </script>
+</body>
+</html>
