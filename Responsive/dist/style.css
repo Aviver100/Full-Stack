@@ -1,0 +1,74 @@
+@import url(https://utopia.fyi/type/calculator?c=600,20,1.2,1920,50,1.25,2,5,&s=0.75|0.5|0.25,1.5|2|3|4|6,s-l&g=s,l,xl,12);
+:root {
+  font-family: "Open Sans", sans-serif;
+  font-family: "Roboto", sans-serif;
+  --step--5: clamp(0.50rem, calc(0.27rem + 0.63vw), 1.02rem);
+  --step--4: clamp(0.60rem, calc(0.30rem + 0.82vw), 1.28rem);
+  --step--3: clamp(0.72rem, calc(0.32rem + 1.06vw), 1.60rem);
+  --step--2: clamp(0.87rem, calc(0.35rem + 1.37vw), 2.00rem);
+  --step--1: clamp(1.04rem, calc(0.38rem + 1.77vw), 2.50rem);
+  --step-0: clamp(1.25rem, calc(0.40rem + 2.27vw), 3.13rem);
+  --step-1: clamp(1.50rem, calc(0.41rem + 2.92vw), 3.91rem);
+  --step-2: clamp(1.80rem, calc(0.40rem + 3.74vw), 4.88rem);
+}
+
+.main {
+  transform: translate(1rem, 2rem);
+}
+.main__menu img {
+  height: 30px;
+}
+.main__title {
+  padding: 5px;
+}
+.main__title h1 {
+  font-size: var(--step-1);
+}
+.main__navber {
+  display: flex;
+  justify-content: space-between;
+}
+.main__navber a {
+  color: gray;
+  font-weight: 600;
+  font-size: 14px;
+  text-decoration: none;
+  font-size: var(--step--1);
+}
+.main__navber .black {
+  color: black;
+}
+.main__mainpic {
+  margin-top: 30px;
+}
+.main__mainpic img {
+  height: 250px;
+  width: 350px;
+}
+.main__subtitle {
+  margin-top: 30px;
+  width: 350px;
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+}
+.main__subtitle h3 {
+  word-spacing: 2px;
+  line-height: 25px;
+}
+.main__text {
+  margin-top: 20px;
+}
+.main__text p {
+  font-size: 12px;
+  line-height: 20px;
+  font-weight: 600;
+}
+.main__tags {
+  display: flex;
+  justify-content: space-between;
+  width: 200px;
+}
+.main__tags p {
+  color: gray;
+  font-size: 12px;
+}
