@@ -12,6 +12,7 @@ body{
             font-size: 35px;
             margin-right: 48%;
             margin-top: 0px;
+
         }
     }
 
@@ -21,9 +22,9 @@ body{
         background-color: greenyellow;
 
         input{
-            width: 300px;
+            width: clamp(100px, 40%, 200px);
             height: 30px;
-            margin-right: 43%;
+            margin-right: auto;
             margin-top: 20px;
         }
 
@@ -45,13 +46,16 @@ body{
         display: grid;
         grid-template-columns: repeat(5,1fr);
         justify-content: space-between;
+        gap: 20px;
 
         &__book{
-            height: 500px;
-            width: 300px;
+            // width: clamp(50px, 100%, 100px);
+            // height: clamp(150px, 160%, 250px);
+            height: 250px;
+            width: 130px;
             background-color: rgb(37, 69, 209);
             margin-top: 90px;
-            margin-right: 40px;
+            margin: auto;
 
             img{
                 width: 80%;
@@ -59,8 +63,20 @@ body{
             }
 
             label{
-                margin-right: 50px;
+                // margin-right: 50px;
+                font-size: clamp(0.5rem, 100%, 2rem);
+
             }
         }
+    }
+}
+
+@media screen and (max-width: 420px) {
+
+    .main__library {
+        grid-template-columns: repeat(2,1fr);
+    }
+ p >   .main_title {
+        text-align: center;
     }
 }
