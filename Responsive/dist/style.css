@@ -14,6 +14,7 @@
 
 .main {
   transform: translate(1rem, 2rem);
+  height: 100%;
 }
 .main__menu img {
   height: 30px;
@@ -22,18 +23,19 @@
   padding: 5px;
 }
 .main__title h1 {
-  font-size: var(--step-1);
+  font-size: clamp(0.5rem, 200%, 3rem);
 }
 .main__navber {
   display: flex;
   justify-content: space-between;
+  width: clamp(375px, 90%, 800px);
 }
 .main__navber a {
   color: gray;
   font-weight: 600;
   font-size: 14px;
   text-decoration: none;
-  font-size: var(--step--1);
+  font-size: clamp(0.5rem, 120%, 1rem);
 }
 .main__navber .black {
   color: black;
@@ -44,6 +46,8 @@
 .main__mainpic img {
   height: 250px;
   width: 350px;
+  width: clamp(350px, 50%, 700px);
+  height: clamp(250px, 50%, 700px);
 }
 .main__subtitle {
   margin-top: 30px;
@@ -53,15 +57,15 @@
 }
 .main__subtitle h3 {
   word-spacing: 2px;
-  line-height: 25px;
+  font-size: clamp(0.5rem, 150%, 1.5rem);
 }
 .main__text {
   margin-top: 20px;
 }
 .main__text p {
   font-size: 12px;
-  line-height: 20px;
   font-weight: 600;
+  font-size: clamp(0.5rem, 80%, 2rem);
 }
 .main__tags {
   display: flex;
@@ -71,4 +75,26 @@
 .main__tags p {
   color: gray;
   font-size: 12px;
+}
+
+@media screen and (min-width: 420px) {
+  .main {
+    text-align: center;
+  }
+
+  .main__subtitle,
+.main__text,
+.main__navber,
+.main__tags {
+    margin: auto;
+  }
+
+  .main__navber {
+    width: 600px;
+  }
+
+  .main__menu {
+    margin-left: 0px;
+    position: absolute;
+  }
 }
