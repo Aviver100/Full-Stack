@@ -1,9 +1,9 @@
 const ILage = 18;
 const USAage = 21;
 
-var age = prompt("Enter your age:") ;
+var age: string | null = prompt("Enter your age:") ;
 if(age){
-    var  agesum = parseInt(age);
+    var  agesum = parseInt(age || "0");
     // console.log(age);
     if(agesum < ILage){
         console.log("NO!")
