@@ -56,4 +56,4 @@ function operation(a:number, b:number, op:number) {
   }
 }
 
-operation(5, 5, 3);
+operation(5, 5, 1);

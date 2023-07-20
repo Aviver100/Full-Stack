@@ -39,4 +39,4 @@ function operation(a, b, op) {
             break;
     }
 }
-operation(5, 5, 3);
+operation(5, 5, 1);
