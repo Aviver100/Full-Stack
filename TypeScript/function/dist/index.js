@@ -1,14 +1,11 @@
 // function to negate the number
-var negate = 100;
-function NegateNumber() {
+function NegateNumber(negate) {
     var sum = negate - negate * 2;
-    console.log(sum);
+    console.log("the negate number is: " + sum);
 }
-NegateNumber();
+NegateNumber(30);
 // function that returns the larger of two numbers
-var first = 200;
-var second = 100;
-function LargeNumber() {
+function LargeNumber(first, second) {
     var larger = 0;
     if (first > second) {
         larger = first;
@@ -16,21 +13,17 @@ function LargeNumber() {
     else {
         larger = second;
     }
-    console.log(larger);
+    console.log("the larger number is: " + larger);
 }
-LargeNumber();
+LargeNumber(50, 2);
 // Convert a Fahrenheit temperature to a Celsius one.
-var fahrenheit = 86;
-function ConvertFahrenheit() {
+function ConvertFahrenheit(fahrenheit) {
     var celsius = (fahrenheit - 32) * 5 / 9;
-    console.log(celsius);
+    console.log("You entered " + fahrenheit + " degrees which is " + celsius + " degrees Celsius");
 }
-ConvertFahrenheit();
+ConvertFahrenheit(86);
 // accepts three arguments: two numbers and an operation
-var a = 10;
-var b = 5;
-var op = 3;
-function operation() {
+function operation(a, b, op) {
     switch (op) {
         case 1:
             console.log(a + b);
@@ -46,4 +39,4 @@ function operation() {
             break;
     }
 }
-operation();
+operation(5, 5, 3);
