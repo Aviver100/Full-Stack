@@ -6,4 +6,7 @@ for (var i = 1; i <= max; i++) {
     else {
         console.log(i);
     }
+    if (i.toString().includes("7")) {
+        console.log(i + " BOOM!");
+    }
 }
