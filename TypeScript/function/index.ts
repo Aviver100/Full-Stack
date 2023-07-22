@@ -2,11 +2,9 @@
 
 function NegateNumber(negate:number) {
   let sum = negate - negate * 2;
-  console.log(`the negate number is: ${sum}`);
+return sum;
 }
-NegateNumber(30);
-
-
+console.log(`the negate number is: ` + NegateNumber(5));
 
 
 
@@ -20,9 +18,9 @@ function LargeNumber(first: number, second: number) {
   else {
     larger = second;
   }
-  console.log(`the larger number is: ${larger}`);
+  return larger;
 }
-LargeNumber(50,2);
+console.log(`the larger number is: ` + LargeNumber(50,2));
 
 
 
@@ -30,10 +28,10 @@ LargeNumber(50,2);
 // Convert a Fahrenheit temperature to a Celsius one.
 
 function ConvertFahrenheit(fahrenheit:number) {
-  let celsius = (fahrenheit - 32) * 5 / 9;
-  console.log(`You entered ${fahrenheit} degrees which is ${celsius} degrees Celsius`);
+  let celsius: number = (fahrenheit - 32) * 5 / 9;
+  return celsius
 }
-ConvertFahrenheit(86);
+console.log(ConvertFahrenheit(86) + ` °C`);
 
 
 
@@ -53,6 +51,8 @@ function operation(a:number, b:number, op:number) {
     case 4:
       console.log(a / b);
       break;
+      default:
+        console.log(`Error`);
   }
 }
 
