@@ -4,6 +4,14 @@ function NegateNumber(negate) {
     return sum;
 }
 console.log("the negate number is: " + NegateNumber(5));
+var NegateNumber2 = function (negate) {
+    var sum = negate - negate * 2;
+    return sum;
+};
+console.log("the negate number is: " + NegateNumber(5));
+var NegateNumber3 = function (negate) { return -negate * 2; };
+var mashu = function (mispar) { return mispar * 2; };
+console.log("the negate number is: " + NegateNumber(5));
 // function that returns the larger of two numbers
 function LargeNumber(first, second) {
     var larger = 0;
@@ -42,3 +50,10 @@ function operation(a, b, op) {
     }
 }
 operation(5, 5, 1);
+function plus(numA, numB) {
+    var sum = numA + numB;
+    return sum;
+}
+console.log(plus(4, 4));
+var plus2 = function (numC, numD) { return numC + numD; };
+console.log(plus2(5, 5));

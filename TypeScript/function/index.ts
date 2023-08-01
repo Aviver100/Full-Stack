@@ -7,6 +7,20 @@ return sum;
 console.log(`the negate number is: ` + NegateNumber(5));
 
 
+const NegateNumber2 = function (negate:number) {
+  let sum = negate - negate * 2;
+return sum;
+}
+console.log(`the negate number is: ` + NegateNumber(5));
+
+
+let NegateNumber3 = (negate:number) => -negate * 2;
+  
+const mashu = (mispar:number) => mispar *2;
+
+console.log(`the negate number is: ` + NegateNumber(5));
+
+
 
 // function that returns the larger of two numbers
 
@@ -57,3 +71,15 @@ function operation(a:number, b:number, op:number) {
 }
 
 operation(5, 5, 1);
+
+function plus (numA:number, numB:number){
+  let sum = numA + numB
+  return sum
+}
+
+console.log(plus(4,4));
+
+
+let plus2 = (numC, numD) => numC + numD 
+
+console.log(plus2(5,5));
