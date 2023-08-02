@@ -8,26 +8,32 @@ class Board {
         console.log(`Width: ${NewBoard.width} \nHeight: ${NewBoard.height}`);
     }
 }
-class Rook extends Board {
+class Rook {
     constructor(board, location1, location2) {
-        super(board.width, board.height);
+        this.board = board;
         this.location1 = location1 !== null && location1 !== void 0 ? location1 : 2;
         this.location2 = location2 !== null && location2 !== void 0 ? location2 : 2;
     }
     getLocation() {
         console.log(`Point 1: ${NewLocation.location1} \nPoint 2: ${NewLocation.location2}`);
     }
-    CheckLocation() {
-        if (this.location1 > this.width || this.location2 > this.height)
+    // CheckLocation() {
+    //     if (this.location1 > this.board.width || this.location2 > this.board.height)
+    //         console.log(`The move is illegal`);
+    // }
+    goRight(right) {
+        if (this.location1 < this.board.width) {
+            let NewMove = this.location1 += right;
+            console.log(NewMove);
+            this.getLocation();
+        }
+        else {
             console.log(`The move is illegal`);
-    }
-    goRight(step) {
-        step = this.location1++;
+        }
     }
 }
-let NewBoard = new Board(8, 10);
+let NewBoard = new Board(10, 10);
 NewBoard.PrintBoard();
-let NewLocation = new Rook(NewBoard, 4, 5);
-NewLocation.getLocation();
-NewLocation.CheckLocation();
-NewLocation.goRight();
+let NewLocation = new Rook(NewBoard, 1, 1);
+// NewLocation.CheckLocation();
+NewLocation.goRight(3);
