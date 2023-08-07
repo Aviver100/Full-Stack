@@ -8,3 +8,7 @@ for(let index of array){
 }
 
 console.log(array);
+
+function newfollower(firstname:string, lastName:string){
+    let follower:string[] = [firstname, lastName];
+}
