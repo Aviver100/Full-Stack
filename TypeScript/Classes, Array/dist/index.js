@@ -17,14 +17,22 @@ var SocialNetwork = /** @class */ (function () {
     function SocialNetwork(SocialNetworkname, accountIdentifier) {
         this.SocialNetworkname = SocialNetworkname;
         this.accountIdentifier = accountIdentifier;
+        this.followers = new Array;
     }
     SocialNetwork.prototype.addFollower = function (person) {
-        // let follower:string[] = [person.firstName, person.lastName];
-        // console.log(follower);
+        this.followers.push(person);
     };
     return SocialNetwork;
 }());
 var NewPerson = new Person("Shlomo", "Artzi", "Singer");
 var NewPerson2 = new Person("Moshe", "Perez", "TV");
-console.log(NewPerson.fullName);
-console.log(NewPerson2.fullName);
+var NewPerson3 = new Person("Eli", "Cohen", "TV");
+var NewPerson4 = new Person("Eli", "Cohen");
+console.log(NewPerson);
+console.log(NewPerson2);
+console.log(NewPerson3);
+var TwitterShlomo = new SocialNetwork("Twitter", "@Shlomo");
+TwitterShlomo.addFollower(NewPerson);
+TwitterShlomo.addFollower(NewPerson2);
+TwitterShlomo.addFollower(NewPerson4);
+console.log(TwitterShlomo);
