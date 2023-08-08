@@ -20,19 +20,33 @@ var SocialNetwork = /** @class */ (function () {
         this.followers = new Array;
     }
     SocialNetwork.prototype.addFollower = function (person) {
-        this.followers.push(person);
+        if (this.followers.includes(person)) {
+            console.log("You are already following");
+        }
+        else {
+            this.followers.push(person);
+        }
+    };
+    SocialNetwork.prototype.removeFollower = function (fullName) {
+        if (this.followers.includes(fullName)) {
+            console.log("You are already following");
+        }
+        else {
+            this.followers.push(person);
+        }
     };
     return SocialNetwork;
 }());
-var NewPerson = new Person("Shlomo", "Artzi", "Singer");
-var NewPerson2 = new Person("Moshe", "Perez", "TV");
-var NewPerson3 = new Person("Eli", "Cohen", "TV");
-var NewPerson4 = new Person("Eli", "Cohen");
-console.log(NewPerson);
-console.log(NewPerson2);
-console.log(NewPerson3);
+var ShlomoArtzi = new Person("Shlomo", "Artzi", "Singer");
+var LionelMessi = new Person("Lionel", "Messi", "football");
 var TwitterShlomo = new SocialNetwork("Twitter", "@Shlomo");
-TwitterShlomo.addFollower(NewPerson);
-TwitterShlomo.addFollower(NewPerson2);
+var instagramMessi = new SocialNetwork("instagram", "@Messi");
+var NewPerson3 = new Person("Eli", "David");
+var NewPerson4 = new Person("Eli", "Cohen");
+var NewPerson5 = new Person("Dani", "Dani");
+// TwitterShlomo.addFollower(NewPerson);
+TwitterShlomo.addFollower(NewPerson3);
 TwitterShlomo.addFollower(NewPerson4);
+TwitterShlomo.addFollower(NewPerson5);
 console.log(TwitterShlomo);
+console.log(instagramMessi);

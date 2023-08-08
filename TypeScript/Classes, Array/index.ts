@@ -16,34 +16,46 @@ class Person {
 class SocialNetwork {
     SocialNetworkname: string;
     accountIdentifier: string;
-    followers:Array<Person>;
+    followers: Array<Person>;
     constructor(SocialNetworkname: string, accountIdentifier: string) {
         this.SocialNetworkname = SocialNetworkname;
         this.accountIdentifier = accountIdentifier;
         this.followers = new Array<Person>;
     }
     addFollower(person: Person) {
-        this.followers.push(person);
+        if (this.followers.includes(person)) {
+            console.log(`You are already following`);
+        } else {
+            this.followers.push(person);
+        }
+    }
+    removeFollower(fullName:string){
+        if (this.followers.includes(fullName)) {
+            console.log(`You are already following`);
+        } else {
+            this.followers.push(person);
+        }
     }
 }
 
-let NewPerson = new Person(`Shlomo`, `Artzi`, `Singer`);
-let NewPerson2 = new Person(`Moshe`, `Perez`, `TV`);
-let NewPerson3 = new Person(`Eli`, `Cohen`, `TV`);
-let NewPerson4 = new Person(`Eli`, `Cohen`);
-
-console.log(NewPerson);
-console.log(NewPerson2);
-console.log(NewPerson3);
-
-
+let ShlomoArtzi = new Person(`Shlomo`, `Artzi`, `Singer`);
+let LionelMessi = new Person(`Lionel`, `Messi`, `football`);
 
 let TwitterShlomo = new SocialNetwork(`Twitter`, `@Shlomo`);
-TwitterShlomo.addFollower(NewPerson);
-TwitterShlomo.addFollower(NewPerson2);
+let instagramMessi = new SocialNetwork(`instagram`, `@Messi`);
+
+let NewPerson3 = new Person(`Eli`, `David`);
+let NewPerson4 = new Person(`Eli`, `Cohen`);
+let NewPerson5 = new Person(`Dani`, `Dani`);
+
+
+// TwitterShlomo.addFollower(NewPerson);
+TwitterShlomo.addFollower(NewPerson3);
 TwitterShlomo.addFollower(NewPerson4);
+TwitterShlomo.addFollower(NewPerson5);
 
 console.log(TwitterShlomo);
+console.log(instagramMessi);
 
 
 
