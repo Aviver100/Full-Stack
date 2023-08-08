@@ -28,11 +28,11 @@ var SocialNetwork = /** @class */ (function () {
         }
     };
     SocialNetwork.prototype.removeFollower = function (fullName) {
-        if (this.followers.includes(fullName)) {
-            console.log("You are already following");
+        if (this.followers.includes(Person.fullName)) {
+            this.followers.splice(person);
         }
         else {
-            this.followers.push(person);
+            console.log("");
         }
     };
     return SocialNetwork;

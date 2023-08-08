@@ -29,11 +29,11 @@ class SocialNetwork {
             this.followers.push(person);
         }
     }
-    removeFollower(fullName:string){
-        if (this.followers.includes(fullName)) {
-            console.log(`You are already following`);
+    removeFollower(fullName: string): Person {
+        if (this.followers.includes(Person.fullName)) {
+            this.followers.splice(person);
         } else {
-            this.followers.push(person);
+            console.log(``);
         }
     }
 }
