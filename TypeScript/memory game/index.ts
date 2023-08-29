@@ -2,9 +2,24 @@ class MemoryGame {
     firstCard: HTMLElement | null = null;
     counter = 0;
     busy = false;
+    isClicked = false;
+    Interval = 0;
+    time = 0;
 
     constructor(private container: Element, private images: string[]) {
         this.initCards();
+    }
+
+    timeformat() {
+        let timer: HTMLElement = document.querySelector('.time')!;
+        console.log(this.time);
+
+        this.time++;
+        let minutes = Math.floor(this.time / 60);
+        let min = minutes < 10 ? `0${minutes}` : minutes
+        let seconds = Math.ceil(this.time % 60);
+        let sec = seconds < 10 ? `0${seconds}` : seconds
+        timer.innerHTML = `${min}:${sec}`;
     }
 
     initCards() {
@@ -16,6 +31,7 @@ class MemoryGame {
         }
         if (this.counter == this.images.length) {
             this.container.textContent = "You win!";
+            clearInterval(this.Interval);
         }
 
         console.log(this.container);
@@ -48,6 +64,11 @@ class MemoryGame {
     }
 
     cardFlip(event: MouseEvent) {
+        if (this.isClicked == false) {
+            let time = 0
+            this.Interval = setInterval(() => this.timeformat(), 1000);
+            this.isClicked = true;
+        }
         const card = event.target as HTMLElement;
 
         if (this.busy || card.classList.contains("selected")) {
@@ -88,6 +109,7 @@ class MemoryGame {
             [cards[i], cards[randomIndex]] = [cards[randomIndex], cards[i]];
         }
     }
+    
 }
 
 const wrapper = document.querySelector(".game-container")!;

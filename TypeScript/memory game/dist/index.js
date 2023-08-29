@@ -6,7 +6,20 @@ class MemoryGame {
         this.firstCard = null;
         this.counter = 0;
         this.busy = false;
+        this.isClicked = false;
+        this.Interval = 0;
+        this.time = 0;
         this.initCards();
+    }
+    timeformat() {
+        let timer = document.querySelector('.time');
+        console.log(this.time);
+        this.time++;
+        let minutes = Math.floor(this.time / 60);
+        let min = minutes < 10 ? `0${minutes}` : minutes;
+        let seconds = Math.ceil(this.time % 60);
+        let sec = seconds < 10 ? `0${seconds}` : seconds;
+        timer.innerHTML = `${min}:${sec}`;
     }
     initCards() {
         let cards = [...this.images, ...this.images];
@@ -16,6 +29,7 @@ class MemoryGame {
         }
         if (this.counter == this.images.length) {
             this.container.textContent = "You win!";
+            clearInterval(this.Interval);
         }
         console.log(this.container);
         this.counter = 0;
@@ -42,6 +56,11 @@ class MemoryGame {
         card.addEventListener("click", (event) => this.cardFlip(event));
     }
     cardFlip(event) {
+        if (this.isClicked == false) {
+            let time = 0;
+            this.Interval = setInterval(() => this.timeformat(), 1000);
+            this.isClicked = true;
+        }
         const card = event.target;
         if (this.busy || card.classList.contains("selected")) {
             return;
