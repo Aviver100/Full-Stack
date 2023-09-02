@@ -1,0 +1,16 @@
+.main {
+  height: 500px;
+  width: 300px;
+  background-color: darksalmon;
+  margin: auto;
+}
+.main input, .main .big_button {
+  width: 292px;
+  height: 50px;
+}
+.main button {
+  text-align: center;
+  width: 70px;
+  height: 55px;
+  font-size: 35px;
+}

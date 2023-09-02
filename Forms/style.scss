@@ -1,0 +1,64 @@
+.main {
+    font-family: 'Secular One', sans-serif;
+
+    &__title {
+        margin-top: -60px;
+        margin-right: 40%;
+
+        img {
+            width: 500px;
+        }
+
+        h2 {
+            font-size: 45px;
+            margin-right: 11%;
+            margin-top: -40px;
+            font-family: 'Rubik Dirt', cursive;
+            color: rgb(72, 133, 220);
+        }
+    }
+
+    &__addBook {
+
+            background-color: #B1AFFF;
+            display: grid;
+            width: 250px;
+            height: 450px;
+            font-size: 20px;
+            margin-right: 150px;
+
+            a {
+                margin-right: 5px;
+            }
+
+            input {
+                height: 25px;
+            }
+
+            button {
+                color: #B1AFFF;
+                font-size: 25px;
+            }
+        
+
+    }
+
+    &__table {
+        margin-right: 600px;
+        margin-top: -450px;
+        table,
+        th {
+            border: 1px black solid;
+            width: 750px;
+            height: auto;
+            font-size: 22px;
+        }
+        tr,
+        td {
+            border: 1px black solid;
+            font-size: 15px;
+            text-align: center;
+        }
+    }
+
+}
