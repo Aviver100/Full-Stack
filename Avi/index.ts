@@ -3,14 +3,14 @@ class Book {
     author: string;
     genre: string;
     date: string;
-    imgFile?: File;
+    // imgFile?: File;
     imgUrl?: string;
     constructor(title: string, author: string, genre: string, date: string, imgFile?: File, imgUrl?: string) {
         this.title = title;
         this.author = author;
         this.genre = genre;
         this.date = date;
-        this.imgFile = imgFile;
+        // this.imgFile = imgFile;
         this.imgUrl = imgUrl;
     }
 }
@@ -39,8 +39,8 @@ function addBook() {
     let genreVal = genre?.value;
     let date = document.querySelector('.date') as HTMLInputElement;
     let dateVal = date?.value;
-    let imgFile = document.querySelector('.imgFile') as HTMLInputElement;
-    let imgFileVal = imgFile?.files;
+    // let imgFile = document.querySelector('.imgFile') as HTMLInputElement;
+    // let imgFileVal = imgFile?.files;
     let imgUrl = document.querySelector('.imgUrl') as HTMLInputElement;
     let imgUrlVal = imgUrl?.value;
 
@@ -67,7 +67,7 @@ function addBook() {
         author.value = '',
         genre.value = '',
         date.value = '',
-        imgFile.value = '',
+        // imgFile.value = '',
         imgUrl.value = '';
 
     if (titleVal != '') {
@@ -101,7 +101,7 @@ function addBook() {
 };
 
 function deleteBook() {
-
+ 
 }
 
 
