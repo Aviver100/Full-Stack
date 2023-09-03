@@ -10,8 +10,14 @@ class Book {
     }
 }
 let save = document.querySelector('.save');
-save.addEventListener('click', addBook);
+save.addEventListener('click', () => {
+    addBook();
+    // counter();
+});
+let Delete = document.querySelector('#delete');
+Delete.addEventListener('click', deleteBook);
 let Books = [];
+let MyLibrary = document.querySelector('#MyLibrary');
 function addBook() {
     let title = document.querySelector('.title');
     let titleVal = title === null || title === void 0 ? void 0 : title.value;
@@ -29,6 +35,8 @@ function addBook() {
     img.src = `${imgUrlVal}`;
     img.style.height = '100px';
     img.style.width = '80px';
+    let checkbox = document.createElement('input');
+    checkbox.setAttribute('type', 'checkbox');
     let newBook = {
         title: titleVal,
         author: authorVal,
@@ -44,7 +52,6 @@ function addBook() {
         date.value = '',
         imgFile.value = '',
         imgUrl.value = '';
-    let MyLibrary = document.querySelector('#MyLibrary');
     if (titleVal != '') {
         let newrow = MyLibrary.insertRow(-1);
         let col1 = newrow.insertCell(0);
@@ -52,13 +59,23 @@ function addBook() {
         let col3 = newrow.insertCell(0);
         let col4 = newrow.insertCell(0);
         let col5 = newrow.insertCell(0);
-        col2.innerText = `${dateVal}`;
-        col3.innerText = `${genreVal}`;
-        col4.innerText = `${authorVal}`;
-        col5.innerText = `${titleVal}`;
+        let col6 = newrow.insertCell(0);
+        col1.appendChild(checkbox);
+        col3.innerText = `${dateVal}`;
+        col4.innerText = `${genreVal}`;
+        col5.innerText = `${authorVal}`;
+        col6.innerText = `${titleVal}`;
         if (imgUrlVal != '') {
-            col1.appendChild(img);
+            col2.appendChild(img);
         }
+    }
+    for (let i = 0; i < MyLibrary.rows.length; i++) {
+        MyLibrary.rows[i].onclick = function () {
+            console.log(i);
+            // MyLibrary.deleteRow(i);
+        };
     }
 }
 ;
+function deleteBook() {
+}

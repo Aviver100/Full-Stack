@@ -17,9 +17,17 @@ class Book {
 
 let save = document.querySelector('.save') as HTMLButtonElement;
 
+save.addEventListener('click', () => {
+    addBook();
+    // counter();
+});
 
-save.addEventListener('click', addBook);
+let Delete = document.querySelector('#delete') as HTMLElement;
+Delete.addEventListener('click', deleteBook)
+
 let Books: Book[] = [];
+
+let MyLibrary = document.querySelector('#MyLibrary') as HTMLTableElement;
 
 
 function addBook() {
@@ -36,11 +44,13 @@ function addBook() {
     let imgUrl = document.querySelector('.imgUrl') as HTMLInputElement;
     let imgUrlVal = imgUrl?.value;
 
-
     let img = document.createElement('img') as HTMLImageElement;
     img.src = `${imgUrlVal}`;
     img.style.height = '100px';
     img.style.width = '80px';
+
+    let checkbox = document.createElement('input') as HTMLInputElement;
+    checkbox.setAttribute('type', 'checkbox');
 
     let newBook: Book = {
         title: titleVal,
@@ -60,7 +70,6 @@ function addBook() {
         imgFile.value = '',
         imgUrl.value = '';
 
-    let MyLibrary = document.querySelector('#MyLibrary') as HTMLTableElement;
     if (titleVal != '') {
         let newrow = MyLibrary.insertRow(-1);
 
@@ -69,17 +78,33 @@ function addBook() {
         let col3 = newrow.insertCell(0);
         let col4 = newrow.insertCell(0);
         let col5 = newrow.insertCell(0);
+        let col6 = newrow.insertCell(0);
+        col1.appendChild(checkbox);
 
-        col2.innerText = `${dateVal}`;
-        col3.innerText = `${genreVal}`;
-        col4.innerText = `${authorVal}`;
-        col5.innerText = `${titleVal}`;
+        col3.innerText = `${dateVal}`;
+        col4.innerText = `${genreVal}`;
+        col5.innerText = `${authorVal}`;
+        col6.innerText = `${titleVal}`;
 
         if (imgUrlVal != '') {
-            col1.appendChild(img);
+            col2.appendChild(img);
         }
     }
 
-
+    for (let i = 0; i < MyLibrary.rows.length; i++) {
+        MyLibrary.rows[i].onclick = function () {
+            console.log(i);
+            // MyLibrary.deleteRow(i);
+        }
+    }
 
 };
+
+function deleteBook() {
+
+}
+
+
+
+
+
