@@ -19,6 +19,11 @@ body {
   font-family: "Rubik Dirt", cursive;
   color: #4885dc;
 }
+.main h4 {
+  margin-right: 980px;
+  color: red;
+  display: none;
+}
 .main__addBook {
   font-size: 20px;
   margin-right: 420px;
