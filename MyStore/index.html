@@ -1,11 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    
-</body>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <script src="dist/index.js" defer></script>
+        <link rel="stylesheet" href="dist/index.css">
+    </head>
+    <body>
+        <div class="register">
+            <h2>Registration</h2>
+            <form id="regForm">
+                <input id="user" placeholder="User name" required><br>
+                <span class="tooltipUser tooltip">Sorry, the username is already in use</span>
+                <input id="fname" placeholder="First name" required><br>
+                <input id="lname" placeholder="Last name" required><br>
+                <input id="pass" type="password" placeholder="Password" required><br>
+                <input id="confpass" type="Password" placeholder="Confirm Password" required><br>
+                <span class="tooltipPass tooltip">Passwords do not match</span>
+                <input id="email" type="Email" placeholder="Email" required><br>
+                <span class="tooltipEmail tooltip">Sorry, the Email is already in use</span>
+                <input type="checkbox" id="chek" required>
+                <label >i accept all terms & conditions</label>
+                <input type="submit" value="Register">
+            </form>
+            <label >Alredy have an account? <a href="">Login now</a></label>
+        </div>
+        <div class="login">
+            <h2>Login</h2>
+            <input id="email" placeholder="Email"><br>
+            <input id="pass" type="password" placeholder="Password"><br>
+            <label >Alredy have an account? <a onclick="showregistr()">register now</a></label>
+            <input type="submit" value="Login now" id="login">
+
+        </div>
+    </body>
 </html>

@@ -1,0 +1,118 @@
+body {
+  background-color: #4070F4;
+}
+
+.register,
+.login {
+  height: 540px;
+  background-color: white;
+  margin: auto;
+  width: fit-content;
+  width: 350px;
+  margin-top: 200px;
+  border-radius: 15px;
+  display: none;
+}
+.register .tooltip,
+.login .tooltip {
+  visibility: hidden;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px;
+  /* Position the tooltip */
+  position: absolute;
+  z-index: 1;
+}
+.register h2,
+.login h2 {
+  position: absolute;
+  margin: 20px;
+}
+.register form input,
+.login form input {
+  height: 40px;
+  width: 250px;
+  margin-left: 50px;
+  border: 2px solid #aaa;
+  border-radius: 4px;
+  outline: none;
+  font-size: 18px;
+  margin-top: 5px;
+}
+.register form input:focus,
+.login form input:focus {
+  border-color: #4070F4;
+  box-shadow: 0 0 8px 0 #4070F4;
+}
+.register form input:first-child,
+.login form input:first-child {
+  margin-top: 80px;
+}
+.register form input:last-child,
+.login form input:last-child {
+  margin-top: 15px;
+  width: 258px;
+  background-color: #4070F4;
+  border: 0px;
+}
+.register form #chek,
+.login form #chek {
+  margin-top: 15px;
+  width: 15px;
+  height: 15px;
+}
+.register form label,
+.login form label {
+  position: absolute;
+  margin-top: 13px;
+}
+.register label:last-child,
+.login label:last-child {
+  position: absolute;
+  margin-top: 15px;
+  margin-left: 60px;
+}
+.register a,
+.login a {
+  color: #4070F4;
+  text-decoration: none;
+}
+
+.login {
+  display: block;
+  height: 300px;
+}
+.login h2 {
+  position: absolute;
+  margin: 20px;
+}
+.login input {
+  height: 40px;
+  width: 250px;
+  margin-left: 50px;
+  border: 2px solid #aaa;
+  border-radius: 4px;
+  outline: none;
+  font-size: 18px;
+  margin-top: 5px;
+}
+.login #email {
+  margin-top: 80px;
+}
+.login input:focus {
+  border-color: #4070F4;
+  box-shadow: 0 0 8px 0 #4070F4;
+}
+.login #login {
+  margin-top: 20px;
+  width: 258px;
+  background-color: #4070F4;
+  border: 0px;
+}
+.login label {
+  position: absolute;
+  margin-left: 58px;
+  margin-top: 75px;
+}
