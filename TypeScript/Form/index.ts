@@ -118,10 +118,11 @@ function deleteBook() {
     }
 }
 
-function editBook() {
+function editBook(event: MouseEvent) {
     let editbuttons = MyLibrary.querySelectorAll('button[class="edit"]') as NodeListOf<HTMLButtonElement>;
-
+    
     for (let i = 0; i < editbuttons.length; i++) {
+
         title.value = `${Books[i].title}`;
         author.value = `${Books[i].author}`;
         genre.value = `${Books[i].genre}`;
@@ -138,6 +139,8 @@ function editBook() {
         }
     }
 }
+
+
 
 function canceledit() {
     let cancelbuttons = MyLibrary.querySelectorAll('button[class="edit"]') as NodeListOf<HTMLButtonElement>;

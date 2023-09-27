@@ -103,7 +103,7 @@ function deleteBook() {
         }
     }
 }
-function editBook() {
+function editBook(event) {
     let editbuttons = MyLibrary.querySelectorAll('button[class="edit"]');
     for (let i = 0; i < editbuttons.length; i++) {
         title.value = `${Books[i].title}`;
