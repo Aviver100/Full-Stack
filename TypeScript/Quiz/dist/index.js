@@ -1,5 +1,6 @@
 "use strict";
 let SelectLevel = document.querySelector('#level');
+let MyTable = document.querySelector('.MyTable');
 class Question {
     constructor(questionID, question, option1, option2, option3, option4) {
         this.questionID = questionID;
@@ -45,6 +46,20 @@ function AddQuestion(event) {
         questionsHard.push(newQuestion);
         localStorage.setItem("questionsHard", JSON.stringify(questionsHard));
     }
+    let newrow = MyTable.insertRow(-1);
+    let col1 = newrow.insertCell(0);
+    let col2 = newrow.insertCell(0);
+    let col3 = newrow.insertCell(0);
+    let col4 = newrow.insertCell(0);
+    let col5 = newrow.insertCell(0);
+    let col6 = newrow.insertCell(0);
+    // col1.appendChild(checkbox);
+    col1.innerText = `${option4}`;
+    col2.innerText = `${option3}`;
+    col3.innerText = `${option2}`;
+    col4.innerText = `${option1}`;
+    col5.innerText = `${question}`;
+    col6.innerText = `${questionID}`;
     console.log(newQuestion);
 }
 const myform = document.querySelector('.Myform');

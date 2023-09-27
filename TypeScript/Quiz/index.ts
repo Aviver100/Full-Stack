@@ -1,4 +1,5 @@
 let SelectLevel = document.querySelector('#level') as HTMLSelectElement;
+let MyTable = document.querySelector('.MyTable') as HTMLTableElement;
 
 class Question {
     constructor(public questionID: number, public question: string, public option1: string, public option2: string, public option3: string, public option4: string) {
@@ -42,7 +43,26 @@ function AddQuestion(event: Event) {
             questionsHard.push(newQuestion);
             localStorage.setItem("questionsHard", JSON.stringify(questionsHard));
         }
-    console.log(newQuestion);
+    
+        let newrow = MyTable.insertRow(-1);
+
+        let col1 = newrow.insertCell(0);
+        let col2 = newrow.insertCell(0);
+        let col3 = newrow.insertCell(0);
+        let col4 = newrow.insertCell(0);
+        let col5 = newrow.insertCell(0);
+        let col6 = newrow.insertCell(0);
+        // col1.appendChild(checkbox);
+
+        col1.innerText = `${option4}`;
+        col2.innerText = `${option3}`;
+        col3.innerText = `${option2}`;
+        col4.innerText = `${option1}`;
+        col5.innerText = `${question}`;
+        col6.innerText = `${questionID}`;
+
+    
+        console.log(newQuestion);
 
 }
 
