@@ -1,6 +1,19 @@
 "use strict";
 let SelectLevel = document.querySelector('#level');
 let MyTable = document.querySelector('.MyTable');
+let alertselect = document.querySelector('.pleaseSelect');
+SelectLevel.addEventListener('change', () => {
+    let selectedValue = SelectLevel.value;
+    if (selectedValue == 'easy') {
+        console.log('easy');
+    }
+    else if (selectedValue == 'medium') {
+        console.log('medium');
+    }
+    else if (selectedValue == 'hard') {
+        console.log('hard');
+    }
+});
 class Question {
     constructor(questionID, question, option1, option2, option3, option4) {
         this.questionID = questionID;
@@ -46,6 +59,18 @@ function AddQuestion(event) {
         questionsHard.push(newQuestion);
         localStorage.setItem("questionsHard", JSON.stringify(questionsHard));
     }
+    else if (selectedValue == 'select') {
+        console.log('nono');
+        // alertselect.style.display = 'block';
+    }
+    let checkbox = document.createElement('input');
+    checkbox.setAttribute('type', 'checkbox');
+    let editbtn = document.createElement('button');
+    editbtn.setAttribute('class', 'edit');
+    editbtn.textContent = 'Edit';
+    let cancelbtn = document.createElement('button');
+    cancelbtn.setAttribute('class', 'cancel');
+    cancelbtn.textContent = 'Cancel';
     let newrow = MyTable.insertRow(-1);
     let col1 = newrow.insertCell(0);
     let col2 = newrow.insertCell(0);
@@ -53,14 +78,27 @@ function AddQuestion(event) {
     let col4 = newrow.insertCell(0);
     let col5 = newrow.insertCell(0);
     let col6 = newrow.insertCell(0);
-    // col1.appendChild(checkbox);
-    col1.innerText = `${option4}`;
-    col2.innerText = `${option3}`;
-    col3.innerText = `${option2}`;
-    col4.innerText = `${option1}`;
-    col5.innerText = `${question}`;
-    col6.innerText = `${questionID}`;
+    let col7 = newrow.insertCell(0);
+    col1.appendChild(checkbox);
+    col1.appendChild(editbtn);
+    col1.appendChild(cancelbtn);
+    col2.innerText = `${option4}`;
+    col3.innerText = `${option3}`;
+    col4.innerText = `${option2}`;
+    col5.innerText = `${option1}`;
+    col6.innerText = `${question}`;
+    col7.innerText = `${questionID}`;
     console.log(newQuestion);
 }
 const myform = document.querySelector('.Myform');
 myform.addEventListener('submit', AddQuestion);
+let editbtn = document.querySelector('.edit');
+let canceltbtn = document.querySelector('.cancel');
+function editQuestion() {
+    let cancelbtn = document.querySelector('.cancel');
+    let editbtn = document.querySelector('.edit');
+    cancelbtn.style.display = 'inline-block';
+    if (cancelbtn.style.display = 'inline-block') {
+        editbtn.style.display = 'none';
+    }
+}
