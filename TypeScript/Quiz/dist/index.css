@@ -32,6 +32,7 @@ h1 {
   position: absolute;
   margin-left: 150px;
   margin-top: 60px;
+  display: none;
 }
 
 .insert,
@@ -94,11 +95,17 @@ body input {
 .MyTable tr input,
 .MyTable td input {
   height: 20px;
+  width: 20px;
+}
+.MyTable th td:last-child,
+.MyTable tr td:last-child,
+.MyTable td td:last-child {
+  width: 150px;
 }
 .MyTable th button,
 .MyTable tr button,
 .MyTable td button {
-  background-color: #f2bef1;
+  background-color: #fb8107;
   border: 0px;
   margin-left: 5px;
 }
@@ -106,4 +113,9 @@ body input {
 .MyTable tr .edit,
 .MyTable td .edit {
   display: inline-block;
+}
+.MyTable th .cancel,
+.MyTable tr .cancel,
+.MyTable td .cancel {
+  display: none;
 }

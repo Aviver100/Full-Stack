@@ -33,7 +33,7 @@ h1 {
         position: absolute;
         margin-left: 150px;
         margin-top: 60px;
-        // display: none;
+        display: none;
     }
 }
 
@@ -93,20 +93,25 @@ body {
     tr,
     td {
         border: 1px solid gray;
-
-        input {
+            input {
             height: 20px;
-            // position: absolute;
+            width: 20px;
         }
 
+        td:last-child{
+            width: 150px;
+        }
         button {
-            background-color: #f2bef1;
+            background-color: #fb8107;
             border: 0px;
             margin-left: 5px;
         }
 
         .edit {
             display: inline-block;
+        }
+        .cancel{
+            display: none;
         }
 
     }
