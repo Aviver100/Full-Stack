@@ -80,6 +80,9 @@ body {
         color: white;
         border: none;
     }
+    .Update, .Cancel{
+        display: none;
+    }
 }
 
 .MyTable {
@@ -111,7 +114,7 @@ body {
             display: inline-block;
         }
         .cancel{
-            display: none;
+            // display: none;
         }
 
     }

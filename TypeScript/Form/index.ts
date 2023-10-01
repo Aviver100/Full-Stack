@@ -142,6 +142,7 @@ function editBook(event: MouseEvent) {
 
 
 
+
 function canceledit() {
     let cancelbuttons = MyLibrary.querySelectorAll('button[class="edit"]') as NodeListOf<HTMLButtonElement>;
     for (let i = 0; i < cancelbuttons.length; i++) {

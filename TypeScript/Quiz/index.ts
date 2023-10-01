@@ -95,7 +95,7 @@ function AddQuestion(event: Event) {
             // col1.appendChild(checkbox);
             col1.appendChild(deletebtn);
             col2.appendChild(editbtn);
-            col2.appendChild(cancelbtn);
+            // col2.appendChild(cancelbtn);
             col3.innerText = `${option4}`;
             col4.innerText = `${option3}`;
             col5.innerText = `${option2}`;
@@ -190,13 +190,15 @@ function loadata(selectedValue: string) {
             // col1.appendChild(checkbox);
             col2.appendChild(editbtn);
             col1.appendChild(deletebtn);
-            col2.appendChild(cancelbtn);
+            // col2.appendChild(cancelbtn);
             // col1.innerText = `${question.questionID}`;
         });
     }
 }
 let editbtn = document.querySelector('.edit') as HTMLButtonElement;
-let canceltbtn = document.querySelector('.cancel') as HTMLButtonElement;
+let canceltbtn = document.querySelector('.Cancel') as HTMLButtonElement;
+let savebtn = document.querySelector('.Save') as HTMLButtonElement;
+let updatebtn = document.querySelector('.Update') as HTMLButtonElement;
 
 
 // editbtn.addEventListener('click', log);
@@ -215,19 +217,31 @@ function EditQuestion() {
             let editbtn = document.querySelector('.edit') as HTMLButtonElement;
 
             // MyTable.rows[i].style.backgroundColor = "green";
-            MyTable.rows[i].classList.toggle("selected");
-            let myrows = MyTable.querySelectorAll('tr');
-            myrows.forEach(x => {
-                if (!x.classList.contains("selected")) {
-                    x.style.backgroundColor = 'yellow';
-                }
-                else{
-                    x.style.backgroundColor = 'red';
-                }
-            })
+            // MyTable.rows[i].classList.toggle("selected");
+            // let myrows = MyTable.querySelectorAll('tr');
+            // myrows.forEach(x => {
+            //     if (!x.classList.contains("selected")) {
+            //         // x.style.backgroundColor = 'yellow';
+            //     }
+            //     else{
+            //         x.classList.remove("selected");
+            //         // x.style.backgroundColor = 'red';
+            //     }
+            // })
         }
     }
+    canceltbtn.style.display = "inline-block";
+    updatebtn.style.display = "inline-block";
+    savebtn.style.display = "none";
 }
+
+canceltbtn.addEventListener('click', () =>{
+    savebtn.style.display = "inline-block";
+    updatebtn.style.display = "none";
+    canceltbtn.style.display = "none";
+
+})
+
 let EasyStorage = JSON.stringify(questionsEasy);
 let MediumStorage = JSON.stringify(questionsMedium);
 let HardStorage = JSON.stringify(questionsHard);

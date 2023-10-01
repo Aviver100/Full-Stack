@@ -79,6 +79,11 @@ body input {
   color: white;
   border: none;
 }
+.insert .Update, .insert .Cancel,
+body .Update,
+body .Cancel {
+  display: none;
+}
 
 .MyTable {
   width: 1100px;
@@ -113,11 +118,6 @@ body input {
 .MyTable tr .edit,
 .MyTable td .edit {
   display: inline-block;
-}
-.MyTable th .cancel,
-.MyTable tr .cancel,
-.MyTable td .cancel {
-  display: none;
 }
 .MyTable .selected {
   background-color: red;
