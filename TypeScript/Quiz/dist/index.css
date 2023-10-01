@@ -119,3 +119,6 @@ body input {
 .MyTable td .cancel {
   display: none;
 }
+.MyTable .selected {
+  background-color: red;
+}

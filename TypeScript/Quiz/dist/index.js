@@ -64,6 +64,10 @@ function AddQuestion(event) {
             const cancelbtn = document.createElement('button');
             cancelbtn.setAttribute('class', 'cancel');
             cancelbtn.textContent = 'Cancel';
+            const deletebtn = document.createElement('button');
+            deletebtn.setAttribute('class', 'delete');
+            deletebtn.textContent = 'Delete';
+            deletebtn.addEventListener('click', DeleteQuestion);
             const newrow = MyTable.insertRow(-1);
             const col1 = newrow.insertCell(0);
             const col2 = newrow.insertCell(0);
@@ -73,16 +77,17 @@ function AddQuestion(event) {
             const col6 = newrow.insertCell(0);
             const col7 = newrow.insertCell(0);
             const col8 = newrow.insertCell(0);
-            col1.appendChild(checkbox);
-            col1.appendChild(editbtn);
-            col1.appendChild(cancelbtn);
-            col2.innerText = `${option4}`;
-            col3.innerText = `${option3}`;
-            col4.innerText = `${option2}`;
-            col5.innerText = `${option1}`;
-            col6.innerText = `${question}`;
-            col7.innerText = `${questionID}`;
+            // col1.appendChild(checkbox);
+            col1.appendChild(deletebtn);
+            col2.appendChild(editbtn);
+            col2.appendChild(cancelbtn);
+            col3.innerText = `${option4}`;
+            col4.innerText = `${option3}`;
+            col5.innerText = `${option2}`;
+            col6.innerText = `${option1}`;
+            col7.innerText = `${question}`;
             col8.innerText = `${questionID}`;
+            // col8.innerText = `${questionID}`;
         }
     }
     else {
@@ -154,9 +159,9 @@ function loadata(selectedValue) {
             col5.innerText = `${question.option2}`;
             col4.innerText = `${question.option3}`;
             col3.innerText = `${question.option4}`;
-            col1.appendChild(checkbox);
+            // col1.appendChild(checkbox);
             col2.appendChild(editbtn);
-            col2.appendChild(deletebtn);
+            col1.appendChild(deletebtn);
             col2.appendChild(cancelbtn);
             // col1.innerText = `${question.questionID}`;
         });
@@ -175,45 +180,43 @@ function EditQuestion() {
             let option2 = document.querySelector('.option2').value = row.cells[3].innerHTML;
             let option3 = document.querySelector('.option3').value = row.cells[4].innerHTML;
             let option4 = document.querySelector('.option4').value = row.cells[5].innerHTML;
+            let editbtn = document.querySelector('.edit');
+            // MyTable.rows[i].style.backgroundColor = "green";
+            MyTable.rows[i].classList.toggle("selected");
+            let myrows = MyTable.querySelectorAll('tr');
+            myrows.forEach(x => {
+                if (!x.classList.contains("selected")) {
+                    x.style.backgroundColor = 'yellow';
+                }
+                else {
+                    x.style.backgroundColor = 'red';
+                }
+            });
         };
     }
 }
+let EasyStorage = JSON.stringify(questionsEasy);
+let MediumStorage = JSON.stringify(questionsMedium);
+let HardStorage = JSON.stringify(questionsHard);
 function DeleteQuestion() {
     for (let i = 0; i < MyTable.rows.length; i++) {
         let checkboxs = MyTable.querySelectorAll('input[type="checkbox"]');
         MyTable.rows[i].onclick = function () {
             console.log(i);
             MyTable.deleteRow(i);
-            for (let i = checkboxs.length - 1; i >= 0; i--) {
-                if (checkboxs[i].checked) {
-                    let selectedValue = SelectLevel.value;
-                    if (selectedValue == 'Easy') {
-                        questionsEasy.splice(i, 1);
-                        MyTable.deleteRow(i + 1);
-                        let mystorage = JSON.stringify(questionsEasy);
-                        localStorage.setItem("questionsEasy", mystorage);
-                    }
-                    else if (selectedValue == 'Medium') {
-                        questionsMedium.splice(i, 1);
-                        MyTable.deleteRow(i + 1);
-                    }
-                    else if (selectedValue == 'Hard') {
-                        questionsHard.splice(i, 1);
-                        MyTable.deleteRow(i + 1);
-                    }
-                    // let mystorage = JSON.stringify(Books);
-                    // localStorage.setItem("key", mystorage);
-                }
+            let selectedValue = SelectLevel.value;
+            if (selectedValue == 'Easy') {
+                questionsEasy.splice(i, 1);
+                localStorage.setItem("questionsEasy", EasyStorage);
             }
-            // let selectedValue = SelectLevel.value;
-            // if (selectedValue == 'Easy') {
-            //     questionsEasy.splice(i);
-            //     localStorage.splice(i, 1);
-            // } else if (selectedValue == 'Medium') {
-            //     questionsMedium.splice(i, 1);
-            // } else if (selectedValue == 'Hard') {
-            //     questionsHard.splice(i, 1);
-            // }
+            else if (selectedValue == 'Medium') {
+                localStorage.setItem("questionsMedium", MediumStorage);
+                questionsMedium.slice(i, 1);
+            }
+            else if (selectedValue == 'Hard') {
+                localStorage.setItem("questionsHard", HardStorage);
+                questionsHard.slice(i, 1);
+            }
         };
     }
 }
