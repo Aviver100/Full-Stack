@@ -1,9 +1,4 @@
 "use strict";
-const SelectLevel = document.querySelector('#level');
-const MyTable = document.querySelector('.MyTable');
-const alertselect = document.querySelector('.pleaseSelect');
-let selectlvl = document.querySelector('.menu__pleaseSelect');
-let questionID = 0;
 class Question {
     constructor(questionID, question, option1, option2, option3, option4) {
         this.questionID = questionID;
@@ -18,7 +13,6 @@ let questionsEasy = [];
 let questionsMedium = [];
 let questionsHard = [];
 function AddQuestion(event) {
-    // const chekduplicate = questionsEasy.some(x => x.question === question);
     event.preventDefault();
     const question = document.querySelector('.question').value;
     const option1 = document.querySelector('.option1').value;
@@ -33,7 +27,6 @@ function AddQuestion(event) {
         option3,
         option4,
     };
-    // if (question != '' || !chekduplicate) {
     if (question != '') {
         const selectedValue = SelectLevel.value;
         if (selectedValue == 'Easy') {
@@ -52,22 +45,20 @@ function AddQuestion(event) {
             selectlvl.style.display = 'none';
         }
         else if (selectedValue == 'Select') {
-            console.log('Please select a level');
             selectlvl.style.display = 'block';
         }
         if (selectedValue != 'Select') {
-            const checkbox = document.createElement('input');
-            checkbox.setAttribute('type', 'checkbox');
             const editbtn = document.createElement('button');
             editbtn.setAttribute('class', 'edit');
             editbtn.textContent = 'Edit';
-            const cancelbtn = document.createElement('button');
-            cancelbtn.setAttribute('class', 'cancel');
-            cancelbtn.textContent = 'Cancel';
+            editbtn.addEventListener('click', EditQuestion);
             const deletebtn = document.createElement('button');
             deletebtn.setAttribute('class', 'delete');
             deletebtn.textContent = 'Delete';
             deletebtn.addEventListener('click', DeleteQuestion);
+            const cancelbtn = document.createElement('button');
+            cancelbtn.setAttribute('class', 'cancel');
+            cancelbtn.textContent = 'Cancel';
             const newrow = MyTable.insertRow(-1);
             const col1 = newrow.insertCell(0);
             const col2 = newrow.insertCell(0);
@@ -77,32 +68,18 @@ function AddQuestion(event) {
             const col6 = newrow.insertCell(0);
             const col7 = newrow.insertCell(0);
             const col8 = newrow.insertCell(0);
-            // col1.appendChild(checkbox);
             col1.appendChild(deletebtn);
             col2.appendChild(editbtn);
-            // col2.appendChild(cancelbtn);
             col3.innerText = `${option4}`;
             col4.innerText = `${option3}`;
             col5.innerText = `${option2}`;
             col6.innerText = `${option1}`;
             col7.innerText = `${question}`;
             col8.innerText = `${questionID}`;
-            // col8.innerText = `${questionID}`;
         }
-    }
-    else {
-        console.log('please select level');
     }
     myform.reset();
 }
-const myform = document.querySelector('.Myform');
-myform.addEventListener('submit', AddQuestion);
-SelectLevel.addEventListener('change', () => {
-    const selectedValue = SelectLevel.value;
-    if (selectedValue != 'select') {
-        loadata(selectedValue);
-    }
-});
 function loadata(selectedValue) {
     let data;
     if (selectedValue == 'Easy') {
@@ -130,7 +107,6 @@ function loadata(selectedValue) {
         const questions = JSON.parse(data);
         questionsHard = JSON.parse(data);
         questions.forEach((question) => {
-            // Create HTML elements for loaded questions and add them to the table
             const checkbox = document.createElement('input');
             checkbox.setAttribute('type', 'checkbox');
             const editbtn = document.createElement('button');
@@ -159,24 +135,27 @@ function loadata(selectedValue) {
             col5.innerText = `${question.option2}`;
             col4.innerText = `${question.option3}`;
             col3.innerText = `${question.option4}`;
-            // col1.appendChild(checkbox);
             col2.appendChild(editbtn);
             col1.appendChild(deletebtn);
-            // col2.appendChild(cancelbtn);
-            // col1.innerText = `${question.questionID}`;
         });
     }
 }
-let editbtn = document.querySelector('.edit');
-let canceltbtn = document.querySelector('.Cancel');
-let savebtn = document.querySelector('.Save');
-let updatebtn = document.querySelector('.Update');
-// editbtn.addEventListener('click', log);
 function EditQuestion() {
     for (let i = 0; i < MyTable.rows.length; i++) {
         MyTable.rows[i].onclick = function () {
-            console.log(i);
             const row = this;
+            let getIDstring = row.cells[0].innerHTML;
+            let getID = parseFloat(getIDstring);
+            const findID = questionsEasy.findIndex((x) => x.questionID === getID);
+            console.log(getID);
+            if (findID) {
+                console.log('BINGO');
+                // console.log(getID);
+                // questionsEasy[findID].option1 = (document.querySelector('.question') as HTMLTextAreaElement).value
+            }
+            else {
+                console.log('nono');
+            }
             let question = document.querySelector('.question').value = row.cells[1].innerHTML;
             let option1 = document.querySelector('.option1').value = row.cells[2].innerHTML;
             let option2 = document.querySelector('.option2').value = row.cells[3].innerHTML;
@@ -201,17 +180,31 @@ function EditQuestion() {
     updatebtn.style.display = "inline-block";
     savebtn.style.display = "none";
 }
+const SelectLevel = document.querySelector('#level');
+const MyTable = document.querySelector('.MyTable');
+const alertselect = document.querySelector('.pleaseSelect');
+let selectlvl = document.querySelector('.menu__pleaseSelect');
+let editbtn = document.querySelector('.edit');
+let canceltbtn = document.querySelector('.Cancel');
+let savebtn = document.querySelector('.Save');
+let updatebtn = document.querySelector('.Update');
+updatebtn.addEventListener('click', UpdateQuestion);
+let questionID = 0;
+const myform = document.querySelector('.Myform');
+myform.addEventListener('submit', AddQuestion);
+SelectLevel.addEventListener('change', () => {
+    const selectedValue = SelectLevel.value;
+    if (selectedValue != 'select') {
+        loadata(selectedValue);
+    }
+});
 canceltbtn.addEventListener('click', () => {
     savebtn.style.display = "inline-block";
     updatebtn.style.display = "none";
     canceltbtn.style.display = "none";
 });
-let EasyStorage = JSON.stringify(questionsEasy);
-let MediumStorage = JSON.stringify(questionsMedium);
-let HardStorage = JSON.stringify(questionsHard);
 function DeleteQuestion() {
     for (let i = 0; i < MyTable.rows.length; i++) {
-        let checkboxs = MyTable.querySelectorAll('input[type="checkbox"]');
         MyTable.rows[i].onclick = function () {
             console.log(i);
             MyTable.deleteRow(i);
@@ -230,4 +223,27 @@ function DeleteQuestion() {
             }
         };
     }
+}
+let EasyStorage = JSON.stringify(questionsEasy);
+let MediumStorage = JSON.stringify(questionsMedium);
+let HardStorage = JSON.stringify(questionsHard);
+function UpdateQuestion() {
+    for (let i = 0; i < MyTable.rows.length; i++) {
+        MyTable.rows[i].onclick = function () {
+            const row = this;
+            let getIDstring = row.cells[0].innerHTML;
+            let getID = parseFloat(getIDstring);
+            const findID = questionsEasy.findIndex((x) => x.questionID === getID);
+            console.log(getID);
+            if (findID) {
+                console.log('BINGO');
+            }
+            else {
+                console.log('nono');
+            }
+        };
+    }
+    canceltbtn.style.display = "none";
+    updatebtn.style.display = "none";
+    savebtn.style.display = "inline-block";
 }

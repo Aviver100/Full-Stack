@@ -1,10 +1,3 @@
-const SelectLevel = document.querySelector('#level') as HTMLSelectElement;
-const MyTable = document.querySelector('.MyTable') as HTMLTableElement;
-const alertselect = document.querySelector('.pleaseSelect') as HTMLElement;
-let selectlvl = document.querySelector('.menu__pleaseSelect') as HTMLElement;
-
-let questionID = 0;
-
 class Question {
     constructor(
         public questionID: number,
@@ -22,7 +15,6 @@ let questionsHard: Question[] = [];
 
 function AddQuestion(event: Event) {
 
-    // const chekduplicate = questionsEasy.some(x => x.question === question);
     event.preventDefault();
 
     const question = (document.querySelector('.question') as HTMLTextAreaElement).value;
@@ -39,7 +31,6 @@ function AddQuestion(event: Event) {
         option3,
         option4,
     };
-    // if (question != '' || !chekduplicate) {
     if (question != '') {
 
         const selectedValue = SelectLevel.value;
@@ -59,27 +50,23 @@ function AddQuestion(event: Event) {
             localStorage.setItem('questionsHard', JSON.stringify(questionsHard));
             selectlvl.style.display = 'none';
         } else if (selectedValue == 'Select') {
-
-            console.log('Please select a level');
             selectlvl.style.display = 'block';
         }
         if (selectedValue != 'Select') {
 
-            const checkbox = document.createElement('input') as HTMLInputElement;
-            checkbox.setAttribute('type', 'checkbox');
-
             const editbtn = document.createElement('button') as HTMLButtonElement;
             editbtn.setAttribute('class', 'edit');
             editbtn.textContent = 'Edit';
-
-            const cancelbtn = document.createElement('button') as HTMLButtonElement;
-            cancelbtn.setAttribute('class', 'cancel');
-            cancelbtn.textContent = 'Cancel';
+            editbtn.addEventListener('click', EditQuestion);
 
             const deletebtn = document.createElement('button') as HTMLButtonElement;
             deletebtn.setAttribute('class', 'delete');
             deletebtn.textContent = 'Delete';
             deletebtn.addEventListener('click', DeleteQuestion);
+
+            const cancelbtn = document.createElement('button') as HTMLButtonElement;
+            cancelbtn.setAttribute('class', 'cancel');
+            cancelbtn.textContent = 'Cancel';
 
             const newrow = MyTable.insertRow(-1);
 
@@ -92,34 +79,19 @@ function AddQuestion(event: Event) {
             const col7 = newrow.insertCell(0);
             const col8 = newrow.insertCell(0);
 
-            // col1.appendChild(checkbox);
             col1.appendChild(deletebtn);
             col2.appendChild(editbtn);
-            // col2.appendChild(cancelbtn);
             col3.innerText = `${option4}`;
             col4.innerText = `${option3}`;
             col5.innerText = `${option2}`;
             col6.innerText = `${option1}`;
             col7.innerText = `${question}`;
             col8.innerText = `${questionID}`;
-            // col8.innerText = `${questionID}`;
         }
-    }
-    else {
-        console.log('please select level');
     }
     myform.reset();
 }
 
-const myform = document.querySelector('.Myform') as HTMLFormElement;
-myform.addEventListener('submit', AddQuestion);
-
-SelectLevel.addEventListener('change', () => {
-    const selectedValue = SelectLevel.value;
-    if (selectedValue != 'select') {
-        loadata(selectedValue);
-    }
-});
 
 function loadata(selectedValue: string) {
 
@@ -131,7 +103,8 @@ function loadata(selectedValue: string) {
             MyTable.deleteRow(i);
         }
         data = localStorage.getItem("questionsEasy")
-    } else if (selectedValue == 'Medium') {
+    }
+    else if (selectedValue == 'Medium') {
         let rowCount = MyTable.rows.length;
         for (let i = rowCount - 1; i > 0; i--) {
             MyTable.deleteRow(i);
@@ -150,7 +123,6 @@ function loadata(selectedValue: string) {
         const questions = JSON.parse(data) as Question[];
         questionsHard = JSON.parse(data);
         questions.forEach((question) => {
-            // Create HTML elements for loaded questions and add them to the table
             const checkbox = document.createElement('input') as HTMLInputElement;
             checkbox.setAttribute('type', 'checkbox');
 
@@ -187,33 +159,37 @@ function loadata(selectedValue: string) {
             col5.innerText = `${question.option2}`;
             col4.innerText = `${question.option3}`;
             col3.innerText = `${question.option4}`;
-            // col1.appendChild(checkbox);
             col2.appendChild(editbtn);
             col1.appendChild(deletebtn);
-            // col2.appendChild(cancelbtn);
-            // col1.innerText = `${question.questionID}`;
+
         });
     }
 }
-let editbtn = document.querySelector('.edit') as HTMLButtonElement;
-let canceltbtn = document.querySelector('.Cancel') as HTMLButtonElement;
-let savebtn = document.querySelector('.Save') as HTMLButtonElement;
-let updatebtn = document.querySelector('.Update') as HTMLButtonElement;
-
-
-// editbtn.addEventListener('click', log);
 
 function EditQuestion() {
     for (let i = 0; i < MyTable.rows.length; i++) {
         MyTable.rows[i].onclick = function () {
-            console.log(i);
             const row = this as HTMLTableRowElement;
+            let getIDstring = row.cells[0].innerHTML;
+            let getID = parseFloat(getIDstring);
+            const findID = questionsEasy.findIndex((x) => x.questionID === getID)
+            console.log(getID);
+
+            if (findID) {
+                console.log('BINGO');
+                // console.log(getID);
+                // questionsEasy[findID].option1 = (document.querySelector('.question') as HTMLTextAreaElement).value
+                
+            }
+            else {
+                console.log('nono');
+
+            }
             let question = (document.querySelector('.question') as HTMLTextAreaElement).value = row.cells[1].innerHTML;
             let option1 = (document.querySelector('.option1') as HTMLTextAreaElement).value = row.cells[2].innerHTML;
             let option2 = (document.querySelector('.option2') as HTMLTextAreaElement).value = row.cells[3].innerHTML;
             let option3 = (document.querySelector('.option3') as HTMLTextAreaElement).value = row.cells[4].innerHTML;
             let option4 = (document.querySelector('.option4') as HTMLTextAreaElement).value = row.cells[5].innerHTML;
-
             let editbtn = document.querySelector('.edit') as HTMLButtonElement;
 
             // MyTable.rows[i].style.backgroundColor = "green";
@@ -235,20 +211,41 @@ function EditQuestion() {
     savebtn.style.display = "none";
 }
 
-canceltbtn.addEventListener('click', () =>{
+
+const SelectLevel = document.querySelector('#level') as HTMLSelectElement;
+const MyTable = document.querySelector('.MyTable') as HTMLTableElement;
+const alertselect = document.querySelector('.pleaseSelect') as HTMLElement;
+let selectlvl = document.querySelector('.menu__pleaseSelect') as HTMLElement;
+let editbtn = document.querySelector('.edit') as HTMLButtonElement;
+let canceltbtn = document.querySelector('.Cancel') as HTMLButtonElement;
+let savebtn = document.querySelector('.Save') as HTMLButtonElement;
+let updatebtn = document.querySelector('.Update') as HTMLButtonElement;
+updatebtn.addEventListener('click', UpdateQuestion)
+
+let questionID = 0;
+
+
+
+
+const myform = document.querySelector('.Myform') as HTMLFormElement;
+myform.addEventListener('submit', AddQuestion);
+
+SelectLevel.addEventListener('change', () => {
+    const selectedValue = SelectLevel.value;
+    if (selectedValue != 'select') {
+        loadata(selectedValue);
+    }
+});
+
+canceltbtn.addEventListener('click', () => {
     savebtn.style.display = "inline-block";
     updatebtn.style.display = "none";
     canceltbtn.style.display = "none";
 
 })
 
-let EasyStorage = JSON.stringify(questionsEasy);
-let MediumStorage = JSON.stringify(questionsMedium);
-let HardStorage = JSON.stringify(questionsHard);
-
 function DeleteQuestion() {
     for (let i = 0; i < MyTable.rows.length; i++) {
-        let checkboxs = MyTable.querySelectorAll('input[type="checkbox"]') as NodeListOf<HTMLInputElement>;
         MyTable.rows[i].onclick = function () {
             console.log(i);
             MyTable.deleteRow(i);
@@ -267,5 +264,33 @@ function DeleteQuestion() {
         }
     }
 }
+let EasyStorage = JSON.stringify(questionsEasy);
+let MediumStorage = JSON.stringify(questionsMedium);
+let HardStorage = JSON.stringify(questionsHard);
 
 
+
+function UpdateQuestion() {
+    for (let i = 0; i < MyTable.rows.length; i++) {
+        MyTable.rows[i].onclick = function () {
+            const row = this as HTMLTableRowElement;
+            let getIDstring = row.cells[0].innerHTML;
+            let getID = parseFloat(getIDstring);
+            const findID = questionsEasy.findIndex((x) => x.questionID === getID)
+            console.log(getID);
+
+            if (findID) {
+                console.log('BINGO');
+            }
+            else {
+                console.log('nono');
+
+            }
+        }
+    }
+
+
+    canceltbtn.style.display = "none";
+    updatebtn.style.display = "none";
+    savebtn.style.display = "inline-block";
+}
