@@ -1,60 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Skranji:wght@700&display=swap" rel="stylesheet">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <head>
+        <meta charset="UTF-8">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Skranji:wght@700&display=swap"
+            rel="stylesheet">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href="dist/index.css">
-    <script src="dist/index.js" defer></script>
-    <title>Quiz Game</title>
-</head>
+        <link rel="stylesheet" href="dist/index.css">
+        <script src="dist/index.js" defer></script>
+        <title>Quiz Game</title>
+    </head>
 
-<body>
-
-    <h1>Trivia game</h1>
-    <div class="menu">
-        <select name="level" id="level">
-            <option value="Select">Select level</option>
-            <option value="Easy">Easy</option>
-            <option value="Medium">Medium</option>
-            <option value="Hard">Hard</option>
-        </select>
-        <h4 class="menu__pleaseSelect">Please Select Level</h4>
-    </div>
-    <div class="insert">
-        <form class="Myform">
-            <textarea type="text" class="question" placeholder="Question" required></textarea><br>
-            <h2>A.</h2>
-            <textarea type="text" class="option1"></textarea><br>
-            <h2>B.</h2>
-            <textarea type="text" class="option2"></textarea><br>
-            <h2>C.</h2>
-            <textarea type="text" class="option3"></textarea><br>
-            <h2>D.</h2>
-            <textarea type="text" class="option4"></textarea><br>
-            <input type="submit" class="Save" value="Save">
-            <input type="button" class="Update" value="Update">
-            <input type="reset" class="Cancel" value="Cancel">
-        </form>
-    </div>
-    <div class="table">
-        <table class="MyTable">
-            <tr>
-                <th>ID</th>
-                <th>Question</th>
-                <th>option 1</th>
-                <th>option 2</th>
-                <th>option 3</th>
-                <th>option 4</th>
-                <th>Edit</th>
-                <th>Delete</th>
-            </tr>
-        </table>
-    </div>
-</body>
+    <body>
+        <div class="instructions">
+            <div class="instructions__popup">
+                <h3>Welcome</h3><br>
+                <p>To Enter a question first select level and write question and 4 answers and mark next to one of the
+                    questions
+                    The correct answer.</p>
+                <button>OK</button>
+            </div>
+        </div>
+        <h1>Trivia game</h1>
+        <div class="menu">
+            <select name="level" id="level">
+                <option value="Select">Select level</option>
+                <option value="Easy">Easy</option>
+                <option value="Medium">Medium</option>
+                <option value="Hard">Hard</option>
+            </select>
+            <h4 class="menu__pleaseSelect">Please Select Level</h4>
+        </div>
+        <div class="insert">
+            <form class="Myform">
+                <textarea type="text" class="question" placeholder="Question"
+                    required></textarea><br>
+                <input type="radio" id="A" name="correct" class="radio1">
+                <textarea type="text" class="option1" placeholder=" A"></textarea><br>
+                <input type="radio" id="B" name="correct" class="radio2">
+                <textarea type="text" class="option2" placeholder=" B"></textarea><br>
+                <input type="radio" id="C" name="correct" class="radio3">
+                <textarea type="text" class="option3" placeholder=" C"></textarea><br>
+                <input type="radio" id="D" name="correct" class="radio4">
+                <textarea type="text" class="option4" placeholder=" D"></textarea><br>
+                <input type="submit" class="Save" value="Save">
+                <input type="button" class="Update" value="Update">
+                <input type="reset" class="Cancel" value="Cancel">
+            </form>
+        </div>
+        <div class="table">
+            <table class="MyTable">
+                <tr>
+                    <th>ID</th>
+                    <th>Question</th>
+                    <th>option 1</th>
+                    <th>option 2</th>
+                    <th>option 3</th>
+                    <th>option 4</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+            </table>
+        </div>
+    </body>
 
 </html>

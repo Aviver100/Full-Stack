@@ -1,6 +1,34 @@
 body {
   background-color: #f6f7b0;
 }
+body .instructions {
+  width: 100vw;
+  height: 100vh;
+  backdrop-filter: blur(8px);
+  border-radius: 25px;
+  position: absolute;
+  display: none;
+}
+body .instructions__popup {
+  width: 350px;
+  height: 230px;
+  background-color: #3de0b7;
+  border-radius: 25px;
+  margin: auto;
+  margin-top: 350px;
+}
+body .instructions__popup button {
+  width: 60px;
+  height: 35px;
+}
+body .instructions__popup h3 {
+  margin-top: 15px;
+  margin-left: 120px;
+}
+body .instructions__popup p {
+  margin-top: 25px;
+  font-size: 25px;
+}
 
 h1 {
   font-size: 50px;
@@ -48,9 +76,8 @@ body textarea:first-child {
   width: 690px;
   height: 60px;
   font-size: 25px;
-  margin-bottom: 15px;
   border-radius: 25px;
-  margin-top: 50px;
+  margin-top: 20px;
 }
 .insert textarea,
 body textarea {
@@ -63,26 +90,46 @@ body textarea {
   background-color: #f2bef1;
   font-size: 20px;
 }
-.insert h2,
-body h2 {
+.insert h3,
+body h3 {
+  margin-bottom: 0px;
+  padding: 0px;
+  position: relative;
+  margin-right: 500px;
+}
+.insert h3,
+body h3 {
   position: absolute;
-  margin-top: 25px;
+  margin-top: 5px;
+  margin-right: 15px;
 }
 .insert input,
 body input {
   width: 150px;
   height: 50px;
-  margin-top: 10px;
   background-color: #abc0e8;
   border-radius: 40px;
   font-size: 25px;
   color: white;
   border: none;
 }
-.insert .Update, .insert .Cancel,
+.insert .Update,
+.insert .Cancel,
 body .Update,
 body .Cancel {
   display: none;
+}
+.insert #A,
+.insert #B,
+.insert #C,
+.insert #D,
+body #A,
+body #B,
+body #C,
+body #D {
+  width: 30px;
+  height: 30px;
+  border-radius: 50px;
 }
 
 .MyTable {
