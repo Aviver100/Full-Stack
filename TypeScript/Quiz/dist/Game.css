@@ -66,6 +66,21 @@
   position: absolute;
   background-color: burlywood;
 }
+.main__game__CountDown {
+  height: 70px;
+  width: 70px;
+  position: absolute;
+  margin: auto;
+  margin-left: 220px;
+  margin-top: 30px;
+  border-radius: 50px;
+  background-color: #cf1e33;
+}
+.main__game__CountDown p {
+  font-size: 25px;
+  margin-top: 18px;
+  margin-left: 6px;
+}
 .main__game__timer {
   width: 100px;
   height: 70px;
@@ -101,4 +116,17 @@
   height: 80px;
   background-color: #e1d6f3;
   margin-top: 20px;
+}
+.main__endgame {
+  background-color: #92c164;
+  height: 200px;
+  width: 550px;
+  position: absolute;
+  margin-top: 150px;
+}
+.main__endgame table, .main__endgame tr, .main__endgame td, .main__endgame th {
+  border: 1px black solid;
+  width: 350px;
+  margin: auto;
+  text-align: center;
 }
