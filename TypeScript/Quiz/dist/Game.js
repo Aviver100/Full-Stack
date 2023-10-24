@@ -120,28 +120,38 @@ function cheker(selected, correct, button, correctButton) {
         correctButton.style.backgroundColor = 'green';
     }
 }
-function CountDown() {
-}
+// function CountDown() {
+// }
 function endGame() {
     console.log('The Game is Ended');
     let MyPlayer = Players.findIndex((x => x.Player == newName));
     Players[MyPlayer].Scores = UserScores;
     localStorage.setItem("PlayersList", JSON.stringify(Players));
-    // console.log(Players[MyPlayer]);    
     game.style.display = "none";
     endgame.style.display = "inline-block";
     let row = playersTable.insertRow(-1);
-    let td1 = row.insertCell(0);
-    let td2 = row.insertCell(1);
+    let cell1 = row.insertCell(0);
+    let cell2 = row.insertCell(0);
+    // let cell3 = row.insertCell(0);
+    // let cell4 = row.insertCell(0);
+    // let cell5 = row.insertCell(0);
+    // let cell6 = row.insertCell(0);
+    // let cell7 = row.insertCell(0);
+    // let cell8 = row.insertCell(0);
+    // let cell9 = row.insertCell(0);
+    // let cell10 = row.insertCell(0);
     let playersWin = localStorage.getItem('PlayersList');
     let PlayersWinList = JSON.parse(playersWin);
-    // console.log(PlayerWinList);
-    // for(i = 0; i > PlayersWin.length; i++){
-    //     console.log(i);
-    // }
-    // console.log(playersWin);
-    td1.innerText = 'BOBI';
-    td2.innerText = '35';
+    cell1.innerText = `${PlayersWinList.Scores[1]}`;
+    cell2.innerText = `${PlayersWinList.Player[1]}`;
+    // cell2.innerText = 'JOJO'
+    // cell2.innerHTML = '100'
+    // cell2.innerHTML = 'tony'
+    // cell2.innerHTML = '10'
+    // cell2.innerHTML = 'ELUL'
+    // cell2.innerHTML = '90'
+    // cell2.innerHTML = 'TEDI'
+    // cell2.innerHTML = '15'
 }
 returnButton.addEventListener('click', () => {
     location.reload();
