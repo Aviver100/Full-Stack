@@ -4,13 +4,20 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Game</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Skranji:wght@700&display=swap"
+            rel="stylesheet">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
         <script src="dist/Game.js" defer></script>
         <link rel="stylesheet" href="dist/Game.css">
     </head>
     <body>
         <div class="main">
             <div class="main__entername">
-                <p>Hello, Enter Your Name:</p>
+                <p>Enter Your Name:</p>
                 <input type="text" class="inputName"><br>
                 <input type="button" class="EnterName" value="Start!">
             </div>
@@ -18,7 +25,7 @@
                 <div class="main__menu__helloName">
                     <p class="name"></p>
                 </div>
-                <div class="main__logo">LOGO</div>
+                <div class="main__logo"></div>
                 <div class="main__levels">
                     <div class="Easy main__levels__level">Easy</div>
                     <div class="Medium main__levels__level">Medium</div>
@@ -28,11 +35,11 @@
             <div class="main__game">
                 <div class="main__game__score">score</div>
                 <!-- <div class="main__game__CountDown"><p class="countdown">00:15</p></div> -->
-                <div class="main__game__timer">timer</div>
+                <div class="main__game__timer">00:10</div>
                 <div class="Qestionumber"></div>
                 <div class="main__game__question"></div>
                 <div class="main__game__question__options">
-                <div class="option op1"></div>
+                <div class="option op1"><p></p></div>
                 <div class="option op2"></div>
                 <div class="option op3"></div>
                 <div class="option op4"></div>
@@ -45,10 +52,10 @@
                         <th>player</th>
                         <th>score</th>
                     </tr>
-                    <tr>
-                        <td>Avi</td>
-                        <td>15</td>
-                    </tr>
+                    <!-- <tr> -->
+                        <!-- <td>Avi</td>
+                        <td>15</td> -->
+                    <!-- </tr> -->
                 </table>
                 <p class="scores"></p>
                 <button class="return">return to menu</button>

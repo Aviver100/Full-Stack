@@ -95,6 +95,20 @@ function StartGame(levelGame) {
             }
         }, 1000);
     }));
+    CountDown(10);
+}
+function CountDown(seconds) {
+    let countBox = document.querySelector('.main__game__timer');
+    let counter = seconds;
+    let interval = setInterval(() => {
+        counter > 0;
+        counter--;
+        countBox.innerHTML = `00:${counter}`;
+        if (counter === 0) {
+            updateQuestion();
+            console.log('stop');
+        }
+    }, 1000);
 }
 function updateQuestion() {
     option1.style.backgroundColor = 'rgb(225, 214, 243)';
@@ -120,8 +134,6 @@ function cheker(selected, correct, button, correctButton) {
         correctButton.style.backgroundColor = 'green';
     }
 }
-// function CountDown() {
-// }
 function endGame() {
     console.log('The Game is Ended');
     let MyPlayer = Players.findIndex((x => x.Player == newName));
@@ -129,29 +141,36 @@ function endGame() {
     localStorage.setItem("PlayersList", JSON.stringify(Players));
     game.style.display = "none";
     endgame.style.display = "inline-block";
-    let row = playersTable.insertRow(-1);
-    let cell1 = row.insertCell(0);
-    let cell2 = row.insertCell(0);
-    // let cell3 = row.insertCell(0);
-    // let cell4 = row.insertCell(0);
-    // let cell5 = row.insertCell(0);
-    // let cell6 = row.insertCell(0);
-    // let cell7 = row.insertCell(0);
-    // let cell8 = row.insertCell(0);
-    // let cell9 = row.insertCell(0);
-    // let cell10 = row.insertCell(0);
-    let playersWin = localStorage.getItem('PlayersList');
-    let PlayersWinList = JSON.parse(playersWin);
-    cell1.innerText = `${PlayersWinList.Scores[1]}`;
-    cell2.innerText = `${PlayersWinList.Player[1]}`;
-    // cell2.innerText = 'JOJO'
-    // cell2.innerHTML = '100'
-    // cell2.innerHTML = 'tony'
-    // cell2.innerHTML = '10'
-    // cell2.innerHTML = 'ELUL'
-    // cell2.innerHTML = '90'
-    // cell2.innerHTML = 'TEDI'
-    // cell2.innerHTML = '15'
+    let PlayersWin = JSON.parse(localStorage.getItem('PlayersList'));
+    let row1 = playersTable.insertRow();
+    let row2 = playersTable.insertRow();
+    let row3 = playersTable.insertRow();
+    let row4 = playersTable.insertRow();
+    let row5 = playersTable.insertRow();
+    let cell1 = row1.insertCell();
+    let cell2 = row1.insertCell();
+    let cell3 = row2.insertCell();
+    let cell4 = row2.insertCell();
+    let cell5 = row3.insertCell();
+    let cell6 = row3.insertCell();
+    let cell7 = row4.insertCell();
+    let cell8 = row4.insertCell();
+    let cell9 = row5.insertCell();
+    let cell10 = row5.insertCell();
+    let sortScores = Players.sort(function (a, b) {
+        return b.Scores - a.Scores;
+    });
+    cell1.innerText = `${sortScores[0].Player}`;
+    cell2.innerText = `${sortScores[0].Scores}`;
+    cell3.innerText = `${sortScores[1].Player}`;
+    cell4.innerText = `${sortScores[1].Scores}`;
+    cell5.innerText = `${sortScores[2].Player}`;
+    cell6.innerText = `${sortScores[2].Scores}`;
+    cell7.innerText = `${sortScores[3].Player}`;
+    cell8.innerText = `${sortScores[3].Scores}`;
+    cell9.innerText = `${sortScores[4].Player}`;
+    cell10.innerText = `${sortScores[4].Scores}`;
+    console.log(sortScores);
 }
 returnButton.addEventListener('click', () => {
     location.reload();

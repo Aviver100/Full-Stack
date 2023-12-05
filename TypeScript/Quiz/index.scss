@@ -2,13 +2,14 @@ body {
     background-color: #f6f7b0;
 
     .instructions {
-        width:100vw;
-        height:100vh;
+        width: 100vw;
+        height: 100vh;
         // background-color: #2db842;
         backdrop-filter: blur(8px);
         border-radius: 25px;
         position: absolute;
         display: none;
+
         &__popup {
             width: 350px;
             height: 230px;
@@ -16,7 +17,7 @@ body {
             // backdrop-filter: blur(5px);
             // position: absolute;
             border-radius: 25px;
-            margin:auto;
+            margin: auto;
             margin-top: 350px;
 
             button {
@@ -175,9 +176,9 @@ body {
             // display: none;
         }
 
+        .selected {
+            background-color: greenyellow;
+        }
     }
 
-    .selected {
-        background-color: red;
-    }
 }

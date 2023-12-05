@@ -166,6 +166,8 @@ body #D {
 .MyTable td .edit {
   display: inline-block;
 }
-.MyTable .selected {
-  background-color: red;
+.MyTable th .selected,
+.MyTable tr .selected,
+.MyTable td .selected {
+  background-color: greenyellow;
 }

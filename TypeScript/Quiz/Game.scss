@@ -1,14 +1,19 @@
 .main {
-    background-color: rgb(127, 184, 234);
+    // background-color: rgb(127, 184, 234);
+    background-image: url("https://i.postimg.cc/zvfFvXqv/Green-Gray-Simple-Quiz-Instagram-Story.png");
+    background-size: cover;
     height: 900px;
     width: 550px;
     margin: auto;
+    
 
 
     &__entername {
         width: 320px;
         height: 200px;
-        background-color: rgb(144, 215, 144);
+        // background-color: rgb(144, 215, 144);
+        border: 4px solid white;
+        border-radius:  35px;
         position: fixed;
         top: 40%;
         left: 50%;
@@ -20,14 +25,19 @@
 
         p {
             margin-top: 40px;
-            margin-left: 80px;
-
+            // margin: auto;
+            margin-left: 45px;
+            color: white;
+            font-size: 30px;
         }
 
         input {
             margin-left: 80px;
             width: 150px;
         }
+        // input{
+        //     color: aqua;
+        // }
     }
 
     &__menu {
@@ -35,23 +45,28 @@
         width: 100%;
         background-color: rgb(114, 171, 173);
         display: none;
-
+        background: linear-gradient(0deg, rgba(18, 3, 29, 1) 0%, rgba(159, 38, 203, 1) 100%);
 
         &__helloName {
-            background-color: greenyellow;
             height: 45px;
             width: 150px;
             margin: auto;
-            // display: none;
+            color: white;
+            font-family: 'Skranji', cursive;
+            font-size: 22px;
         }
     }
 
     &__logo {
         width: 350px;
-        height: 180px;
-        background-color: blueviolet;
+        height: 250px;
+        // background-color: blueviolet;
+        background-image: url("https://i.postimg.cc/6qXycjDJ/quiz-logo-menu-removebg-preview.png");
+        background-size: cover;
         position: absolute;
         margin: 100px;
+        margin-bottom: -300px;
+        position: relative;
     }
 
     &__levels {
@@ -62,16 +77,24 @@
         &__level {
             width: 350px;
             height: 70px;
-            background-color: rgb(92, 204, 120);
             margin-top: 50px;
+            background: linear-gradient(90deg, rgba(58,139,180,1) 0%, rgba(29,253,247,1) 100%, rgba(69,115,252,1) 100%);
+            border-radius: 35px;
+            text-align: center;
+            line-height: 70px;
+            font-size: 30px;
+            font-family: 'Skranji', cursive;
+            color: #2b5cef;
         }
     }
 
     &__game {
-        background-color: rgb(149, 13, 121);
+        background: rgb(18, 3, 29);
+        background: linear-gradient(0deg, rgba(18, 3, 29, 1) 0%, rgba(159, 38, 203, 1) 100%);
         width: 100%;
         height: 100%;
         display: none;
+        border: 3px solid red;
 
         &__score {
             width: 100px;
@@ -79,6 +102,7 @@
             position: absolute;
             background-color: burlywood;
         }
+
         &__CountDown {
             height: 70px;
             width: 70px;
@@ -88,7 +112,8 @@
             margin-top: 30px;
             border-radius: 50px;
             background-color: rgb(207, 30, 51);
-            p{
+
+            p {
                 font-size: 25px;
                 margin-top: 18px;
                 margin-left: 6px;
@@ -104,7 +129,10 @@
         }
 
         &__question {
-            background-color: rgb(250, 237, 0);
+            background-color: rgb(33, 42, 44);
+            border: 7px solid ;
+
+            border-radius: 10px;
             height: 200px;
             width: 400px;
             position: absolute;
@@ -127,13 +155,26 @@
                 position: absolute;
                 margin-top: 400px;
                 margin-left: 80px;
+                // :first-child{
+                //     color: greenyellow;
+                // }
 
                 .option {
                     width: 380px;
-                    height: 80px;
+                    height: 60px;
                     background-color: rgb(225, 214, 243);
-                    margin-top: 20px;
+                    margin-top: 35px;
+                    border-radius: 50px;
                 }
+                .op1, .op2, .op3, .op4{
+                    text-align: center;
+                    line-height: 50px;
+                }
+                // .op1:first-child{
+                //     color: greenyellow;
+                //     margin: 25px;
+                //     text-align: center;
+                // }
             }
         }
     }
@@ -144,13 +185,17 @@
         width: 550px;
         position: absolute;
         margin-top: 150px;
-        // display: none;
-    table, tr, td, th{
-        border: 1px black solid;
-        width: 350px;
-        margin: auto;
-        text-align: center;
-    }
+        display: none;
+
+        table,
+        tr,
+        td,
+        th {
+            border: 1px black solid;
+            width: 350px;
+            margin: auto;
+            text-align: center;
+        }
     }
 
 }

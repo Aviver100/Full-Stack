@@ -16,26 +16,13 @@ let radio2 = document.querySelector('.radio2');
 let radio3 = document.querySelector('.radio3');
 let radio4 = document.querySelector('.radio4');
 class Question {
-    constructor(questionID, question, answersArray, correctAnswer
-    // public option1: string,
-    // public option2: string,
-    // public option3: string,
-    // public option4: string
-    ) {
+    constructor(questionID, question, answersArray, correctAnswer) {
         this.questionID = questionID;
         this.question = question;
         this.answersArray = answersArray;
         this.correctAnswer = correctAnswer;
     }
 }
-// class answers {
-//     constructor(
-//         public option1: string,
-//         public option2: string,
-//         public option3: string,
-//         public option4: string
-//     ) { }
-// }
 let questionsEasy = [];
 let questionsMedium = [];
 let questionsHard = [];
@@ -70,13 +57,9 @@ function AddQuestion(event) {
         question,
         answersArray,
         correctAnswer
-        // option1,
-        // option2,
-        // option3,
-        // option4,
     };
     if (question != '') {
-        const selectedValue = SelectLevel.value;
+        let selectedValue = SelectLevel.value;
         if (selectedValue == 'Easy') {
             questionsEasy.push(newQuestion);
             localStorage.setItem('questionsEasy', JSON.stringify(questionsEasy));
@@ -126,21 +109,6 @@ function AddQuestion(event) {
             col8.innerText = `${questionID}`;
         }
     }
-    // if (radio1.checked == true) {
-    //     console.log('radio1');
-    //     correctAnswer = 1;
-    // } else if (radio2.checked == true) {
-    //     console.log('radio2');
-    //     correctAnswer = 2;
-    // }
-    // else if (radio3.checked == true) {
-    //     console.log('radio3');
-    //     correctAnswer = 3;
-    // }
-    // else if (radio4.checked == true) {
-    //     console.log('radio4');
-    //     correctAnswer = 4;
-    // }
     myform.reset();
 }
 function loadata(selectedValue) {
@@ -205,54 +173,24 @@ function loadata(selectedValue) {
 }
 let getID;
 function EditQuestion() {
-    for (let i = 0; i < MyTable.rows.length; i++) {
-        MyTable.rows[i].onclick = function () {
-            const row = this;
-            let getIDstring = row.cells[0].innerHTML;
-            getID = parseFloat(getIDstring);
-            const findID = questionsEasy.findIndex((x) => x.questionID === getID);
-            // console.log(getID);
-            if (questionsEasy[getID].correctAnswer == 0 || questionsMedium[getID].correctAnswer == 0 || questionsHard[getID].correctAnswer == 0) {
-                radio1.checked = true;
-                console.log(getID);
-            }
-            else if (questionsEasy[getID].correctAnswer == 1 || questionsMedium[getID].correctAnswer == 1 || questionsHard[getID].correctAnswer == 1) {
-                radio2.checked = true;
-            }
-            else if (questionsEasy[getID].correctAnswer == 2 || questionsMedium[getID].correctAnswer == 2 || questionsHard[getID].correctAnswer == 2) {
-                radio3.checked = true;
-            }
-            else if (questionsEasy[getID].correctAnswer == 3 || questionsMedium[getID].correctAnswer == 3 || questionsHard[getID].correctAnswer == 3) {
-                radio4.checked = true;
-            }
-            if (findID) {
-                // console.log('BINGO');
-                // console.log(getID);
-                // questionsEasy[findID].option1 = (document.querySelector('.question') as HTMLTextAreaElement).value
-            }
-            else {
-                // console.log('nono');
-            }
-            document.querySelector('.question').value = row.cells[1].innerHTML;
-            document.querySelector('.option1').value = row.cells[2].innerHTML;
-            document.querySelector('.option2').value = row.cells[3].innerHTML;
-            document.querySelector('.option3').value = row.cells[4].innerHTML;
-            document.querySelector('.option4').value = row.cells[5].innerHTML;
-            document.querySelector('.edit');
-            // MyTable.rows[i].style.backgroundColor = "green";
-            // MyTable.rows[i].classList.toggle("selected");
-            // let myrows = MyTable.querySelectorAll('tr');
-            // myrows.forEach(x => {
-            //     if (!x.classList.contains("selected")) {
-            //         // x.style.backgroundColor = 'yellow';
-            //     }
-            //     else{
-            //         x.classList.remove("selected");
-            //         // x.style.backgroundColor = 'red';
-            //     }
-            // })
-        };
+    let selectedValue = SelectLevel.value;
+    let selectedArray;
+    if (selectedValue == 'Easy') {
+        selectedArray = questionsEasy;
     }
+    else if (selectedValue == 'Medium') {
+        selectedArray = questionsMedium;
+    }
+    else if (selectedValue == 'Hard') {
+        selectedArray = questionsHard;
+    }
+    let rows = MyTable.querySelector('tr');
+    for (i = 0; i > MyTable.rows.length; i++) {
+        rows[i].
+        ;
+    }
+    // let questionToEdit = selectedArray?.find(x => x.questionID === questionID)
+    console.log(selectedValue);
     canceltbtn.style.display = "inline-block";
     updatebtn.style.display = "inline-block";
     savebtn.style.display = "none";
@@ -279,9 +217,13 @@ function DeleteQuestion() {
     }
 }
 function UpdateQuestion() {
+    for (let i = 0; i < MyTable.rows.length; i++) {
+        MyTable.rows[i].onclick = function () {
+        };
+    }
     let selectedValue = SelectLevel.value;
     if (selectedValue == 'Easy') {
-        const IDtoUpdate = questionsEasy.findIndex((x) => x.questionID == getID);
+        let IDtoUpdate = questionsEasy.findIndex((x) => x.questionID == getID);
         console.log('EasyToUpdate');
         questionsEasy[IDtoUpdate].question = document.querySelector('.question').value;
         questionsEasy[IDtoUpdate].answersArray[0] = document.querySelector('.option1').value;
@@ -289,17 +231,19 @@ function UpdateQuestion() {
         questionsEasy[IDtoUpdate].answersArray[2] = document.querySelector('.option3').value;
         questionsEasy[IDtoUpdate].answersArray[3] = document.querySelector('.option4').value;
         localStorage.setItem('questionsEasy', JSON.stringify(questionsEasy));
+        console.log(questionsEasy[IDtoUpdate].answersArray[3]);
     }
     else if (selectedValue == 'Medium') {
         console.log('MediumToUpdate');
-        // } else if (selectedValue == 'Hard' && IDtoUpdate) {
-        //     questionsHard[getID].question = (document.querySelector('.question') as HTMLTextAreaElement).value;
-        //     questionsHard[getID].option1 = (document.querySelector('.option1') as HTMLTextAreaElement).value;
-        //     questionsHard[getID].option2 = (document.querySelector('.option2') as HTMLTextAreaElement).value;
-        //     questionsHard[getID].option3 = (document.querySelector('.option3') as HTMLTextAreaElement).value;
-        //     questionsHard[getID].option4 = (document.querySelector('.option4') as HTMLTextAreaElement).value;
-        // localStorage.setItem("questionsHard", HardStorage);
-        // localStorage.setItem('questionsHard', JSON.stringify(questionsHard));
+    }
+    else if (selectedValue == 'Hard') {
+        let IDtoUpdate = questionsHard.findIndex((x) => x.questionID == getID);
+        questionsEasy[IDtoUpdate].question = document.querySelector('.question').value;
+        questionsEasy[IDtoUpdate].answersArray[0] = document.querySelector('.option1').value;
+        questionsEasy[IDtoUpdate].answersArray[1] = document.querySelector('.option2').value;
+        questionsEasy[IDtoUpdate].answersArray[2] = document.querySelector('.option3').value;
+        questionsEasy[IDtoUpdate].answersArray[3] = document.querySelector('.option4').value;
+        localStorage.setItem('questionsHard', JSON.stringify(questionsHard));
         console.log('HardToUpdate');
         // localStorage.setItem("questionsHard", HardStorage);
     }
@@ -309,7 +253,8 @@ function UpdateQuestion() {
 }
 myform.addEventListener('submit', AddQuestion);
 SelectLevel.addEventListener('change', () => {
-    const selectedValue = SelectLevel.value;
+    let selectedValue = SelectLevel.value;
+    myform.reset();
     if (selectedValue != 'select') {
         loadata(selectedValue);
     }
