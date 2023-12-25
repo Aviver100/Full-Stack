@@ -76,6 +76,7 @@ function StartGame(levelGame) {
     else if (levelGame == "HardLevel") {
         data = dataHard;
     }
+    CountDown(10);
     GameDIV.style.display = "inline-block";
     Menu.style.display = "none";
     updateQuestion();
@@ -95,18 +96,27 @@ function StartGame(levelGame) {
             }
         }, 1000);
     }));
-    CountDown(10);
+    // setInterval(CountDown, 1000)
 }
+// setInterval(()=>{
+//     for(let i = 10; i > 0; i-- ){
+//         if(i==0){
+//             console.log('stop');
+//         }
+//     }
+// }, 1000)
+let interval;
 function CountDown(seconds) {
     let countBox = document.querySelector('.main__game__timer');
     let counter = seconds;
-    let interval = setInterval(() => {
-        counter > 0;
+    interval = setInterval(() => {
+        countBox.innerHTML = `${counter}`;
+        console.log(counter);
         counter--;
-        countBox.innerHTML = `00:${counter}`;
-        if (counter === 0) {
+        if (counter == 0) {
+            i++;
             updateQuestion();
-            console.log('stop');
+            console.log('Stop');
         }
     }, 1000);
 }
@@ -121,6 +131,8 @@ function updateQuestion() {
     option3.innerText = data[i].answersArray[2];
     option4.innerText = data[i].answersArray[3];
     ScoresDiv.innerText = `${UserScores}`;
+    clearInterval(interval);
+    CountDown(10);
 }
 function cheker(selected, correct, button, correctButton) {
     if (selected == correct) {
@@ -133,6 +145,8 @@ function cheker(selected, correct, button, correctButton) {
         button.style.backgroundColor = 'red';
         correctButton.style.backgroundColor = 'green';
     }
+    clearInterval(interval);
+    CountDown(10);
 }
 function endGame() {
     console.log('The Game is Ended');

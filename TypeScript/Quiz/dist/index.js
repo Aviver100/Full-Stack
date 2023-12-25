@@ -186,8 +186,7 @@ function EditQuestion() {
     }
     let rows = MyTable.querySelector('tr');
     for (i = 0; i > MyTable.rows.length; i++) {
-        rows[i].
-        ;
+        // rows[i].
     }
     // let questionToEdit = selectedArray?.find(x => x.questionID === questionID)
     console.log(selectedValue);

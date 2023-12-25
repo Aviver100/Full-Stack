@@ -1,3 +1,7 @@
+body {
+  font-family: "Skranji", cursive;
+}
+
 .main {
   background-image: url("https://i.postimg.cc/zvfFvXqv/Green-Gray-Simple-Quiz-Instagram-Story.png");
   background-size: cover;
@@ -25,8 +29,14 @@
   font-size: 30px;
 }
 .main__entername input {
-  margin-left: 80px;
+  margin-left: 20px;
   width: 150px;
+  width: 260px;
+  height: 70px;
+  border-radius: 20px;
+}
+.main__entername input {
+  color: aqua;
 }
 .main__menu {
   height: 100%;
@@ -36,12 +46,10 @@
   background: linear-gradient(0deg, #12031d 0%, #9f26cb 100%);
 }
 .main__menu__helloName {
-  height: 45px;
-  width: 150px;
   margin: auto;
+  margin-left: 170px;
   color: white;
-  font-family: "Skranji", cursive;
-  font-size: 22px;
+  font-size: 32px;
 }
 .main__logo {
   width: 350px;
@@ -63,12 +71,13 @@
   height: 70px;
   margin-top: 50px;
   background: linear-gradient(90deg, #3a8bb4 0%, #1dfdf7 100%, #4573fc 100%);
-  border-radius: 35px;
+  border-radius: 50px;
   text-align: center;
   line-height: 70px;
   font-size: 30px;
-  font-family: "Skranji", cursive;
-  color: #2b5cef;
+  color: #9223BB;
+  cursor: pointer;
+  border: 6px solid #FDBE00;
 }
 .main__game {
   background: #12031d;
@@ -79,20 +88,19 @@
   border: 3px solid red;
 }
 .main__game__score {
-  width: 100px;
-  height: 70px;
+  width: 50px;
+  height: 50px;
   position: absolute;
   background-color: burlywood;
 }
 .main__game__CountDown {
-  height: 70px;
-  width: 70px;
+  height: 50px;
+  width: 50px;
   position: absolute;
   margin: auto;
   margin-left: 220px;
   margin-top: 30px;
   border-radius: 50px;
-  background-color: #cf1e33;
 }
 .main__game__CountDown p {
   font-size: 25px;
@@ -100,21 +108,24 @@
   margin-left: 6px;
 }
 .main__game__timer {
-  width: 100px;
-  height: 70px;
+  width: 60px;
+  height: 60px;
   background-color: burlywood;
-  margin-left: 450px;
+  margin-left: 490px;
   position: absolute;
+  border-radius: 50px;
 }
 .main__game__question {
   background-color: #212a2c;
-  border: 7px solid;
-  border-radius: 10px;
+  border: 7px solid greenyellow;
+  border-radius: 40px;
   height: 200px;
   width: 400px;
   position: absolute;
   margin-top: 120px;
   margin-left: 70px;
+  color: white;
+  text-align: center;
 }
 .main__game__question__option:first-child {
   background-color: brown;
@@ -130,6 +141,8 @@
   position: absolute;
   margin-top: 400px;
   margin-left: 80px;
+  cursor: pointer;
+  font-size: 25px;
 }
 .main__game__question__options .option {
   width: 380px;
@@ -137,10 +150,12 @@
   background-color: #e1d6f3;
   margin-top: 35px;
   border-radius: 50px;
+  border: 5px solid #7676ee;
 }
 .main__game__question__options .op1, .main__game__question__options .op2, .main__game__question__options .op3, .main__game__question__options .op4 {
-  text-align: center;
-  line-height: 50px;
+  text-align: left;
+  line-height: 60px;
+  padding-left: 20px;
 }
 .main__endgame {
   background-color: #92c164;

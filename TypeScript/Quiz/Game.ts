@@ -81,6 +81,8 @@ function StartGame(levelGame: string) {
     } else if (levelGame == "HardLevel") {
         data = dataHard
     }
+    
+    CountDown(10);
 
     GameDIV.style.display = "inline-block"
     Menu.style.display = "none";
@@ -93,6 +95,7 @@ function StartGame(levelGame: string) {
         let correctButton = ButtonsArray[data[i].correctAnswer];
 
         cheker(selected, data[i].correctAnswer, buttonClicked, correctButton);
+
         setTimeout(() => {
             if (i < data.length - 1) {
                 i++
@@ -102,25 +105,35 @@ function StartGame(levelGame: string) {
             }
         }, 1000)
     }))
-CountDown(10);
+    // setInterval(CountDown, 1000)
 }
 
-function CountDown(seconds:any) {
+// setInterval(()=>{
+//     for(let i = 10; i > 0; i-- ){
+//         if(i==0){
+//             console.log('stop');
+//         }
+//     }
+// }, 1000)
+
+let interval: any;
+
+function CountDown(seconds: number) {
     let countBox = document.querySelector('.main__game__timer') as HTMLElement;
     let counter = seconds;
-    
-    let interval = setInterval(() => {
-        counter > 0;
-        counter--;
-        countBox.innerHTML = `00:${counter}`;
-      if(counter === 0){
-        updateQuestion();
-        console.log('stop');
 
-      }
+    interval = setInterval(() => {
+        countBox.innerHTML = `${counter}`;
+        console.log(counter);
+        counter--;
+        if (counter == 0) {
+            i++;
+            updateQuestion();
+            console.log('Stop');
+        }
+        
     }, 1000);
 }
-
 
 function updateQuestion() {
     option1.style.backgroundColor = 'rgb(225, 214, 243)';
@@ -135,6 +148,8 @@ function updateQuestion() {
     option4.innerText = data[i].answersArray[3];
 
     ScoresDiv.innerText = `${UserScores}`;
+    clearInterval(interval)
+    CountDown(10);
 }
 
 function cheker(selected: number, correct: number, button: any, correctButton: Node) {
@@ -149,6 +164,8 @@ function cheker(selected: number, correct: number, button: any, correctButton: N
         button.style.backgroundColor = 'red';
         correctButton.style.backgroundColor = 'green'
     }
+    clearInterval(interval)
+    CountDown(10);
 }
 
 
