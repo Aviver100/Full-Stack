@@ -15,26 +15,6 @@ app.listen(port, () => {
   console.log(`[server]: Server is running at http://localhost:${port}`);
 });
 
-const promise = new Promise((resolve, reject) => {
-  setTimeout(() => {
-    const data = false ? { name: 'Avi' } : null;
-    if (data) {
-      console.log(data);
-    }
-  })
-})
-
-promise
-  .then((result) => {
-  console.log(result);
-
-})
-  .catch((error) => {
-    console.error('nono');
-    console.error(error);
-    
-  })
-
 
 
 
