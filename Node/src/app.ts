@@ -10,25 +10,27 @@ interface product {
     price: number
 }
 
-const Products:product[] = [];
+const Products: product[] = [];
 
-app.post("/api/product", (req, res)=>{
-    const newProduct:product = req.body;
-    const index = Products.findIndex(item =>{newProduct.name === item.name})
-    if(!index){
+app.post("/api/product", (req, res) => {
+    const newProduct: product = req.body;
+    const index = Products.findIndex(item => { newProduct.name === item.name })
+    if (!index) {
         Products.push(newProduct);
         console.log(newProduct);
-        res.send({Products})
-    }else{
+        res.send({ Products })
+    } else {
         throw (`the name ${newProduct.name} in use`)
-    // }
+        // }
+    }
 })
- 
-app.get("/api/products", (req,res)=>{
+
+
+app.get("/api/products", (req, res) => {
     res.send(Products)
 })
-app.listen(port, ()=>{
+app.listen(port, () => {
     console.log(`server http://loclhost/${port} run`);
-    
+
 })
 

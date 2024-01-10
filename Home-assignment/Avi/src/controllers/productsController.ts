@@ -7,7 +7,6 @@ const products: Product[] = [];
 export function createProduct(req: express.Request, res: express.Response) {
     try {
         const newProduct: Product = req.body;
-
         // Basic verification of the input
         if (!newProduct.name || !newProduct.price) {
             throw new Error("Missing product details to add");
