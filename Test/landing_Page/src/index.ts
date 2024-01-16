@@ -1,5 +1,5 @@
 import express from 'express';
-import {UpdateCustomer, creatCustomer} from './controllers/index'
+import {DeleteCustomer, GetCustomer, UpdateCustomer, creatCustomer} from './controllers/index'
 import {Customers} from './controllers/index'
 
 const app = express();
@@ -14,8 +14,10 @@ app.get('/api/customers', (req, res) => {
 });
 
 app.post('/api/add-customer', creatCustomer);
-app.get('/api/:phone', UpdateCustomer);
+app.get('/api/:phone', GetCustomer);
+app.patch('/api/:phone', UpdateCustomer);
+app.delete('/api/:phone', DeleteCustomer);
 
 app.listen(port, () => {
-    console.log(`Server is running on http://localhost:${port}`);
+    console.log(`Server is running on http://localhost:${port}`); 
 });
