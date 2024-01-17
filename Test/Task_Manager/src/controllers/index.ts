@@ -16,7 +16,6 @@ export function creatTask(req: express.Request, res: express.Response) {
     newTask.id = uuidv4();
     Tasks.push(newTask)
     res.send({Tasks});
-    res.send({Tasks}); 
 }
 
 export function UpdateTask(req: express.Request, res: express.Response) {
