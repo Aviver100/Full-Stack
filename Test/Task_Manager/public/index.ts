@@ -1,18 +1,13 @@
-// import {GetTasks, Tasks} from '../src/controllers/index'
+import { GetTasks, Tasks } from '../src/controllers/index'
+import { task } from '../src/modules/task'
 // import { task } from '../src/modules/task';
 
-// function updateTable(data:task) {
-//     // Get the table body
-//     var Tasktable = document.querySelector('.TasksList') as HTMLTableElement;
+async function loadIntoTable(url:string, table:HTMLElement) {
+    fetch("/api/tasks").then
+}
 
-//     // Create a new table row
-//     var newRow = Tasktable.insertRow();
+let TasksArray = JSON.stringify(Tasks);
+console.log(TasksArray);
+console.log("123456"); 
 
-//     // Insert cells with data
-//     var cell1 = newRow.insertCell(0);
-//     var cell2 = newRow.insertCell(1);
-
-//     // Update cell content with data from the API response
-//     cell1.textContent = data.title;
-//     cell2.textContent = data.description;
-//   }
+loadIntoTable("/api/tasks", document.querySelector("MyTable")!)
