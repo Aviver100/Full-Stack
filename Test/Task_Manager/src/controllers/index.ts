@@ -8,11 +8,6 @@ export let Tasks: task[] = [];
 export function creatTask(req: express.Request, res: express.Response) {
     let newTask: task = req.body;
     newTask.status = status.ToDo;
-    // if(req.body.status === status.ToDo){
-    //     newTask.status = status.ToDo
-    // }else if(req.body.status === status.Done){
-    //     newTask.status = status.Done
-    // }
     newTask.id = uuidv4();
     Tasks.push(newTask)
     res.send({Tasks});
