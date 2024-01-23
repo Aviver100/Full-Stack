@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Manager</title>
+   
+    <link rel="stylesheet" href="dist/style.css">
+</head>
+<body>
+    <form action="/api/tasks" method="post" id="TaskForm">
+        <input type="text" placeholder="Title" name="title" ><br>
+        <input type="text" placeholder="Description" name="description"><br>
+        <input type="submit" value="SAVE" >
+    </form>
+    <button onclick="handleGetAllTasks(event)">GET ALL</button>
+    <table class="MyTable">
+        <thead></thead>
+        <tbody></tbody>
+    </table>
+</body>
+<script src="./dist/index.js"></script>
+</html>
