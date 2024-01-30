@@ -4,7 +4,7 @@ import { Tasks } from './controllers/index'
 import { addTaskValidation } from './validation/taskFormValidation';
 
 const app = express();
-const port = 3000;
+const port = 3001;
 
 app.use(express.json());
 app.use(express.urlencoded());
@@ -19,6 +19,7 @@ app.use(express.static('public'));
 // app.get('/api/tasks', GetTasks);
 
 import taskRoutes from "./routes/tasks"
+
 app.use("/api/tasks", taskRoutes)
 
 app.listen(port, () => {

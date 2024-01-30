@@ -15,10 +15,10 @@ const router = express.Router();
 
 // when directed to these routes -> /api/tasks
 
-router.get("", getTasks)
-    .get("/:id", getTasks)
-    .post("", addTaskValidation, creatTask)
-    .patch("/:id", updateTask)
-    .delete("/:id", deleteTask)
+router.post("/add", addTaskValidation, creatTask)   // Creat
+    .get("", getTasks)                          // Read
+    .get("/:id", getTasks)                      // Read By ID 
+    .patch("/:id", updateTask)                  // Update
+    .delete("/:id", deleteTask)                 // Delete
 
-export default router;
+    export default router;
