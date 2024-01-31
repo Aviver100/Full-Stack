@@ -9,9 +9,10 @@
 </head>
 <body>
         <form onsubmit="handleAddTask(event)">
+        <!-- <form action="/" method="post"> -->
         <input type="text" placeholder="Title" name="title" ><br>
         <input type="text" placeholder="Description" name="description"><br>
-        <input type="button" value="SAVE" onclick="handleAddTask(event)">
+        <input type="submit" value="SAVE">
     </form>
     <button onclick="handleGetAllTasks(event)">GET ALL</button>
     <table class="MyTable"> 

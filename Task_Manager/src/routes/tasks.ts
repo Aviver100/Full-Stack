@@ -1,5 +1,5 @@
 import express from 'express';
-import { deleteTask, getTasks, updateTask, creatTask } from '../controllers';
+import { deleteTask, getTasks, updateTask, creatTask, getTask } from '../controllers';
 import { addTaskValidation } from '../validation/taskFormValidation';
 
 const router = express.Router();
@@ -16,8 +16,8 @@ const router = express.Router();
 // when directed to these routes -> /api/tasks
 
 router.post("/add", addTaskValidation, creatTask)   // Creat
-    .get("", getTasks)                          // Read
-    .get("/:id", getTasks)                      // Read By ID 
+    .get("/", getTasks)                          // Read
+    .get("/:id", getTask)                      // Read By ID 
     .patch("/:id", updateTask)                  // Update
     .delete("/:id", deleteTask)                 // Delete
 

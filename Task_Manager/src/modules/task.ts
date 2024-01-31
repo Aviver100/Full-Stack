@@ -1,4 +1,5 @@
-import { status } from '../modules/TaskStatus'
+import { status } from '../modules/TaskStatus';
+import mongoose, { Schema, model } from 'mongoose';
 
 export interface task {
     id: string,
@@ -6,3 +7,11 @@ export interface task {
     description: string,
     status: status
 }
+
+const TaskSchema = new mongoose.Schema({
+    title: String,
+    description: String,
+    // status{
+        
+    // }
+})

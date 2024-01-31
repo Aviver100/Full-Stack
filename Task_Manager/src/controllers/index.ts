@@ -28,7 +28,7 @@ export function updateTask(req: express.Request, res: express.Response) {
 
 export function getTasks(req: express.Request, res: express.Response) {
     if (!Tasks || Tasks.length === 0) {
-        res.status(404).send({message: 'Task not found'});
+        res.status(404).send({message: 'Tasks not found'});
     } else {
         res.send(Tasks);
     }

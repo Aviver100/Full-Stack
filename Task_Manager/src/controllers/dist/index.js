@@ -1,6 +1,6 @@
 "use strict";
 exports.__esModule = true;
-exports.DeleteTask = exports.GetTask = exports.GetTasks = exports.UpdateTask = exports.creatTask = exports.Tasks = void 0;
+exports.deleteTask = exports.getTask = exports.getTasks = exports.updateTask = exports.creatTask = exports.Tasks = void 0;
 var uuid_1 = require("uuid");
 var TaskStatus_1 = require("../modules/TaskStatus");
 exports.Tasks = [];
@@ -10,10 +10,9 @@ function creatTask(req, res) {
     newTask.id = uuid_1.v4();
     exports.Tasks.push(newTask);
     res.send({ Tasks: exports.Tasks });
-    // res.end();
 }
 exports.creatTask = creatTask;
-function UpdateTask(req, res) {
+function updateTask(req, res) {
     var TaskToUpdate = req.params.id;
     var foundTask = exports.Tasks.find(function (task) { return task.id === TaskToUpdate; });
     if (!foundTask) {
@@ -26,17 +25,17 @@ function UpdateTask(req, res) {
         res.send(foundTask);
     }
 }
-exports.UpdateTask = UpdateTask;
-function GetTasks(req, res) {
+exports.updateTask = updateTask;
+function getTasks(req, res) {
     if (!exports.Tasks || exports.Tasks.length === 0) {
-        res.status(404).send('Task not found');
+        res.status(404).send({ message: 'Tasks not found' });
     }
     else {
         res.send(exports.Tasks);
     }
 }
-exports.GetTasks = GetTasks;
-function GetTask(req, res) {
+exports.getTasks = getTasks;
+function getTask(req, res) {
     var TaskToGet = req.params.id;
     var foundTask = exports.Tasks.find(function (task) { return task.id === TaskToGet; });
     if (!foundTask) {
@@ -46,8 +45,8 @@ function GetTask(req, res) {
         res.send(foundTask);
     }
 }
-exports.GetTask = GetTask;
-function DeleteTask(req, res) {
+exports.getTask = getTask;
+function deleteTask(req, res) {
     var TaskToDelete = req.params.id;
     var foundTask = exports.Tasks.findIndex(function (task) { return task.id === TaskToDelete; });
     if (!foundTask) {
@@ -58,4 +57,4 @@ function DeleteTask(req, res) {
         res.send(foundTask);
     }
 }
-exports.DeleteTask = DeleteTask;
+exports.deleteTask = deleteTask;

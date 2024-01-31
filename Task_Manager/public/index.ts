@@ -1,7 +1,6 @@
-// import {Tasks} from '../src/controllers/index'
 import express from "express";
 
-async function handleGetAllTasks(event) {
+async function handleGetAllTasks() {
     try {
         const response = await fetch("/api/tasks")
         const data = await response.json();
@@ -11,7 +10,7 @@ async function handleGetAllTasks(event) {
     }
 }
 
-async function handleAddTask(event: SubmitEvent) {
+export async function handleAddTask(event: SubmitEvent) {
     event.preventDefault();
 
     const formData = new FormData(event.target as HTMLFormElement);
@@ -19,7 +18,7 @@ async function handleAddTask(event: SubmitEvent) {
         const response = await fetch('/api/tasks/add', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(Object.fromEntries(formData)),
+            body: JSON.stringify(Object.fromEntries(formData)),            
         });
         if (!response.ok) {
             throw new Error('Server error')
@@ -30,6 +29,7 @@ async function handleAddTask(event: SubmitEvent) {
     catch(error:any) {
         console.error('Error:', error.message)
     }
+
 
 
 
