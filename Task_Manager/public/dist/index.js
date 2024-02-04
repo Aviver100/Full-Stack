@@ -36,10 +36,22 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 exports.__esModule = true;
-exports.handleAddTask = void 0;
-function handleGetAllTasks() {
+exports.renderTasks = exports.handleAddTask = exports.handleGetAllTasks = void 0;
+var data;
+// window.addEventListener('DOMContentLoaded', async () => {
+//     {
+//         try {
+//             const response = await fetch("/api/tasks")
+//             data = await response.json();
+//             console.log(data);
+//         } catch (error) {
+//             console.log(error);
+//         }
+//     }
+// })
+function handleGetAllTasks(event) {
     return __awaiter(this, void 0, void 0, function () {
-        var response, data, error_1;
+        var response, error_1;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -54,13 +66,14 @@ function handleGetAllTasks() {
                     return [3 /*break*/, 4];
                 case 3:
                     error_1 = _a.sent();
-                    console.error(error_1);
+                    console.log(error_1);
                     return [3 /*break*/, 4];
                 case 4: return [2 /*return*/];
             }
         });
     });
 }
+exports.handleGetAllTasks = handleGetAllTasks;
 function handleAddTask(event) {
     return __awaiter(this, void 0, void 0, function () {
         var formData, response, result, error_2;
@@ -85,15 +98,33 @@ function handleAddTask(event) {
                     return [4 /*yield*/, response.json()];
                 case 3:
                     result = _a.sent();
-                    console.log(result);
                     return [3 /*break*/, 5];
                 case 4:
                     error_2 = _a.sent();
                     console.error('Error:', error_2.message);
                     return [3 /*break*/, 5];
-                case 5: return [2 /*return*/];
+                case 5:
+                    renderTasks();
+                    return [2 /*return*/];
             }
         });
     });
 }
 exports.handleAddTask = handleAddTask;
+function renderTasks() {
+    return __awaiter(this, void 0, void 0, function () {
+        var tableData, table;
+        return __generator(this, function (_a) {
+            tableData = "";
+            data.map(function (values) {
+                var status = values.status === 0 ? "To Do" : "Done";
+                tableData +=
+                    "<tr>\n        <td>" + values.title + "</td>\n        <td>" + values.description + "</td>\n        <td>" + status + "</td>\n        </tr>";
+            });
+            table = document.querySelector('.table_body');
+            table.innerHTML = tableData;
+            return [2 /*return*/];
+        });
+    });
+}
+exports.renderTasks = renderTasks;

@@ -1,12 +1,27 @@
-import express from "express";
+import express, { json } from "express";
+import { task } from "../src/modules/task";
+let data: any;
 
-async function handleGetAllTasks() {
+// window.addEventListener('DOMContentLoaded', async () => {
+//     {
+//         try {
+//             const response = await fetch("/api/tasks")
+//             data = await response.json();
+//             console.log(data);
+//         } catch (error) {
+//             console.log(error);
+
+//         }
+//     }
+// })
+export async function handleGetAllTasks(event) {
     try {
         const response = await fetch("/api/tasks")
-        const data = await response.json();
-        console.log(data)
+        data = await response.json();
+        console.log(data);
     } catch (error) {
-        console.error(error)
+        console.log(error);
+
     }
 }
 
@@ -18,37 +33,33 @@ export async function handleAddTask(event: SubmitEvent) {
         const response = await fetch('/api/tasks/add', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(Object.fromEntries(formData)),            
+            body: JSON.stringify(Object.fromEntries(formData)),
         });
         if (!response.ok) {
             throw new Error('Server error')
         }
         const result = await response.json();
-        console.log(result);
     }
-    catch(error:any) {
+    catch (error: any) {
         console.error('Error:', error.message)
     }
-
-
-
-
-
-
-    // } catch (error) {
-
-    // }
-    // const title = formData.get('title');
-    // const description = formData.get('description');
-    // const newTask = {title, description}
-
-    // if(response.ok){
-    //     console.log('the task added');
-    //     messages.push(`the task added ${response}`)
-    // }
-    // else{
-    //     console.log('Failed to added task');
-    //     messages.push(`Failed to added task ${response}`)
-
-    // } 
+    renderTasks();
 }
+
+
+export async function renderTasks() {
+
+    let tableData = "";
+    data.map((values: task) => {
+        let status = values.status === 0 ? "To Do" : "Done";
+        tableData +=
+            `<tr>
+        <td>${values.title}</td>
+        <td>${values.description}</td>
+        <td>${status}</td>
+        </tr>`
+    });
+    let table = document.querySelector('.table_body') as HTMLTableElement;
+    table.innerHTML = tableData;
+ }
+
