@@ -36,19 +36,8 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 exports.__esModule = true;
-exports.renderTasks = exports.handleAddTask = exports.handleGetAllTasks = void 0;
+exports.editTask = exports.renderTasks = exports.handleAddTask = exports.handleGetAllTasks = void 0;
 var data;
-// window.addEventListener('DOMContentLoaded', async () => {
-//     {
-//         try {
-//             const response = await fetch("/api/tasks")
-//             data = await response.json();
-//             console.log(data);
-//         } catch (error) {
-//             console.log(error);
-//         }
-//     }
-// })
 function handleGetAllTasks(event) {
     return __awaiter(this, void 0, void 0, function () {
         var response, error_1;
@@ -62,7 +51,7 @@ function handleGetAllTasks(event) {
                     return [4 /*yield*/, response.json()];
                 case 2:
                     data = _a.sent();
-                    console.log(data);
+                    renderTasks();
                     return [3 /*break*/, 4];
                 case 3:
                     error_1 = _a.sent();
@@ -92,6 +81,7 @@ function handleAddTask(event) {
                         })];
                 case 2:
                     response = _a.sent();
+                    renderTasks();
                     if (!response.ok) {
                         throw new Error('Server error');
                     }
@@ -103,9 +93,7 @@ function handleAddTask(event) {
                     error_2 = _a.sent();
                     console.error('Error:', error_2.message);
                     return [3 /*break*/, 5];
-                case 5:
-                    renderTasks();
-                    return [2 /*return*/];
+                case 5: return [2 /*return*/];
             }
         });
     });
@@ -118,8 +106,9 @@ function renderTasks() {
             tableData = "";
             data.map(function (values) {
                 var status = values.status === 0 ? "To Do" : "Done";
+                var editDelete = "<button onclick=\"editTask()\">Edit</button> <button onclick=\"deleteTask()\">Delete</button>";
                 tableData +=
-                    "<tr>\n        <td>" + values.title + "</td>\n        <td>" + values.description + "</td>\n        <td>" + status + "</td>\n        </tr>";
+                    "<tr>\n        <td>" + values.title + "</td>\n        <td>" + values.description + "</td>\n        <td>" + status + "</td>\n        <td>" + editDelete + "</td>\n        </tr>";
             });
             table = document.querySelector('.table_body');
             table.innerHTML = tableData;
@@ -128,3 +117,17 @@ function renderTasks() {
     });
 }
 exports.renderTasks = renderTasks;
+function editTask(td) {
+    var _a, _b;
+    return __awaiter(this, void 0, void 0, function () {
+        var table, selectedRow, titleElement;
+        return __generator(this, function (_c) {
+            table = document.querySelector("table_body");
+            selectedRow = (_a = td.parentElement) === null || _a === void 0 ? void 0 : _a.parentElement;
+            titleElement = (_b = document.querySelector("title")) === null || _b === void 0 ? void 0 : _b.value;
+            titleElement = selectedRow.cells[0].innerHTML;
+            return [2 /*return*/];
+        });
+    });
+}
+exports.editTask = editTask;
