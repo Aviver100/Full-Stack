@@ -1,5 +1,9 @@
-import { status } from '../modules/TaskStatus';
 import mongoose, { Schema, model } from 'mongoose';
+
+export enum status{
+    ToDo = "To Do",
+    Done = "Done"
+}
 
 export interface task {
     id: string,

@@ -2,11 +2,11 @@
 exports.__esModule = true;
 exports.deleteTask = exports.getTask = exports.getTasks = exports.updateTask = exports.creatTask = exports.Tasks = void 0;
 var uuid_1 = require("uuid");
-var TaskStatus_1 = require("../modules/TaskStatus");
+var task_1 = require("../modules/task");
 exports.Tasks = [];
 function creatTask(req, res) {
     var newTask = req.body;
-    newTask.status = TaskStatus_1.status.ToDo;
+    newTask.status = task_1.status.ToDo;
     newTask.id = uuid_1.v4();
     exports.Tasks.push(newTask);
     res.send({ Tasks: exports.Tasks });

@@ -36,8 +36,11 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 exports.__esModule = true;
-exports.editTask = exports.renderTasks = exports.handleAddTask = exports.handleGetAllTasks = void 0;
+exports.updateTask = exports.editTask = exports.renderTasks = exports.handleAddTask = exports.handleGetAllTasks = void 0;
 var data;
+var editBtn = document.querySelector(".edit");
+var updateBtn = document.querySelector(".update");
+// let deleteBtn = document.querySelector(".delete") as HTMLButtonElement;
 function handleGetAllTasks(event) {
     return __awaiter(this, void 0, void 0, function () {
         var response, error_1;
@@ -99,16 +102,19 @@ function handleAddTask(event) {
     });
 }
 exports.handleAddTask = handleAddTask;
+// let status = values.status === ToDo ? "To Do" : "Done";
 function renderTasks() {
     return __awaiter(this, void 0, void 0, function () {
         var tableData, table;
         return __generator(this, function (_a) {
             tableData = "";
             data.map(function (values) {
-                var status = values.status === 0 ? "To Do" : "Done";
-                var editDelete = "<button class=\"edit\" onclick=\"editTask()\">Edit</button> <button onclick=\"deleteTask()\">Delete</button>";
+                var editDelete = 
+                // <button class="update" onclick="updateTask()" style="display: none;">Update</button>
+                "<button class=\"edit\" onclick=\"editTask()\">Edit</button>\n        <button class=\"update\" onclick=\"updateTask()\">Update</button>\n        <button class=\"delete\" onclick=\"deleteTask()\">Delete</button>";
                 tableData +=
-                    "<tr>\n        <td contenteditable=\"false\" >" + values.title + "</td>\n        <td contenteditable=\"false\" >" + values.description + "</td>\n        <td contenteditable=\"false\" >" + status + "</td>\n        <td>" + editDelete + "</td>\n        </tr>";
+                    "<tr>\n        <td contenteditable=\"false\" >" + values.title + "</td>\n        <td contenteditable=\"false\" >" + values.description + "</td>\n        <td>\n        <select name=\"status\" id=\"status\" disabled>\n        <option value=\"" + values.status + "\">To Do</option>\n        <option value=\"Done\">Done</option></td>\n        <td>" + editDelete + "</td>\n        </tr>";
+                // <td contenteditable="false" >${status}</td>
             });
             table = document.querySelector('.table_body');
             table.innerHTML = tableData;
@@ -119,44 +125,60 @@ function renderTasks() {
 exports.renderTasks = renderTasks;
 function editTask() {
     return __awaiter(this, void 0, void 0, function () {
-        var editBtn, table, _loop_1, i;
+        var tr_current;
         return __generator(this, function (_a) {
-            editBtn = document.querySelector(".edit");
-            if (editBtn.innerHTML == "Edit") {
-                editBtn.innerHTML = "Save";
-            }
-            else {
-                editBtn.innerHTML = "Edit";
-            }
-            table = document.querySelector("table");
-            if (table) {
-                _loop_1 = function (i) {
-                    table.rows[i].onclick = function () {
-                        console.log(i);
-                        table.rows[i].cells[0].contentEditable = "true";
-                        table.rows[i].cells[0].style.backgroundColor = "blue";
-                        // table.rows[i].cells[0].contentEditable = "true";
-                        // table.rows[i].cells[0].contentEditable = "true";
-                    };
-                };
-                for (i = 0; i < table.rows.length; i++) {
-                    _loop_1(i);
+            tr_current = event.currentTarget.parentElement.parentElement;
+            tr_current.onclick = function () {
+                var table = document.querySelector("table");
+                if (table) {
+                    for (var i = 1; i < table.rows.length; i++) {
+                        table.rows[i].cells[0].contentEditable = "false";
+                        table.rows[i].cells[1].contentEditable = "false";
+                        table.rows[i].cells[2].children[0].setAttribute("disabled", "true");
+                        table.rows[i].cells[3].children[0].setAttribute("disabled", "true");
+                        table.rows[i].cells[3].children[1].setAttribute("disabled", "true");
+                        table.rows[i].cells[3].children[2].setAttribute("disabled", "true");
+                        table.rows[i].cells[0].style.backgroundColor = "white";
+                        table.rows[i].cells[1].style.backgroundColor = "white";
+                        table.rows[i].cells[2].style.backgroundColor = "white";
+                    }
                 }
-                // table.addEventListener('click', (event:MouseEvent)=>{
-                //     if((event.target as HTMLElement).classList.contains('edit')){
-                //         const tableRow:HTMLTableRowElement | null = (event.target as HTMLElement).closest('tr');
-                //         if(tableRow){
-                //             tableRow.cells[0].contentEditable = "true"
-                //             tableRow.cells[1].contentEditable = "true"
-                //             tableRow.cells[0].style.backgroundColor = "#59B4C3"
-                //             tableRow.cells[1].style.backgroundColor = "#59B4C3"
-                //             console.log(tableRow);
-                //         }
-                //     }
-                // })
-            }
+                tr_current.cells[0].contentEditable = "true";
+                tr_current.cells[1].contentEditable = "true";
+                tr_current.cells[2].children[0].removeAttribute("disabled");
+                tr_current.cells[2].children[0].removeAttribute("disabled");
+                tr_current.cells[3].children[0].removeAttribute("disabled");
+                tr_current.cells[3].children[1].removeAttribute("disabled");
+                tr_current.cells[3].children[2].removeAttribute("disabled");
+                tr_current.cells[0].style.backgroundColor = "#A9A9A9";
+                tr_current.cells[1].style.backgroundColor = "#A9A9A9";
+                tr_current.cells[2].style.backgroundColor = "#A9A9A9";
+            };
             return [2 /*return*/];
         });
     });
 }
 exports.editTask = editTask;
+function updateTask() {
+    return __awaiter(this, void 0, void 0, function () {
+        var tr_current;
+        return __generator(this, function (_a) {
+            tr_current = event.currentTarget.parentElement.parentElement;
+            tr_current.onclick = function () {
+                var table = document.querySelector("table");
+                tr_current.cells[0].contentEditable = "true";
+                tr_current.cells[1].contentEditable = "true";
+                tr_current.cells[2].children[0].removeAttribute("disabled");
+                tr_current.cells[2].children[0].removeAttribute("disabled");
+                tr_current.cells[3].children[0].removeAttribute("disabled");
+                tr_current.cells[3].children[1].removeAttribute("disabled");
+                tr_current.cells[3].children[2].removeAttribute("disabled");
+                tr_current.cells[0].style.backgroundColor = "white";
+                tr_current.cells[1].style.backgroundColor = "white";
+                tr_current.cells[2].style.backgroundColor = "white";
+            };
+            return [2 /*return*/];
+        });
+    });
+}
+exports.updateTask = updateTask;

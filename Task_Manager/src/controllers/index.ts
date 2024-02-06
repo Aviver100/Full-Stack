@@ -1,7 +1,7 @@
 import express, {} from 'express';
 import { task } from '../modules/task';
 import { v4 as uuidv4 } from 'uuid';
-import { status } from '../modules/TaskStatus'
+import { status } from '../modules/task'
 
 export let Tasks: task[] = [];
 
