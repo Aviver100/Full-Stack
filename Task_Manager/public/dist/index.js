@@ -106,9 +106,9 @@ function renderTasks() {
             tableData = "";
             data.map(function (values) {
                 var status = values.status === 0 ? "To Do" : "Done";
-                var editDelete = "<button onclick=\"editTask()\">Edit</button> <button onclick=\"deleteTask()\">Delete</button>";
+                var editDelete = "<button class=\"edit\" onclick=\"editTask()\">Edit</button> <button onclick=\"deleteTask()\">Delete</button>";
                 tableData +=
-                    "<tr>\n        <td>" + values.title + "</td>\n        <td>" + values.description + "</td>\n        <td>" + status + "</td>\n        <td>" + editDelete + "</td>\n        </tr>";
+                    "<tr>\n        <td contenteditable=\"false\" >" + values.title + "</td>\n        <td contenteditable=\"false\" >" + values.description + "</td>\n        <td contenteditable=\"false\" >" + status + "</td>\n        <td>" + editDelete + "</td>\n        </tr>";
             });
             table = document.querySelector('.table_body');
             table.innerHTML = tableData;
@@ -117,15 +117,44 @@ function renderTasks() {
     });
 }
 exports.renderTasks = renderTasks;
-function editTask(td) {
-    var _a, _b;
+function editTask() {
     return __awaiter(this, void 0, void 0, function () {
-        var table, selectedRow, titleElement;
-        return __generator(this, function (_c) {
-            table = document.querySelector("table_body");
-            selectedRow = (_a = td.parentElement) === null || _a === void 0 ? void 0 : _a.parentElement;
-            titleElement = (_b = document.querySelector("title")) === null || _b === void 0 ? void 0 : _b.value;
-            titleElement = selectedRow.cells[0].innerHTML;
+        var editBtn, table, _loop_1, i;
+        return __generator(this, function (_a) {
+            editBtn = document.querySelector(".edit");
+            if (editBtn.innerHTML == "Edit") {
+                editBtn.innerHTML = "Save";
+            }
+            else {
+                editBtn.innerHTML = "Edit";
+            }
+            table = document.querySelector("table");
+            if (table) {
+                _loop_1 = function (i) {
+                    table.rows[i].onclick = function () {
+                        console.log(i);
+                        table.rows[i].cells[0].contentEditable = "true";
+                        table.rows[i].cells[0].style.backgroundColor = "blue";
+                        // table.rows[i].cells[0].contentEditable = "true";
+                        // table.rows[i].cells[0].contentEditable = "true";
+                    };
+                };
+                for (i = 0; i < table.rows.length; i++) {
+                    _loop_1(i);
+                }
+                // table.addEventListener('click', (event:MouseEvent)=>{
+                //     if((event.target as HTMLElement).classList.contains('edit')){
+                //         const tableRow:HTMLTableRowElement | null = (event.target as HTMLElement).closest('tr');
+                //         if(tableRow){
+                //             tableRow.cells[0].contentEditable = "true"
+                //             tableRow.cells[1].contentEditable = "true"
+                //             tableRow.cells[0].style.backgroundColor = "#59B4C3"
+                //             tableRow.cells[1].style.backgroundColor = "#59B4C3"
+                //             console.log(tableRow);
+                //         }
+                //     }
+                // })
+            }
             return [2 /*return*/];
         });
     });
