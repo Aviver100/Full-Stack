@@ -36,12 +36,9 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 exports.__esModule = true;
-exports.updateTask = exports.editTask = exports.renderTasks = exports.handleAddTask = exports.handleGetAllTasks = void 0;
+exports.updateTask = exports.handleAddTask = exports.handleGetAllTasks = void 0;
 var data;
-var editBtn = document.querySelector(".edit");
-var updateBtn = document.querySelector(".update");
-// let deleteBtn = document.querySelector(".delete") as HTMLButtonElement;
-function handleGetAllTasks(event) {
+function handleGetAllTasks() {
     return __awaiter(this, void 0, void 0, function () {
         var response, error_1;
         return __generator(this, function (_a) {
@@ -66,6 +63,7 @@ function handleGetAllTasks(event) {
     });
 }
 exports.handleGetAllTasks = handleGetAllTasks;
+handleGetAllTasks();
 function handleAddTask(event) {
     return __awaiter(this, void 0, void 0, function () {
         var formData, response, result, error_2;
@@ -102,82 +100,81 @@ function handleAddTask(event) {
     });
 }
 exports.handleAddTask = handleAddTask;
-// let status = values.status === ToDo ? "To Do" : "Done";
 function renderTasks() {
-    return __awaiter(this, void 0, void 0, function () {
-        var tableData, table;
-        return __generator(this, function (_a) {
-            tableData = "";
-            data.map(function (values) {
-                var editDelete = 
-                // <button class="update" onclick="updateTask()" style="display: none;">Update</button>
-                "<button class=\"edit\" onclick=\"editTask()\">Edit</button>\n        <button class=\"update\" onclick=\"updateTask()\">Update</button>\n        <button class=\"delete\" onclick=\"deleteTask()\">Delete</button>";
-                tableData +=
-                    "<tr>\n        <td contenteditable=\"false\" >" + values.title + "</td>\n        <td contenteditable=\"false\" >" + values.description + "</td>\n        <td>\n        <select name=\"status\" id=\"status\" disabled>\n        <option value=\"" + values.status + "\">To Do</option>\n        <option value=\"Done\">Done</option></td>\n        <td>" + editDelete + "</td>\n        </tr>";
-                // <td contenteditable="false" >${status}</td>
-            });
-            table = document.querySelector('.table_body');
-            table.innerHTML = tableData;
-            return [2 /*return*/];
-        });
+    var tableData = "";
+    data.map(function (values) {
+        var editDelete = "<button class=\"edit\" onclick=\"editTask()\">Edit</button>\n        <button class=\"update\" onclick=\"updateTask()\">Update</button>\n        <button class=\"delete\" onclick=\"deleteTask()\">Delete</button>";
+        tableData +=
+            "<tr>\n        <td contenteditable=\"false\" >" + values.title + "</td>\n        <td contenteditable=\"false\" >" + values.description + "</td>\n        <td>\n        <select name=\"status\" id=\"status\" disabled>\n        <option disabled selected value>" + values.status + "</option>\n        <option value=\"To Do\">To Do</option>\n        <option value=\"Done\">Done</option>\n        <td>" + editDelete + "</td>\n        </tr>";
     });
+    var table = document.querySelector('.table_body');
+    table.innerHTML = tableData;
 }
-exports.renderTasks = renderTasks;
 function editTask() {
-    return __awaiter(this, void 0, void 0, function () {
-        var tr_current;
-        return __generator(this, function (_a) {
-            tr_current = event.currentTarget.parentElement.parentElement;
-            tr_current.onclick = function () {
-                var table = document.querySelector("table");
-                if (table) {
-                    for (var i = 1; i < table.rows.length; i++) {
-                        table.rows[i].cells[0].contentEditable = "false";
-                        table.rows[i].cells[1].contentEditable = "false";
-                        table.rows[i].cells[2].children[0].setAttribute("disabled", "true");
-                        table.rows[i].cells[3].children[0].setAttribute("disabled", "true");
-                        table.rows[i].cells[3].children[1].setAttribute("disabled", "true");
-                        table.rows[i].cells[3].children[2].setAttribute("disabled", "true");
-                        table.rows[i].cells[0].style.backgroundColor = "white";
-                        table.rows[i].cells[1].style.backgroundColor = "white";
-                        table.rows[i].cells[2].style.backgroundColor = "white";
-                    }
-                }
-                tr_current.cells[0].contentEditable = "true";
-                tr_current.cells[1].contentEditable = "true";
-                tr_current.cells[2].children[0].removeAttribute("disabled");
-                tr_current.cells[2].children[0].removeAttribute("disabled");
-                tr_current.cells[3].children[0].removeAttribute("disabled");
-                tr_current.cells[3].children[1].removeAttribute("disabled");
-                tr_current.cells[3].children[2].removeAttribute("disabled");
-                tr_current.cells[0].style.backgroundColor = "#A9A9A9";
-                tr_current.cells[1].style.backgroundColor = "#A9A9A9";
-                tr_current.cells[2].style.backgroundColor = "#A9A9A9";
-            };
-            return [2 /*return*/];
-        });
-    });
+    var current_tr = event.currentTarget.parentElement.parentElement;
+    console.log(current_tr);
+    current_tr.onclick = function () {
+        var table = document.querySelector("table");
+        if (table) {
+            for (var i = 1; i < table.rows.length; i++) {
+                table.rows[i].cells[2].style.backgroundColor = "white";
+                table.rows[i].cells[2].children[0].setAttribute("disabled", "true");
+            }
+            current_tr.cells[2].children[0].removeAttribute("disabled");
+        }
+    };
 }
-exports.editTask = editTask;
-function updateTask() {
+function updateTask(status, id) {
     return __awaiter(this, void 0, void 0, function () {
-        var tr_current;
+        var current_tr, currentTask, response, body, response_1, result, error_3;
         return __generator(this, function (_a) {
-            tr_current = event.currentTarget.parentElement.parentElement;
-            tr_current.onclick = function () {
-                var table = document.querySelector("table");
-                tr_current.cells[0].contentEditable = "true";
-                tr_current.cells[1].contentEditable = "true";
-                tr_current.cells[2].children[0].removeAttribute("disabled");
-                tr_current.cells[2].children[0].removeAttribute("disabled");
-                tr_current.cells[3].children[0].removeAttribute("disabled");
-                tr_current.cells[3].children[1].removeAttribute("disabled");
-                tr_current.cells[3].children[2].removeAttribute("disabled");
-                tr_current.cells[0].style.backgroundColor = "white";
-                tr_current.cells[1].style.backgroundColor = "white";
-                tr_current.cells[2].style.backgroundColor = "white";
-            };
-            return [2 /*return*/];
+            switch (_a.label) {
+                case 0:
+                    current_tr = event.currentTarget.parentElement.parentElement;
+                    current_tr.onclick = function () {
+                        var table = document.querySelector("table");
+                        if (table) {
+                            status = (current_tr.cells[2].children[0]).value;
+                            currentTask = (current_tr.cells[0]).innerText;
+                        }
+                    };
+                    return [4 /*yield*/, fetch("/api/tasks")];
+                case 1:
+                    response = _a.sent();
+                    return [4 /*yield*/, response.json()];
+                case 2:
+                    data = _a.sent();
+                    data.map(function (task) {
+                        if (task.title === currentTask) {
+                            id = task.id;
+                            console.log(id);
+                        }
+                    });
+                    _a.label = 3;
+                case 3:
+                    _a.trys.push([3, 6, , 7]);
+                    body = { status: status, id: id };
+                    return [4 /*yield*/, fetch("/api/tasks/" + id, {
+                            method: 'PATCH',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify(body)
+                        })];
+                case 4:
+                    response_1 = _a.sent();
+                    handleGetAllTasks();
+                    if (!response_1.ok) {
+                        throw new Error('Server error');
+                    }
+                    return [4 /*yield*/, response_1.json()];
+                case 5:
+                    result = _a.sent();
+                    return [3 /*break*/, 7];
+                case 6:
+                    error_3 = _a.sent();
+                    console.error('Error:', error_3.message);
+                    return [3 /*break*/, 7];
+                case 7: return [2 /*return*/];
+            }
         });
     });
 }

@@ -18,9 +18,9 @@ function updateTask(req, res) {
     if (!foundTask) {
         res.status(404).send('Task not found');
     }
-    else if (req.body.title) {
-        foundTask.title = req.body.title;
-        foundTask.description = req.body.description;
+    else {
+        // foundTask.title = req.body.title;
+        // foundTask.description = req.body.description;
         foundTask.status = req.body.status;
         res.send(foundTask);
     }

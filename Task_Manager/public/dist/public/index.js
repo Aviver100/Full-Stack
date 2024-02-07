@@ -1,26 +1,23 @@
-import express, { json } from "express";
-import { task, status, TaskModel} from "../src/modules/task";
-import { Tasks } from "../src/controllers";
-let data: any;
-
-
-export async function handleGetAllTasks() {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.updateTask = exports.handleAddTask = exports.handleGetAllTasks = void 0;
+let data;
+async function handleGetAllTasks() {
     debugger;
     try {
-        const response = await fetch("/api/tasks")
+        const response = await fetch("/api/tasks");
         data = await response.json();
         renderTasks();
-    } catch (error) {
+    }
+    catch (error) {
         console.log(error);
     }
 }
-
+exports.handleGetAllTasks = handleGetAllTasks;
 handleGetAllTasks();
-
-export async function handleAddTask(event: SubmitEvent) {
+async function handleAddTask(event) {
     event.preventDefault();
-
-    const formData = new FormData(event.target as HTMLFormElement);
+    const formData = new FormData(event.target);
     try {
         const response = await fetch('/api/tasks/add', {
             method: 'POST',
@@ -29,21 +26,19 @@ export async function handleAddTask(event: SubmitEvent) {
         });
         renderTasks();
         if (!response.ok) {
-            throw new Error('Server error')
+            throw new Error('Server error');
         }
         const result = await response.json();
     }
-    catch (error: any) {
-        console.error('Error:', error.message)
+    catch (error) {
+        console.error('Error:', error.message);
     }
 }
-
-
+exports.handleAddTask = handleAddTask;
 function renderTasks() {
     let tableData = "";
-    data.map((values: task) => {
-        let editDelete =
-            `<button class="edit" onclick="editTask(event)">Edit</button>
+    data.map((values) => {
+        let editDelete = `<button class="edit" onclick="editTask(event)">Edit</button>
         <button class="update" onclick="updateTask(event)">Update</button>
         <button class="delete" onclick="deleteTask()">Delete</button>`;
         tableData +=
@@ -56,52 +51,49 @@ function renderTasks() {
         <option value="To Do">To Do</option>
         <option value="Done">Done</option>
         <td>${editDelete}</td>
-        </tr>`
+        </tr>`;
     });
-    let table = document.querySelector('.table_body') as HTMLTableElement;
+    let table = document.querySelector('.table_body');
     table.innerHTML = tableData;
 }
-
-
-function editTask(event: MouseEvent) {
-    const current_tr = (event.currentTarget as HTMLButtonElement)?.parentElement?.parentElement! as HTMLTableRowElement;
+function editTask(event) {
+    var _a, _b;
+    const current_tr = (_b = (_a = event.currentTarget) === null || _a === void 0 ? void 0 : _a.parentElement) === null || _b === void 0 ? void 0 : _b.parentElement;
     console.log(current_tr);
-
     current_tr.onclick = () => {
-        const table = document.querySelector("table") as HTMLTableElement;
+        const table = document.querySelector("table");
         if (table) {
             for (let i = 1; i < table.rows.length; i++) {
-                (table.rows[i] as HTMLTableRowElement).cells[2].style.backgroundColor = "white";
-                (table.rows[i] as HTMLTableRowElement).cells[2].children[0].setAttribute("disabled", "true");
+                table.rows[i].cells[2].style.backgroundColor = "white";
+                table.rows[i].cells[2].children[0].setAttribute("disabled", "true");
             }
             current_tr.cells[2].children[0].removeAttribute("disabled");
         }
-    }
+    };
 }
-
-export async function updateTask(event: MouseEvent, status: status, id: string) {
+async function updateTask(event, status, id) {
+    var _a, _b;
     // const current_tr = event.currentTarget.parentElement.parentElement;
-    const current_tr = (event.currentTarget as HTMLButtonElement)?.parentElement?.parentElement! as HTMLTableRowElement;
-    let currentTask: string;
-
+    const current_tr = (_b = (_a = event.currentTarget) === null || _a === void 0 ? void 0 : _a.parentElement) === null || _b === void 0 ? void 0 : _b.parentElement;
+    let currentTask;
     current_tr.onclick = () => {
-        const table = document.querySelector("table") as HTMLTableElement;
+        const table = document.querySelector("table");
         if (table) {
-            const selectElement = current_tr.cells[2].children[0] as HTMLInputElement;
-            status = selectElement.value as status;
+            const selectElement = current_tr.cells[2].children[0];
+            status = selectElement.value;
             currentTask = (current_tr.cells[0]).innerText;
         }
-    }
-    const response = await fetch("/api/tasks")
+    };
+    const response = await fetch("/api/tasks");
     data = await response.json();
-    data.map((task: task) => {
+    data.map((task) => {
         if (task.title === currentTask) {
             id = task.id;
             console.log(id);
         }
-    })
+    });
     try {
-        const body = { status, id }
+        const body = { status, id };
         const response = await fetch(`/api/tasks/${id}`, {
             method: 'PATCH',
             headers: { 'Content-Type': 'application/json' },
@@ -109,11 +101,12 @@ export async function updateTask(event: MouseEvent, status: status, id: string) 
         });
         handleGetAllTasks();
         if (!response.ok) {
-            throw new Error('Server error')
+            throw new Error('Server error');
         }
         const result = await response.json();
     }
-    catch (error: any) {
-        console.error('Error:', error.message)
+    catch (error) {
+        console.error('Error:', error.message);
     }
 }
+exports.updateTask = updateTask;
