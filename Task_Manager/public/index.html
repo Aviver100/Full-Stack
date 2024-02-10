@@ -12,12 +12,12 @@
         <link rel="stylesheet" href="dist/style.css">
     </head>
     <body>
-        <form onsubmit="handleAddTask(event)">
-            <!-- <form action="/" method="post"> -->
+        <!-- <form action="/api/tasks/add" method="post"> -->
+            <form onsubmit="handleAddTask(event)">
             <input type="text" placeholder="Title" name="title"><br>
             <input type="text" placeholder="Description" name="description"><br>
             <input type="submit" value="SAVE">
-        </form>
+        </form> 
         <button onclick="handleGetAllTasks(event)">GET ALL</button>
         <!-- <button onclick="renderTasks()">renderTasks</button> -->
         <div class="container">

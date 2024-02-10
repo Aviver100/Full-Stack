@@ -11,5 +11,4 @@ function createServer(){
     app.use("/api/tasks", taskRoutes)
     return app;
 }
-
 export default createServer;

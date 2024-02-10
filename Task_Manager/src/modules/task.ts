@@ -12,17 +12,17 @@ export enum status {
 // }
 
 export interface task {
-    id: string,
+    id: string;
     title: string,
     description: string,
     status: status
 }
 
 const TaskSchema = new Schema({
-    // id:{
-    //     type: String,
-    //     require: true
-    // },
+    id:{
+        type: String,
+        require: true
+    },
     title: {
         type: String,
         require: true,
@@ -32,12 +32,12 @@ const TaskSchema = new Schema({
         type: String,
         require: true,
         minLength: 5
-    },
-    // status:{
-    //     type: String,
-    //     enum: [status.ToDo, status.Done],
-    //     default: status.ToDo
-    // },
+    }, 
+    status:{
+        type: String,
+        enum: [status.ToDo, status.Done],
+        default: status.ToDo
+    }
 })
 
 export const TaskModel = mongoose.model("task", TaskSchema);

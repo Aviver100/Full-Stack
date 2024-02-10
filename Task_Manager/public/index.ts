@@ -1,11 +1,10 @@
 import express, { json } from "express";
-import { task, status, TaskModel} from "../src/modules/task";
+import { task, status, TaskModel } from "../src/modules/task";
 import { Tasks } from "../src/controllers";
 let data: any;
 
 
 export async function handleGetAllTasks() {
-    debugger;
     try {
         const response = await fetch("/api/tasks")
         data = await response.json();
@@ -19,14 +18,16 @@ handleGetAllTasks();
 
 export async function handleAddTask(event: SubmitEvent) {
     event.preventDefault();
-
     const formData = new FormData(event.target as HTMLFormElement);
+    const newTask = new TaskModel(formData); 
     try {
         const response = await fetch('/api/tasks/add', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(Object.fromEntries(formData)),
+            // body: JSON.stringify(Object.fromEntries(newTask)),
+            body: JSON.stringify(newTask.toObject()),
         });
+        (event.target as HTMLFormElement).reset();
         renderTasks();
         if (!response.ok) {
             throw new Error('Server error')
