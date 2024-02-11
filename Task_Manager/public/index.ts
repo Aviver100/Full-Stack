@@ -1,10 +1,7 @@
-import express, { json } from "express";
-import { task, status, TaskModel } from "../src/modules/task";
-import { Tasks } from "../src/controllers";
+import { task, status} from "../src/modules/task";
 let data: any;
 
-
-export async function handleGetAllTasks() {
+async function handleGetAllTasks() {
     try {
         const response = await fetch("/api/tasks")
         data = await response.json();
@@ -13,21 +10,20 @@ export async function handleGetAllTasks() {
         console.log(error);
     }
 }
+console.log('hello');
 
 handleGetAllTasks();
 
-export async function handleAddTask(event: SubmitEvent) {
+async function handleAddTask(event: SubmitEvent) {
     event.preventDefault();
     const formData = new FormData(event.target as HTMLFormElement);
-    const newTask = new TaskModel(formData); 
+    // const newTask = new task(formData);
     try {
         const response = await fetch('/api/tasks/add', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            // body: JSON.stringify(Object.fromEntries(newTask)),
-            body: JSON.stringify(newTask.toObject()),
+            body: JSON.stringify(formData),
         });
-        (event.target as HTMLFormElement).reset();
         renderTasks();
         if (!response.ok) {
             throw new Error('Server error')
@@ -39,35 +35,42 @@ export async function handleAddTask(event: SubmitEvent) {
     }
 }
 
-
-function renderTasks() {
-    let tableData = "";
-    data.map((values: task) => {
-        let editDelete =
-            `<button class="edit" onclick="editTask(event)">Edit</button>
+async function renderTasks() {
+    try {
+        const response = await fetch('/api/tasks');
+        if (!response.ok) {
+            throw new Error('Database error')
+        }
+        const tasksList = await response.json();
+        let tableData = "";
+        tasksList.map((task: task) => {
+            let editDelete =
+                `<button class="edit" onclick="editTask(event)">Edit</button>
         <button class="update" onclick="updateTask(event)">Update</button>
         <button class="delete" onclick="deleteTask()">Delete</button>`;
-        tableData +=
-            `<tr>
-        <td contenteditable="false" >${values.title}</td>
-        <td contenteditable="false" >${values.description}</td>
+            tableData +=
+                `<tr>  
+   
+        <td contenteditable="false" >titleee${task.title}</td>
+        <td contenteditable="false" >${task.description}</td>
         <td>
         <select name="status" id="status" disabled>
-        <option disabled selected value>${values.status}</option>
+        <option disabled selected value>${task.status}</option>
         <option value="To Do">To Do</option>
         <option value="Done">Done</option>
+        </select>
         <td>${editDelete}</td>
         </tr>`
-    });
-    let table = document.querySelector('.table_body') as HTMLTableElement;
-    table.innerHTML = tableData;
+        });
+        let table = document.querySelector('.table_body') as HTMLTableElement;
+        table.innerHTML = tableData;
+    } catch (error: any) {
+        console.error('Error:', error.message);
+    }
 }
-
 
 function editTask(event: MouseEvent) {
     const current_tr = (event.currentTarget as HTMLButtonElement)?.parentElement?.parentElement! as HTMLTableRowElement;
-    console.log(current_tr);
-
     current_tr.onclick = () => {
         const table = document.querySelector("table") as HTMLTableElement;
         if (table) {
@@ -80,7 +83,7 @@ function editTask(event: MouseEvent) {
     }
 }
 
-export async function updateTask(event: MouseEvent, status: status, id: string) {
+async function updateTask(event: MouseEvent, status: status, id: string) {
     // const current_tr = event.currentTarget.parentElement.parentElement;
     const current_tr = (event.currentTarget as HTMLButtonElement)?.parentElement?.parentElement! as HTMLTableRowElement;
     let currentTask: string;
@@ -93,22 +96,21 @@ export async function updateTask(event: MouseEvent, status: status, id: string) 
             currentTask = (current_tr.cells[0]).innerText;
         }
     }
-    const response = await fetch("/api/tasks")
-    data = await response.json();
-    data.map((task: task) => {
-        if (task.title === currentTask) {
-            id = task.id;
-            console.log(id);
-        }
-    })
     try {
-        const body = { status, id }
-        const response = await fetch(`/api/tasks/${id}`, {
-            method: 'PATCH',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(body),
-        });
-        handleGetAllTasks();
+    const response = await fetch("/api/tasks")
+    const data = await response.json();
+    const task = data.find((task:task)=>{ task.title === currentTask})
+    if(task){
+        const taskId = task._id
+        console.log(taskId);
+    }
+        const body = { status, id:task }
+        // const response = await fetch(`/api/tasks/${id}`, {
+        //     method: 'PATCH',
+        //     headers: { 'Content-Type': 'application/json' },
+        //     body: JSON.stringify(body),
+        // });
+        handleGetAllTasks(); 
         if (!response.ok) {
             throw new Error('Server error')
         }

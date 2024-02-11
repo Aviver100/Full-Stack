@@ -6,23 +6,20 @@ export enum status {
     Done = "Done"
 }
 
-// interface Itask extends Document {
-//     title: string;
-//     description: string
-// }
-
 export interface task {
+    _id: any;
     id: string;
+    // id: string;
     title: string,
     description: string,
     status: status
 }
 
 const TaskSchema = new Schema({
-    id:{
-        type: String,
-        require: true
-    },
+    // id:{
+    //     type: String,
+    //     require: true
+    // },
     title: {
         type: String,
         require: true,

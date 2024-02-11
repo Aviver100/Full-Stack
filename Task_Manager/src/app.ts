@@ -2,7 +2,7 @@ import createServer from './index';
 import {connectToMongo} from './database';
 
 const app = createServer();
-const port = process.env.PORT || 3001;
+const port = process.env.PORT || 3000;
 
 connectToMongo();
 

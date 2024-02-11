@@ -5,6 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Task Manager</title>
         <script src="./dist/index.js" defer></script>
+        <!-- <script src="./index.ts" defer></script> -->
         <link rel="stylesheet"
             href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
             integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
@@ -13,13 +14,13 @@
     </head>
     <body>
         <!-- <form action="/api/tasks/add" method="post"> -->
-            <form onsubmit="handleAddTask(event)">
+            <form onsubmit="handleAddTask()">
             <input type="text" placeholder="Title" name="title"><br>
             <input type="text" placeholder="Description" name="description"><br>
             <input type="submit" value="SAVE">
         </form> 
-        <button onclick="handleGetAllTasks(event)">GET ALL</button>
-        <!-- <button onclick="renderTasks()">renderTasks</button> -->
+        <!-- <button onclick="handleGetAllTasks(event)">GET ALL</button> -->
+        <!-- <button onclick="renderTasks(event)">renderTasks</button> -->
         <div class="container">
             <table class="table table-bordered">
                 <thead class="table-dark">
