@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
+            integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+            crossorigin="anonymous">
+            <link rel="stylesheet" href="dist/style.css">
+            <script src="./dist/register.js"></script>
+</head>
+<body>
+    <form onsubmit="register()">
+        <input type="text" placeholder="Enter name" name="name" id="name" required><br>
+        <input type="text" placeholder="Enter Email" name="email" id="email" required><br>
+        <input type="password" placeholder="Enter Password" name="password" id="password" required><br>
+        <input type="password" placeholder="Repeat Password" name="password" id="password" required><br>
+        <input type="submit" value="Register">
+    </form> 
+    <div class="signin">
+        <p>Already have an account? <a href="./login.html">Sign in</a>.</p>
+      </div>
+</body>
+</html>
