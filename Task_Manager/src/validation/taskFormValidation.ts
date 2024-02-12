@@ -9,7 +9,7 @@ export const descriptionValidator = body("description").trim()
     .isLength({ min: 8 }).withMessage("The description should be 8 characters minimum")
     .isLength({ max: 20 }).withMessage("Description can be 20 characters max")
 
-export const addTaskValidation = [
-    descriptionValidator,
-    titleValidator
+export const TaskValidation = [
+    titleValidator,
+    descriptionValidator
 ];

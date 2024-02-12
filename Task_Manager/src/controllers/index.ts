@@ -1,8 +1,7 @@
-import express, { response } from 'express';
+import express from 'express';
 import { TaskModel } from '../modules/task';
 import { task } from '../modules/task';
 import { status } from '../modules/task'
-import mongoose from 'mongoose';
 
 export let Tasks: task[] = [];
 
@@ -16,26 +15,20 @@ export async function creatTask(req: express.Request, res: express.Response) {
     } catch (error: any) {
         console.error('Error:', error.message);
     }
-    // Tasks.push(newTaskData) 
 }
 
 export async function updateTask(req: express.Request, res: express.Response) {
     const {id} = req.params;
-    const {status} = req.body;
-
-    // const taskTitle = req.params.title; 
-    // const taskStatus = req.body.status;
-    // console.log(id);
+    const {title, description, status} = req.body;
     try {
-        const updateTask = await TaskModel.findByIdAndUpdate(id, {status});
+        const updateTask = await TaskModel.findByIdAndUpdate(id, {title, description, status});
         if (updateTask) {
-            console.log('The task was deleted');
+            console.log('The task was updated');
         }
         res.json(updateTask);
     } catch (error: any) {
         console.error('Error:', error.message);
     }
-
 }
 
 export async function getTasks(req: express.Request, res: express.Response) {
@@ -52,7 +45,6 @@ export async function getTasks(req: express.Request, res: express.Response) {
     }
 }
 
-
 export function getTask(req: express.Request, res: express.Response) {
     let TaskToGet = req.params.id;
     let foundTask = Tasks.find(task => task.id === TaskToGet);
@@ -63,13 +55,16 @@ export function getTask(req: express.Request, res: express.Response) {
     }
 }
 
-export function deleteTask(req: express.Request, res: express.Response) {
-    let TaskToDelete = req.params.id;
-    let foundTask = Tasks.findIndex(task => task.id === TaskToDelete);
-    if (!foundTask) {
-        res.status(404).send('Task not found');
-    } else {
-        Tasks.splice(foundTask, 1);
-        res.send(foundTask);
+export async function deleteTask(req: express.Request, res: express.Response) {
+    let {id} = req.params;
+    try {
+        const deleteTask = await TaskModel.findByIdAndDelete(id);
+        if (deleteTask) {
+            console.log('The task was deleted');
+        }
+        res.json(deleteTask);
+    } catch (error: any) {
+        console.error('Error:', error.message);
     }
+
 }
