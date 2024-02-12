@@ -22,7 +22,7 @@ async function handleAddTask(event: SubmitEvent) {
         const response = await fetch('/api/tasks/add', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(formData),
+            body: JSON.stringify({ title: formData.get('title'), description: formData.get('description') })
         });
         renderTasks();
         if (!response.ok) {
@@ -51,7 +51,7 @@ async function renderTasks() {
             tableData +=
                 `<tr>  
    
-        <td contenteditable="false" >titleee${task.title}</td>
+        <td contenteditable="false" >${task.title}</td>
         <td contenteditable="false" >${task.description}</td>
         <td>
         <select name="status" id="status" disabled>
