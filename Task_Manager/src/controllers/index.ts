@@ -20,42 +20,22 @@ export async function creatTask(req: express.Request, res: express.Response) {
 }
 
 export async function updateTask(req: express.Request, res: express.Response) {
-    const {id} = req.body;
+    const {id} = req.params;
+    const {status} = req.body;
 
-    const taskTitle = req.params.title; 
-    const taskStatus = req.body.status;
-    console.log(id);
+    // const taskTitle = req.params.title; 
+    // const taskStatus = req.body.status;
+    // console.log(id);
     try {
-        const updateTask = await TaskModel.findByIdAndUpdate(
-            '65c8c6f8b4e6302b74ba9fb6',
-            { status: status.Done },
-            { new: true }
-        );
-
-        if (!updateTask) {
-            console.log('not good');
-            console.log(updateTask);
-        } else {
-            console.log('good');
+        const updateTask = await TaskModel.findByIdAndUpdate(id, {status});
+        if (updateTask) {
+            console.log('The task was deleted');
         }
         res.json(updateTask);
     } catch (error: any) {
         console.error('Error:', error.message);
     }
 
-    // const taskList = await TaskModel.find();
-    // const foundTask = taskList.find(task => task.title === taskTitle);
-    // // const foundTask = await TaskModel.findById(taskId);
-    // console.log('this is the task:', foundTask);
-    // console.log('All tasks:', taskList);
-
-    // if (!foundTask) {
-    //     return res.status(404).send('Task not found');
-    // } else {
-    //     foundTask.status = req.body.status;
-    //     res.send(foundTask);
-    // }
-    // const newStatus: status = req.body.status;
 }
 
 export async function getTasks(req: express.Request, res: express.Response) {

@@ -49,8 +49,8 @@ async function renderTasks() {
         <button class="update" onclick="updateTask(event)">Update</button>
         <button class="delete" onclick="deleteTask()">Delete</button>`;
             tableData +=
-                `<tr>  
-   
+                `<tr data-id=${task._id}>  
+                
         <td contenteditable="false" >${task.title}</td>
         <td contenteditable="false" >${task.description}</td>
         <td>
@@ -71,7 +71,7 @@ async function renderTasks() {
 
 function editTask(event: MouseEvent) {
     const current_tr = (event.currentTarget as HTMLButtonElement)?.parentElement?.parentElement! as HTMLTableRowElement;
-    current_tr.onclick = () => {
+    // current_tr.onclick = () => {
         const table = document.querySelector("table") as HTMLTableElement;
         if (table) {
             for (let i = 1; i < table.rows.length; i++) {
@@ -80,22 +80,31 @@ function editTask(event: MouseEvent) {
             }
             current_tr.cells[2].children[0].removeAttribute("disabled");
         }
-    }
+    // }
 }
 
-async function updateTask(event: MouseEvent, status: status, id: string) {
+async function updateTask(event: MouseEvent) {    
     // const current_tr = event.currentTarget.parentElement.parentElement;
     const current_tr = (event.currentTarget as HTMLButtonElement)?.parentElement?.parentElement! as HTMLTableRowElement;
+    const id = current_tr.getAttribute('data-id');
+    const status = (current_tr.querySelector('#status') as HTMLSelectElement).value;
     let currentTask: string;
 
-    current_tr.onclick = () => {
-        const table = document.querySelector("table") as HTMLTableElement;
-        if (table) {
-            const selectElement = current_tr.cells[2].children[0] as HTMLInputElement;
-            status = selectElement.value as status;
-            currentTask = (current_tr.cells[0]).innerText;
+    /** update logic start */
+        try {            
+            await fetch('/api/tasks/' + id, {
+                method: 'PATCH',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({status}),
+            });
+        } catch (error) {
+            console.error(error)
         }
-    }
+
+
+    /** update logic end */
+
+
     try {
     const response = await fetch("/api/tasks")
     const data = await response.json();

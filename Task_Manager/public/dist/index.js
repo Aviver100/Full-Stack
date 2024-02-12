@@ -19,7 +19,7 @@ async function handleAddTask(event) {
         const response = await fetch('/api/tasks/add', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(formData),
+            body: JSON.stringify({ title: formData.get('title'), description: formData.get('description') })
         });
         renderTasks();
         if (!response.ok) {
@@ -44,9 +44,9 @@ async function renderTasks() {
         <button class="update" onclick="updateTask(event)">Update</button>
         <button class="delete" onclick="deleteTask()">Delete</button>`;
             tableData +=
-                `<tr>  
-   
-        <td contenteditable="false" >titleee${task.title}</td>
+                `<tr data-id=${task._id}>  
+                
+        <td contenteditable="false" >${task.title}</td>
         <td contenteditable="false" >${task.description}</td>
         <td>
         <select name="status" id="status" disabled>
@@ -66,49 +66,49 @@ async function renderTasks() {
 }
 function editTask(event) {
     const current_tr = event.currentTarget?.parentElement?.parentElement;
-    current_tr.onclick = () => {
-        const table = document.querySelector("table");
-        if (table) {
-            for (let i = 1; i < table.rows.length; i++) {
-                table.rows[i].cells[2].style.backgroundColor = "white";
-                table.rows[i].cells[2].children[0].setAttribute("disabled", "true");
-            }
-            current_tr.cells[2].children[0].removeAttribute("disabled");
+    // current_tr.onclick = () => {
+    const table = document.querySelector("table");
+    if (table) {
+        for (let i = 1; i < table.rows.length; i++) {
+            table.rows[i].cells[2].style.backgroundColor = "white";
+            table.rows[i].cells[2].children[0].setAttribute("disabled", "true");
         }
-    };
+        current_tr.cells[2].children[0].removeAttribute("disabled");
+    }
+    // }
 }
-async function updateTask(event, status, id) {
+async function updateTask(event) {
     // const current_tr = event.currentTarget.parentElement.parentElement;
     const current_tr = event.currentTarget?.parentElement?.parentElement;
+    const id = current_tr.getAttribute('data-id');
+    const status = current_tr.querySelector('#status').value;
     let currentTask;
-    current_tr.onclick = () => {
-        const table = document.querySelector("table");
-        if (table) {
-            const selectElement = current_tr.cells[2].children[0];
-            status = selectElement.value;
-            currentTask = (current_tr.cells[0]).innerText;
-        }
-    };
-    const response = await fetch("/api/tasks");
-    const data = await response.json();
-    const task = data.find((task) => { task.title === currentTask; });
-    if (task) {
-        const taskId = task._id;
-        console.log(taskId);
-    }
-    data.map((task) => {
-        if (task.title === currentTask) {
-            id = task.id;
-            // console.log(id);
-        }
-    });
+    /** update logic start */
     try {
-        const body = { status, id };
-        const response = await fetch(`/api/tasks/${id}`, {
+        await fetch('/api/tasks/' + id, {
             method: 'PATCH',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(body),
+            body: JSON.stringify({ status }),
         });
+    }
+    catch (error) {
+        console.error(error);
+    }
+    /** update logic end */
+    try {
+        const response = await fetch("/api/tasks");
+        const data = await response.json();
+        const task = data.find((task) => { task.title === currentTask; });
+        if (task) {
+            const taskId = task._id;
+            console.log(taskId);
+        }
+        const body = { status, id: task };
+        // const response = await fetch(`/api/tasks/${id}`, {
+        //     method: 'PATCH',
+        //     headers: { 'Content-Type': 'application/json' },
+        //     body: JSON.stringify(body),
+        // });
         handleGetAllTasks();
         if (!response.ok) {
             throw new Error('Server error');

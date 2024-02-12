@@ -69,26 +69,20 @@ function creatTask(req, res) {
 exports.creatTask = creatTask;
 function updateTask(req, res) {
     return __awaiter(this, void 0, void 0, function () {
-        var id, taskTitle, taskStatus, updateTask_1, error_2;
+        var id, status, updateTask_1, error_2;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
-                    id = req.body.id;
-                    taskTitle = req.params.title;
-                    taskStatus = req.body.status;
-                    console.log(id);
+                    id = req.params.id;
+                    status = req.body.status;
                     _a.label = 1;
                 case 1:
                     _a.trys.push([1, 3, , 4]);
-                    return [4 /*yield*/, task_1.TaskModel.findByIdAndUpdate('65c8c6f8b4e6302b74ba9fb6', { status: task_2.status.Done }, { "new": true })];
+                    return [4 /*yield*/, task_1.TaskModel.findByIdAndUpdate(id, { status: status })];
                 case 2:
                     updateTask_1 = _a.sent();
-                    if (!updateTask_1) {
-                        console.log('not good');
-                        console.log(updateTask_1);
-                    }
-                    else {
-                        console.log('good');
+                    if (updateTask_1) {
+                        console.log('The task was deleted');
                     }
                     res.json(updateTask_1);
                     return [3 /*break*/, 4];
