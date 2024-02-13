@@ -1,15 +1,3 @@
-// let data: any;
-// get all tasks from the db
-// async function handleGetAllTasks() {
-//     try {
-//         const response = await fetch("/api/tasks")
-//         const data = await response.json();
-//         renderTasks();
-//     } catch (error) {
-//         console.log(error);
-//     }
-// }
-// handleGetAllTasks();
 // add new task
 async function handleAddTask(event) {
     event.preventDefault();
@@ -24,11 +12,12 @@ async function handleAddTask(event) {
         if (!response.ok) {
             throw new Error('Server error');
         }
-        // const result = await response.json();
     }
     catch (error) {
         console.error('Error:', error.message);
     }
+    const myForm = document.querySelector("#myForm");
+    myForm.reset();
 }
 // render the tasks and refresh the table
 async function renderTasks() {
@@ -49,7 +38,7 @@ async function renderTasks() {
         <td contenteditable="false" id="description">${task.description}</td>
         <td>
         <select name="status" id="status" disabled>
-        <option value>${task.status}</option>
+        <option disabled selected value>${task.status}</option>
         <option value="To Do">To Do</option>
         <option value="Done">Done</option>
         </select>
@@ -95,7 +84,6 @@ async function updateTask(event) {
     catch (error) {
         console.error(error);
     }
-    // handleGetAllTasks();
     renderTasks();
 }
 async function deleteTask(event) {
@@ -111,7 +99,6 @@ async function deleteTask(event) {
     catch (error) {
         console.error(error);
     }
-    // handleGetAllTasks();
     renderTasks();
 }
 renderTasks();

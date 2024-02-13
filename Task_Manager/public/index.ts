@@ -18,6 +18,8 @@ async function handleAddTask(event: SubmitEvent) {
     catch (error: any) {
         console.error('Error:', error.message)
     }
+    const myForm = document.querySelector("#myForm") as HTMLFormElement;
+    myForm.reset();
 }
 
 // render the tasks and refresh the table

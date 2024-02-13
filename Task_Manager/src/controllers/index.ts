@@ -23,7 +23,7 @@ export async function updateTask(req: express.Request, res: express.Response) {
     try {
         const updateTask = await TaskModel.findByIdAndUpdate(id, {title, description, status});
         if (updateTask) {
-            console.log('The task was updated');
+            console.log(`task ${id} was updated`);
         }
         res.json(updateTask);
     } catch (error: any) {
@@ -60,7 +60,7 @@ export async function deleteTask(req: express.Request, res: express.Response) {
     try {
         const deleteTask = await TaskModel.findByIdAndDelete(id);
         if (deleteTask) {
-            console.log('The task was deleted');
+            console.log(`task ${id} was deleted`);
         }
         res.json(deleteTask);
     } catch (error: any) {
