@@ -16,10 +16,6 @@ export interface task {
 }
 
 const TaskSchema = new Schema({
-    // id:{
-    //     type: String,
-    //     require: true
-    // },
     title: {
         type: String,
         require: true,

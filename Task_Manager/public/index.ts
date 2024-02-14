@@ -1,4 +1,4 @@
-import { task } from "../src/modules/task";
+import { status, task } from "../src/modules/task";
 
 // add new task
 async function handleAddTask(event: SubmitEvent) {
@@ -42,9 +42,9 @@ async function renderTasks() {
         <td contenteditable="false" id="description">${task.description}</td>
         <td>
         <select name="status" id="status" disabled>
-        <option disabled selected value>${task.status}</option>
-        <option value="To Do">To Do</option>
-        <option value="Done">Done</option>
+        
+        <option value="To Do" ${task.status === 'To Do' ? 'selected' : ' '}>To Do</option>
+        <option value="Done" ${task.status === 'Done' ? 'selected' : ' '}>Done</option>
         </select>
         <td>${editDelete}</td>
         </tr>`
