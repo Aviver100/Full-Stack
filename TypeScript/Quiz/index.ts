@@ -42,7 +42,7 @@ function AddQuestion(event: Event) {
     let option3 = (document.querySelector('.option3') as HTMLTextAreaElement).value;
     let option4 = (document.querySelector('.option4') as HTMLTextAreaElement).value;
 
-    let answersArray = [option1, option2, option3, option4]
+1      let answersArray = [option1, option2, option3, option4]
     // let correctAnswer:number;
 
     if (radio1.checked == true) {
