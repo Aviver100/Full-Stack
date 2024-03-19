@@ -6,12 +6,12 @@ interface BoxProps{
     children: ReactNode;
 }
 
-const [list, setList] = React.useState(products);
+// const [list, setList] = React.useState(products);
 
-function removeProduct(id:number){
-  const newList = list.filter((product) => product.id !== id)
-  setList(newList)
-}
+// function removeProduct(id:number){
+//   const newList = list.filter((product) => product.id !== id)
+//   setList(newList)
+// }
 
 
 
@@ -32,7 +32,8 @@ function Box() {
           <p>${product.price}</p>
           <p>Rating: {product.rating}</p>
           {/* <p>Stock: {product.stock}</p> */}
-          <button onClick={removeProduct}>Delete</button>
+          {/* <button onClick={removeProduct}>Delete</button> */}
+          <button>Delete</button>
         </div>
       ))}
    </div>
