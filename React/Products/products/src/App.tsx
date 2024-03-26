@@ -1,14 +1,13 @@
-
 import './App.css'
-import Box from './Box/productBox'
+import ProductBox from '../src/Components/productBox/productBox'
+import Popup from './Components/popup/popup'
 
 
 function App() {
-  // const [count, setCount] = useState(0)
-  // debugger
   return (
     <>
-      <Box/>
+      <ProductBox />
+      <Popup/>
     </>
   )
 }
