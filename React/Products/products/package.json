@@ -10,7 +10,9 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@asuikit/modals": "^6.0.34",
     "react": "^18.2.0",
+    "react-dialog-confirm": "^1.0.3",
     "react-dom": "^18.2.0",
     "saas": "^1.0.0"
   },
