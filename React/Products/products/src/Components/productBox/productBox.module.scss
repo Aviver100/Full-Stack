@@ -1,5 +1,6 @@
 .mainDiv {
-    background-color: #D7E4C0;
+    
+    background-color: #FDFDBD;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -7,10 +8,20 @@
     justify-content: center;
     align-items: center;
     margin-top: 100px;
+    
+    &__filterBar{
+        // background-color: red;
+        background-color: #B8E8FC;
+        width: 100%;
+        height: 100px;
+    }
 
+    &__filterButton{
+        margin-top: 30px;
+    }
 
     &__productBox {
-        background-color: #BBC3A4;
+        background-color: #C8FFD4;
         height: 350px;
         width: 200px;
         border-radius: 10px;
@@ -37,6 +48,6 @@
     }
 
     button {
-        background-color: #B3A398;
+        background-color: #B1AFFF;
     }
 }
