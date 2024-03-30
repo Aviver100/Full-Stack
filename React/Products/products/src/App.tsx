@@ -9,7 +9,7 @@ function App() {
     <>
       <ProductBox />
       {/* <Popup2/> */}
-      <Popup/>
+      {/* <Popup/> */}
     </>
   )
 }

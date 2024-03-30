@@ -1,10 +1,9 @@
 import React, { ReactNode, useState } from 'react'
 import styles from './productBox.module.scss'
 import { products } from '../../productsList/products';
-import openPopup from '../popup/popup'
-// import productDetailes from '../popup/popup'
+import ProductDetailes from '../popup/popup';
 
-function productBox() {
+function ProductBox() {
   const [list, setList] = React.useState(products);
 
   function removeProduct(id: number) {
@@ -15,7 +14,6 @@ function productBox() {
   function highRating() {
     const newList = list.filter((product) => product.rating > 4.5)
     setList(newList)
-    console.log(newList);
   }
 
   return (
@@ -25,15 +23,14 @@ function productBox() {
           <button className={styles.mainDiv__filterButton} onClick={() => highRating()}>Rating 4.5+</button>
         </div>
         {list.map((product) => (
-          <div className={styles.mainDiv__productBox} key={product.id}>
+          <div className={styles.mainDiv__productBox} key={product.id}>       
             <div className={styles.mainDiv__productImg}>
-              <img src={product.images[1]} alt="product image" />
+              <ProductDetailes {...product} />
             </div>
-            <h5>{product.title}</h5>
+            <h4>{product.title}</h4>
             <p>${product.price}</p>
             <p>Rating: {product.rating}</p>
             <button type='button' onClick={() => removeProduct(product.id)}>Delete</button>
-            <button type='button' onClick={() => openPopup()}>productDetailes</button>
           </div>
         ))}
       </div>
@@ -41,4 +38,4 @@ function productBox() {
   )
 }
 
-export default productBox
+export default ProductBox
