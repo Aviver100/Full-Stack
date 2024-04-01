@@ -1,4 +1,4 @@
-import { ProductPopupProps, confirmAlert } from 'react-confirm-alert';
+import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
 import { products } from '../../productsList/products';
 import { useState } from 'react';
@@ -14,9 +14,16 @@ interface Product {
   images: string[];
 }
 
-
 function ProductDetailes(product: Product) {
   const [list, setList] = useState(products);
+
+  let ProductsArray: Product[] = [];
+
+  function addToCart(product: Product) {
+    // const [list, setList] = useState([]);
+    ProductsArray.push(product)
+    localStorage.setItem("Products Cart", JSON.stringify(ProductsArray))
+  }
 
   function openPopup() {
     confirmAlert({
@@ -39,6 +46,8 @@ function ProductDetailes(product: Product) {
         },
         {
           label: 'Add To Cart',
+          // onClick: () => localStorage.setItem("Products Cart", JSON.stringify(product))     
+          onClick: () => addToCart(product)
         }
       ]
     });

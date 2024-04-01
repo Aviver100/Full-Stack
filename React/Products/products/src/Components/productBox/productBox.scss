@@ -1,0 +1,42 @@
+.mainDiv {
+    background-color: #D7E4C0;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    margin-top: 100px;
+
+
+    &__productBox {
+        background-color: #BBC3A4;
+        height: 350px;
+        width: 200px;
+        border-radius: 10px;
+        margin: 15px;
+    }
+
+    &__productImg {
+        height: 150px;
+        width: 150px;
+
+        img {
+            height: 150px;
+            width: 150px;
+            margin: 25px;
+        }
+    }
+
+    h5 {
+        margin-top: 30px;
+    }
+
+    p {
+        text-align: center;
+    }
+
+    button {
+        background-color: #B3A398;
+    }
+}
