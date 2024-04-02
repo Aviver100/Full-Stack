@@ -8,8 +8,6 @@ function App() {
   return (
     <>
       <ProductBox />
-      {/* <Popup2/> */}
-      {/* <Popup/> */}
     </>
   )
 }

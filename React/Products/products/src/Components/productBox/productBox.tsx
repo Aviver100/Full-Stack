@@ -2,6 +2,20 @@ import React, { ReactNode, useState } from 'react'
 import styles from './productBox.module.scss'
 import { products } from '../../productsList/products';
 import ProductDetailes from '../popup/popup';
+import Shoppingcart from '../Shopping Cart/shoppingcart'
+
+interface Product {
+  id: number;
+  title: string;
+  description: string;
+  price: number;
+  stock: number;
+  brand: string;
+  images: string[];
+}
+
+export let ProductsArray: Product[] = [];
+localStorage.getItem("Products Cart");
 
 function ProductBox() {
   const [list, setList] = React.useState(products);
@@ -21,9 +35,11 @@ function ProductBox() {
       <div className={styles.mainDiv}>
         <div className={styles.mainDiv__filterBar}>
           <button className={styles.mainDiv__filterButton} onClick={() => highRating()}>Rating 4.5+</button>
+          <Shoppingcart/>
+          {/* <button className={styles.mainDiv__filterButton} onClick={() => ShoppingCart()}>Shopping Cart</button> */}
         </div>
         {list.map((product) => (
-          <div className={styles.mainDiv__productBox} key={product.id}>       
+          <div className={styles.mainDiv__productBox} key={product.id}>
             <div className={styles.mainDiv__productImg}>
               <ProductDetailes {...product} />
             </div>

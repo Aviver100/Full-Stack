@@ -3,6 +3,7 @@ import 'react-confirm-alert/src/react-confirm-alert.css';
 import { products } from '../../productsList/products';
 import { useState } from 'react';
 import styles from './popup.module.scss'
+import{ ProductsArray} from '../productBox/productBox'
 
 interface Product {
   id: number;
@@ -15,16 +16,14 @@ interface Product {
 }
 
 function ProductDetailes(product: Product) {
+
   const [list, setList] = useState(products);
-
-  let ProductsArray: Product[] = [];
-
   function addToCart(product: Product) {
-    // const [list, setList] = useState([]);
+
     ProductsArray.push(product)
+    console.log(ProductsArray);
     localStorage.setItem("Products Cart", JSON.stringify(ProductsArray))
   }
-
   function openPopup() {
     confirmAlert({
       title: product.title,
@@ -46,7 +45,6 @@ function ProductDetailes(product: Product) {
         },
         {
           label: 'Add To Cart',
-          // onClick: () => localStorage.setItem("Products Cart", JSON.stringify(product))     
           onClick: () => addToCart(product)
         }
       ]
