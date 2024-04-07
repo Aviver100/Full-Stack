@@ -6,7 +6,9 @@ interface user {
     id: number,
     firstName: string,
     lastName: string,
-    age: number
+    age: number,
+    email: string,
+    phone: number,
 }
 
 function UserPage() {
@@ -21,12 +23,30 @@ function UserPage() {
 
     return (
         <>
-            <div className='UserDetails'>
+         <table className='UserDetailsTable'>
+        <tr>
+            <th>ID</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Age</th>
+        </tr>
+        <tr>
+            <td>{user?.id}</td>
+            <td>{user?.firstName}</td>
+            <td>{user?.lastName}</td>
+            <td>{user?.email}</td>
+            <td>{user?.phone}</td>
+            <td>{user?.age}</td>
+        </tr>
+    </table>
+            {/* <div className='UserDetails'>
                 <p>ID: {user?.id}</p>
                 <p>First Name: {user?.firstName}</p>
                 <p>Last Name: {user?.lastName}</p>
                 <p>Age: {user?.age}</p>
-            </div>
+            </div> */}
         </>
     )
 
