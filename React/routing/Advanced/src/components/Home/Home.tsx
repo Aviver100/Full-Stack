@@ -1,8 +1,16 @@
 import React from 'react'
+import './Home.scss'
+import { Link } from 'react-router-dom'
 
 function Home() {
     return (
-        <div>Home</div>
+        <>
+            <div className='MainDiv'>
+                <div>Home</div>
+                <Link to="/settings">Settings</Link><br />
+            </div>
+        </>
+
     )
 }
 

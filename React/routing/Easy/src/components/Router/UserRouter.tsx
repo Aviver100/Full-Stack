@@ -1,17 +1,32 @@
-import { RouterProvider, createBrowserRouter } from 'react-router-dom'
+import { Outlet, RouterProvider, createBrowserRouter } from 'react-router-dom'
 import UserPage from '../UserPage/UserPage'
+import UsersNavBar from '../UsersNavBar/UsersNavBar'
 
-function UserRouter() {
+// function UserRouter() {
 
-  const router = createBrowserRouter([{
-    path: "/user/:id",
-    element: <UserPage />
-  }
-  ])
-
-  return (
-    <RouterProvider router={router} />
-  )
+const router = createBrowserRouter([{
+  path: "/",
+  element:
+    <>
+      <UsersNavBar />
+      <Outlet />
+    </>,
+  children: [
+    {
+      path: "/user/:id",
+      element: <UserPage />,
+    },
+    {
+      path: "/",
+      element: <p>Hello, Please select User</p>
+    }
+  ]
 }
+])
 
-export default UserRouter
+// return (
+//   <RouterProvider router={router} />
+// )
+// }
+
+export default router

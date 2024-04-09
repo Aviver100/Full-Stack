@@ -14,39 +14,37 @@ interface user {
 function UserPage() {
     const [user, setUser] = useState<user>();
     const { id } = useParams();
+    console.log(id);
+    
 
     useEffect(() => {
         fetch(`https://dummyjson.com/users/${id}`)
             .then(res => res.json())
             .then(res => setUser(res))
-    }, [])
+    }, [id])
 
     return (
         <>
-         <table className='UserDetailsTable'>
-        <tr>
-            <th>ID</th>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Email</th>
-            <th>Phone</th>
-            <th>Age</th>
-        </tr>
-        <tr>
-            <td>{user?.id}</td>
-            <td>{user?.firstName}</td>
-            <td>{user?.lastName}</td>
-            <td>{user?.email}</td>
-            <td>{user?.phone}</td>
-            <td>{user?.age}</td>
-        </tr>
-    </table>
-            {/* <div className='UserDetails'>
-                <p>ID: {user?.id}</p>
-                <p>First Name: {user?.firstName}</p>
-                <p>Last Name: {user?.lastName}</p>
-                <p>Age: {user?.age}</p>
-            </div> */}
+            <table className='UserDetailsTable'>
+                <tbody>
+                <tr>
+                    <th>ID</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Age</th>
+                </tr>
+                <tr>
+                    <td>{user?.id}</td>
+                    <td>{user?.firstName}</td>
+                    <td>{user?.lastName}</td>
+                    <td>{user?.email}</td>
+                    <td>{user?.phone}</td>
+                    <td>{user?.age}</td>
+                </tr>
+                </tbody>
+            </table>
         </>
     )
 
