@@ -6,7 +6,7 @@ function Home() {
     return (
         <>
             <div className='MainDiv'>
-                <div>Home</div>
+            <h3>Home</h3>
                 <Link to="/settings">Settings</Link><br />
             </div>
         </>
