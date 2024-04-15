@@ -8,6 +8,7 @@ function Home() {
             <div className='MainDiv'>
             <h3>Home</h3>
                 <Link to="/settings">Settings</Link><br />
+                {/* <a href="/Settings">Settings</a> */}
             </div>
         </>
 

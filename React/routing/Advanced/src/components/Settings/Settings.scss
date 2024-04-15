@@ -1,3 +1,25 @@
-.MainDiv{
-    margin-left: 250px;   
+html,
+body {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .MainDiv {
+        background-color: rgb(194, 184, 184);
+        border-radius: 10px;
+        width: 450px;
+        height: 280px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: auto;
+
+        &__Navigation {
+            width: 150px;
+            margin-bottom: 10px;
+            // position: absolute;
+        }
+    }
 }
