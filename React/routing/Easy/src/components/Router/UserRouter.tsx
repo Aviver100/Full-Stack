@@ -1,8 +1,6 @@
-import { Outlet, RouterProvider, createBrowserRouter } from 'react-router-dom'
+import { Outlet, createBrowserRouter } from 'react-router-dom'
 import UserPage from '../UserPage/UserPage'
 import UsersNavBar from '../UsersNavBar/UsersNavBar'
-
-// function UserRouter() {
 
 const router = createBrowserRouter([{
   path: "/",
@@ -19,14 +17,12 @@ const router = createBrowserRouter([{
     {
       path: "/",
       element: <p>Hello, Please select User</p>
+    },
+    {
+      path: "*",
+      element: <p>Page Not Found!</p>
     }
   ]
 }
 ])
-
-// return (
-//   <RouterProvider router={router} />
-// )
-// }
-
 export default router
