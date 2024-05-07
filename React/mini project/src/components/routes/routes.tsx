@@ -1,14 +1,15 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import DogCard from '../mainPage/mainPage'
+import MainPage from '../mainPage/mainPage'
+import DogPage from "../dogPage/dogPage";
 
 function Routes() {
     const router = createBrowserRouter([{
         path: "/",
-        element: <DogCard />
+        element: <MainPage />
     },
     {
-        path: "/heydog",
-        element: <p>Hey dog</p>
+        path: "/dogpage",
+        element: <DogPage />
     }
     ])
     return (

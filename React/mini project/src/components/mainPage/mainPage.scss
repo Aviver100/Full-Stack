@@ -1,13 +1,4 @@
-.main{
-    // display: flex;
-    // flex-direction: row;
-    // flex-wrap: wrap;
-    // // width: 80%;
-    // margin: auto;
-    // width: 80%;
-    // border: 3px solid green;
-    // padding: 10px;
-
+.main {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -16,9 +7,16 @@
     align-items: center;
 }
 
-.dogBox{
+.search {
+    width: 80%;
+    margin-left: 150px;
+    margin-top: 25px;
+    height: 20px;
+}
+
+.dogBox {
     height: 380px;
-    width:320px;
-    background-color:cornflowerblue;
+    width: 320px;
+    background-color: cornflowerblue;
     margin: 25px;
 }
