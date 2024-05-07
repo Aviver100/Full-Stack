@@ -1,5 +1,5 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import DogCard from '../dogCard/dogCard'
+import DogCard from '../mainPage/mainPage'
 
 function Routes() {
     const router = createBrowserRouter([{
