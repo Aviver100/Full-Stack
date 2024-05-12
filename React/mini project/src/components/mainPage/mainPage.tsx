@@ -1,11 +1,14 @@
 import { useEffect, useState } from 'react'
-import './mainPage.scss'
+import styles from './mainPage.module.scss'
 import BreedCard from '../breedCard/breedCard';
 
 function mainPage() {
     const [breed, setBreed] = useState([]);
-    const [photo, setPhoto] = useState([]);
     const [searchInput, setSearchInput] = useState("");
+
+    function handleSearch(event: React.ChangeEvent<HTMLInputElement>) {
+        setSearchInput(event.target.value)
+    }
 
     useEffect(() => {
         fetch('https://dog.ceo/api/breeds/list/all')
@@ -14,16 +17,26 @@ function mainPage() {
             .catch(err => console.error(err))
     }, []);
 
+    const filterBreed = Object.keys(breed).filter((breedName) =>
+        breedName.toLowerCase().includes(searchInput))
+
     return (
         <>
-            <input className='search' type="text" />
-            <div className="main">
-                <>
-                    {Object.keys(breed).map((breed) => (
-                        <BreedCard key={breed} breed={breed} />
+            <input
+                className={styles.search}
+                type="text"
+                value={searchInput}
+                onChange={handleSearch}
+                placeholder='What are you looking for?'
+            />
+            <div className={styles.main}>
+
+                {
+                    filterBreed.map((breedName) => (
+                        <BreedCard key={breedName} breed={breedName} />
                     ))
-                    }
-                </>
+                }
+                
             </div>
         </>
     )

@@ -1,0 +1,67 @@
+// body{
+//     display: flex;
+//     flex-direction: column;
+//     justify-content: space-between;
+// }
+// .breedInfo{
+//     flex: 1;
+//     margin: 10px;
+//     padding: 10px;
+//     border: 1px solid black;
+//     width: 1200px;
+//     height: 700px;
+// }
+// .breedPhoto {
+//     width: 100%;
+//     max-height: 400px;
+//     object-fit:cover ;
+// }
+
+// .breedTitle {
+//     margin: 15px;
+// }
+// .chat {
+//     width: 55px;
+//     height: 100px;
+//     border: 1px solid black;
+//     position: fixed; /* Keeps this component fixed at a specific location */
+//     bottom: 10px; /* Positioning at the bottom */
+//     right: 10px; /* Positioning at the right */
+//     background: white;
+//     display: flex;
+//     align-items: center;
+//     justify-content: center;
+//   }
+
+
+.container {
+    display: flex;
+    // justify-content: space-between;
+    width: 120rem;
+
+}
+
+.breedInfo {
+    margin: 10px;
+    padding: 10px;
+    border: 1px solid gray;
+    width: 70%;
+    max-height: 850px;
+}
+
+.breedTitle {
+    font-size: 1.5em;
+    margin-bottom: 15px;
+}
+
+.breedPhoto {
+    width: 100%;
+    max-height: 90%;
+}
+
+.chat {
+    border: 1px solid black;
+    background: white;
+    padding: 10px;
+    margin: 10px;
+}

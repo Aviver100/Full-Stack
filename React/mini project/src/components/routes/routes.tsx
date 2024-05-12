@@ -1,6 +1,6 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import MainPage from '../mainPage/mainPage'
-import DogPage from "../dogPage/dogPage";
+import BreedPage from "../breedPage/breedPage";
 
 function Routes() {
     const router = createBrowserRouter([{
@@ -8,8 +8,8 @@ function Routes() {
         element: <MainPage />
     },
     {
-        path: "/dogpage",
-        element: <DogPage />
+        path: "/breed/:breedParam",
+        element: <BreedPage breed={""} />
     }
     ])
     return (

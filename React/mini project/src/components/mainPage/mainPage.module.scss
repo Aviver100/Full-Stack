@@ -5,18 +5,15 @@
     align-content: center;
     justify-content: center;
     align-items: center;
+    padding: 80px;
 }
 
 .search {
     width: 80%;
-    margin-left: 150px;
+    margin-left: 10%;
     margin-top: 25px;
-    height: 20px;
-}
-
-.breedCard {
-    height: 380px;
-    width: 320px;
-    background-color: cornflowerblue;
-    margin: 25px;
+    height: 35px;
+    border-radius: 18px;
+    position: fixed;
+    
 }
