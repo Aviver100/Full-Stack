@@ -1,43 +1,47 @@
+// App.tsx
 import React, { useState, useEffect } from 'react';
 import io from 'socket.io-client';
+import './chat.scss';
 
-const ChatComponent: React.FC = () => {
+const socket = io();
+
+const App: React.FC = () => {
+    const [inputValue, setInputValue] = useState('');
     const [messages, setMessages] = useState<string[]>([]);
-    const [messageInput, setMessageInput] = useState<string>('');
-    const socket = io('http://localhost:3001');
 
     useEffect(() => {
-        socket.on('message', (message: string) => {
-            setMessages(prevMessages => [...prevMessages, message]);
+        socket.on('chat message', (msg: string) => {
+            setMessages(prevMessages => [...prevMessages, msg]);
+            window.scrollTo(0, document.body.scrollHeight);
         });
-
-        return () => {
-            socket.disconnect();
-        };
     }, []);
 
-    const sendMessage = () => {
-        if (messageInput.trim() !== '') {
-            socket.emit('message', messageInput);
-            setMessageInput('');
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        if (inputValue.trim()) {
+            socket.emit('chat message', inputValue);
+            setInputValue('');
         }
     };
 
     return (
-        <div>
-            <ul>
-                {messages.map((message, index) => (
-                    <li key={index}>{message}</li>
+        <div className="App">
+            <ul id="messages">
+                {messages.map((msg, index) => (
+                    <li key={index}>{msg}</li>
                 ))}
             </ul>
-            <input
-                type="text"
-                value={messageInput}
-                onChange={(e) => setMessageInput(e.target.value)}
-            />
-            <button onClick={sendMessage}>Send</button>
+            <form id="form" onSubmit={handleSubmit}>
+                <input
+                    id="input"
+                    autoComplete="off"
+                    value={inputValue}
+                    onChange={(e) => setInputValue(e.target.value)}
+                />
+                <button type="submit">Send</button>
+            </form>
         </div>
     );
 };
 
-export default ChatComponent;
+export default App;

@@ -24,7 +24,7 @@ function breedPage({ breed }: { breed: string }) {
         </div>
 
         <div className={styles.chat}>
-          <Chat url={'ws://localhost:8080'} />
+          <Chat/>
         </div>
       </div>
     </>
