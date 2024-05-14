@@ -1,6 +1,7 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import MainPage from '../mainPage/mainPage'
 import BreedPage from "../breedPage/breedPage";
+import Chat from "../chat/chat";
 
 function Routes() {
     const router = createBrowserRouter([{
@@ -10,6 +11,10 @@ function Routes() {
     {
         path: "/breed/:breedParam",
         element: <BreedPage breed={""} />
+    },
+    {
+        path: "*",
+        element: <p>Page not found</p>
     }
     ])
     return (

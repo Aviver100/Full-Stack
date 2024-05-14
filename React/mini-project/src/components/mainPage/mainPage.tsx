@@ -36,7 +36,7 @@ function mainPage() {
                         <BreedCard key={breedName} breed={breedName} />
                     ))
                 }
-                
+
             </div>
         </>
     )
