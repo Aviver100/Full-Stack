@@ -1,7 +1,6 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import MainPage from '../mainPage/mainPage'
 import BreedPage from "../breedPage/breedPage";
-import Chat from "../chat/chat";
 
 function Routes() {
     const router = createBrowserRouter([{

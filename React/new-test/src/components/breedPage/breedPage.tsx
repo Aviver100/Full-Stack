@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
 import styles from './breedPage.module.scss'
-import Chat from '../chat/chat_iframe';
+import Chat from '../chat/chat';
 
 function breedPage({ breed }: { breed: string }) {
   const { breedParam } = useParams();
@@ -25,6 +25,7 @@ function breedPage({ breed }: { breed: string }) {
 
         <div className={styles.chat}>
           <iframe className={styles.chat_iframe} src='http://localhost:3000' style={{ width: '100%', height: '100%'}} />
+          {/* <Chat/> */}
         </div>
       </div>
     </>
