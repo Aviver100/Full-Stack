@@ -8,7 +8,7 @@ interface filghtProps {
   // 2 אותיות קוד ראשונות לחברה
   "CHOPER": string,
   // המספר + האותיות = הקוד טיסה
-  "CHFLTN": number,
+  "CHFLTN": string,
   // שם החברה באנגלית
   "CHOPERD": string,
   // שעת נחיתה מתוכננת
@@ -42,27 +42,37 @@ interface filghtProps {
 
 function FlightList() {
   const [list, setList] = useState<filghtProps[]>([]);
-  const [departures, setDepartures] = useState<filghtProps[]>([]);
-  const [arrivals, setArrivals] = useState<filghtProps[]>([]);
+  // const [departures, setDepartures] = useState<filghtProps[]>([]);
+  // const [arrivals, setArrivals] = useState<filghtProps[]>([]);
 
 
   useEffect(() => {
     const getData = async () => {
-      const response = await fetch('https://data.gov.il/api/3/action/datastore_search?resource_id=e83f763b-b7d7-479e-b172-ae981ddc6de5&limit=50')
+      const response = await fetch('https://data.gov.il/api/3/action/datastore_search?resource_id=e83f763b-b7d7-479e-b172-ae981ddc6de5&limit=500')
       const data = await response.json();
       setList(data.result.records);
     }
     getData();
   }, [])
 
-  async function selectList() {
+  async function selectList(event: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
     const findArrivals =
-      list.filter(flight => flight.CHCKZN === null)
-    if (findArrivals) {
-      setArrivals(findArrivals);
-    } else {
-      setDepartures(findArrivals);
+      list.filter(flight => flight.CHCKZN === null);
+    const findDepartures =
+      list.filter(flight => flight.CHCKZN !== null);
+
+    const buttonValue = (event.currentTarget as HTMLButtonElement).value;
+
+    if (buttonValue == "Arrivals") {
+      setList(findArrivals)
+      console.log(list);
     }
+    else {
+      setList(findDepartures)
+      console.log(list);
+
+    }
+    // buttonValue === "Arrivals" ? setList(findArrivals) : setList(findDepartures)
   }
 
   const formatTime = (dateTimeString: string) => {
@@ -71,14 +81,13 @@ function FlightList() {
     const minutes = String(date.getMinutes()).padStart(2, '0');
     return `${hours}:${minutes}`;
   }
-  // { console.log(list) }
 
   return (
 
     <div className={styles.mainDiv}>
       <div className={styles.filter}>
-        <button onClick={selectList}>Departures</button>
-        <button onClick={selectList}>Arrivals</button>
+        <button value="Departures" onClick={selectList}>Departures</button>
+        <button value="Arrivals" onClick={selectList}>Arrivals</button>
       </div>
       <table>
         <thead>
