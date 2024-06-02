@@ -9,7 +9,7 @@ interface flightProps {
   // 2 אותיות קוד ראשונות לחברה
   "CHOPER": string,
   // המספר + האותיות = הקוד טיסה
-  "CHFLTN": number,
+  "CHFLTN": string,
   // שם החברה באנגלית
   "CHOPERD": string,
   // שעת נחיתה מתוכננת
