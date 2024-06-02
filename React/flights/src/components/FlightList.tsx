@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import styles from './FlightList.module.scss'
+// import scrapper from 'airline-logo-scapper';
 
 
-interface filghtProps {
+interface flightProps {
   // מספר סידורי בטבלה
   "_id": number,
   // 2 אותיות קוד ראשונות לחברה
@@ -41,28 +42,67 @@ interface filghtProps {
 
 
 function FlightList() {
-  const [list, setList] = useState<filghtProps[]>([]);
-  const [departures, setDepartures] = useState<filghtProps[]>([]);
-  const [arrivals, setArrivals] = useState<filghtProps[]>([]);
+  const [list, setList] = useState<flightProps[]>([]);
+  const [filteredlist, setFilteredList] = useState<flightProps[]>([]);
+  // const [departures, setDepartures] = useState<flightProps[]>([]);
+  // const [arrivals, setArrivals] = useState<filghtProps[]>([]);
 
+
+// const airline = 'jet/ airways';
+
+// let getLogo = async (airline:string) => {
+//     try{
+//         let logo = await scrapper(airline);
+//         console.log(`data uri => ${logo}`);
+//     }
+//     catch(error) {
+//         console.log(error);
+//     }
+// }
+
+// getLogo(airline);
 
   useEffect(() => {
+    document.title = 'Flights Board';
     const getData = async () => {
-      const response = await fetch('https://data.gov.il/api/3/action/datastore_search?resource_id=e83f763b-b7d7-479e-b172-ae981ddc6de5&limit=50')
+      const response = await fetch('https://data.gov.il/api/3/action/datastore_search?resource_id=e83f763b-b7d7-479e-b172-ae981ddc6de5&limit=1500')
       const data = await response.json();
       setList(data.result.records);
+      setFilteredList(data.result.records);
     }
     getData();
   }, [])
-
-  async function selectList() {
-    const findArrivals =
-      list.filter(flight => flight.CHCKZN === null)
-    if (findArrivals) {
-      setArrivals(findArrivals);
-    } else {
-      setDepartures(findArrivals);
+  function findArrivals() {
+      const currentTime = new Date().getTime();
+      const newDate = currentTime - (60 * 60 * 1000);
+      const arrivalsList =
+        list.filter(flight =>
+          flight.CHCKZN === null &&
+          (
+            (flight.CHPTOL && new Date(flight.CHPTOL).getTime() >= newDate) ||
+            (flight.CHSTOL && new Date(flight.CHSTOL).getTime() >= newDate)
+          )
+          // new Date(flight.CHPTOL).getTime() >= newDate)
+        ).sort((a, b) => new Date(a.CHSTOL).getTime() - new Date(b.CHSTOL).getTime());
+      setFilteredList(arrivalsList);
+      checkStatus();
     }
+
+
+  function findDepartures() {
+    const currentTime = new Date().getTime();
+    const newDate = currentTime - (60 * 60 * 1000);
+    const arrivalsList =
+      list.filter(flight =>
+        flight.CHCKZN !== null &&
+        (
+          (flight.CHPTOL && new Date(flight.CHPTOL).getTime() >= newDate) ||
+          (flight.CHSTOL && new Date(flight.CHSTOL).getTime() >= newDate)
+        )
+        // new Date(flight.CHPTOL).getTime() >= newDate)
+      ).sort((a, b) => new Date(a.CHSTOL).getTime() - new Date(b.CHSTOL).getTime());
+    setFilteredList(arrivalsList);
+    checkStatus();
   }
 
   const formatTime = (dateTimeString: string) => {
@@ -71,18 +111,44 @@ function FlightList() {
     const minutes = String(date.getMinutes()).padStart(2, '0');
     return `${hours}:${minutes}`;
   }
-  // { console.log(list) }
+
+  function checkStatus() {
+
+    const tdStatus = document.getElementsByClassName('status') as HTMLCollectionOf<HTMLTableCellElement>;
+    for (let i = 0; i < tdStatus.length; i++) {
+      let value = tdStatus[i].innerText;
+      if (value === 'בזמן' || 'נחתה') {
+        tdStatus[i].style.backgroundColor = 'green';
+      }
+      if (value === 'עיכוב') {
+        tdStatus[i].style.backgroundColor = 'yellow';
+      }
+      if (value === 'לא סופי') {
+        tdStatus[i].style.backgroundColor = 'orange';
+      }
+      if (value === 'מבוטלת') {
+        tdStatus[i].style.backgroundColor = 'red';
+      }
+      if (value === 'סופי') {
+        tdStatus[i].style.backgroundColor = '#ACE1AF';
+      }
+    }
+  }
+  checkStatus();
+  // findDepartures();
 
   return (
 
     <div className={styles.mainDiv}>
       <div className={styles.filter}>
-        <button onClick={selectList}>Departures</button>
-        <button onClick={selectList}>Arrivals</button>
+        <button onClick={findDepartures}>המראות</button>
+        <button onClick={findArrivals}>נחיתות</button><br/>
+        <input type="text" placeholder='הזן טקסט לחיפוש' />
       </div>
-      <table>
+      <table id='mainTable'>
         <thead>
           <tr>
+            <th>חברת תעופה</th>
             <th>מספר טיסה</th>
             <th>מוצא</th>
             <th>טרמינל</th>
@@ -96,17 +162,18 @@ function FlightList() {
         </thead>
         <tbody>
           {
-            list.map((flight) => (
+            filteredlist.map((flight) => (
               <tr key={flight._id}>
+                <td >{flight.CHOPERD}</td>
                 <td>{flight.CHOPER}{flight.CHFLTN}</td>
                 <td >{flight.CHLOC1TH}</td>
                 <td >{flight.CHTERM}</td>
                 <td >{formatTime(flight.CHSTOL)}</td>
                 <td >{formatTime(flight.CHPTOL)}</td>
                 <td >{flight.CHAORD}</td>
-                <td >{flight.CHCKZN}</td>
-                <td >{flight.CHCINT}</td>
-                <td >{flight.CHRMINH}</td>
+                <td className='toHide'>{flight.CHCKZN}</td>
+                <td className='toHide'>{flight.CHCINT}</td>
+                <td className='status'>{flight.CHRMINH}</td>
               </tr>
             ))}
         </tbody>

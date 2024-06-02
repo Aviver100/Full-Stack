@@ -11,17 +11,22 @@ body {
 }
 
 .filter {
-    display: flex;
     justify-content: center;
-    // align-items: center;
     margin-top: 50px;
-    margin-right: 100px;
+    margin-right: 680px;
 
-button{
-    width: 150px;
-    margin-right: 70px;
-    background-color: burlywood;
-}
+    button {
+        width: 150px;
+        margin-right: 70px;
+        background-color: burlywood;
+    }
+
+    input {
+        width: 365px;
+        margin-right: 70px;
+        margin-top: 15px;
+        height: 25px;
+    }
 }
 
 table {
