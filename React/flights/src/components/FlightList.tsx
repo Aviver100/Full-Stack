@@ -44,23 +44,7 @@ interface flightProps {
 function FlightList() {
   const [list, setList] = useState<flightProps[]>([]);
   const [filteredlist, setFilteredList] = useState<flightProps[]>([]);
-  // const [departures, setDepartures] = useState<flightProps[]>([]);
-  // const [arrivals, setArrivals] = useState<filghtProps[]>([]);
-
-
-// const airline = 'jet/ airways';
-
-// let getLogo = async (airline:string) => {
-//     try{
-//         let logo = await scrapper(airline);
-//         console.log(`data uri => ${logo}`);
-//     }
-//     catch(error) {
-//         console.log(error);
-//     }
-// }
-
-// getLogo(airline);
+  const [hideColumns, setHideColumns] = useState(false)
 
   useEffect(() => {
     document.title = 'Flights Board';
@@ -73,20 +57,25 @@ function FlightList() {
     getData();
   }, [])
   function findArrivals() {
-      const currentTime = new Date().getTime();
-      const newDate = currentTime - (60 * 60 * 1000);
-      const arrivalsList =
-        list.filter(flight =>
-          flight.CHCKZN === null &&
-          (
-            (flight.CHPTOL && new Date(flight.CHPTOL).getTime() >= newDate) ||
-            (flight.CHSTOL && new Date(flight.CHSTOL).getTime() >= newDate)
-          )
-          // new Date(flight.CHPTOL).getTime() >= newDate)
-        ).sort((a, b) => new Date(a.CHSTOL).getTime() - new Date(b.CHSTOL).getTime());
-      setFilteredList(arrivalsList);
-      checkStatus();
-    }
+    const currentTime = new Date().getTime();
+    const newDate = currentTime - (60 * 60 * 1000);
+    const arrivalsList =
+      list.filter(flight =>
+        flight.CHCKZN === null &&
+        (
+          (flight.CHPTOL && new Date(flight.CHPTOL).getTime() >= newDate) ||
+          (flight.CHSTOL && new Date(flight.CHSTOL).getTime() >= newDate)
+        )
+      ).sort((a, b) => new Date(a.CHSTOL).getTime() - new Date(b.CHSTOL).getTime());
+    setFilteredList(arrivalsList);
+    setHideColumns(true)
+
+    const departuresButton = document.getElementById('findDepartures') as HTMLButtonElement;
+    departuresButton.style.backgroundColor = 'yellow'
+
+    const arrivalsButton = document.getElementById('findArrivals') as HTMLButtonElement;
+    arrivalsButton.style.backgroundColor = 'red'
+  }
 
 
   function findDepartures() {
@@ -99,10 +88,15 @@ function FlightList() {
           (flight.CHPTOL && new Date(flight.CHPTOL).getTime() >= newDate) ||
           (flight.CHSTOL && new Date(flight.CHSTOL).getTime() >= newDate)
         )
-        // new Date(flight.CHPTOL).getTime() >= newDate)
       ).sort((a, b) => new Date(a.CHSTOL).getTime() - new Date(b.CHSTOL).getTime());
     setFilteredList(arrivalsList);
-    checkStatus();
+    setHideColumns(false);
+    const departuresButton = document.getElementById('findDepartures') as HTMLButtonElement;
+    departuresButton.style.backgroundColor = 'red'
+
+    const arrivalsButton = document.getElementById('findArrivals') as HTMLButtonElement;
+    arrivalsButton.style.backgroundColor = 'yellow'
+
   }
 
   const formatTime = (dateTimeString: string) => {
@@ -111,7 +105,6 @@ function FlightList() {
     const minutes = String(date.getMinutes()).padStart(2, '0');
     return `${hours}:${minutes}`;
   }
-
   function checkStatus() {
 
     const tdStatus = document.getElementsByClassName('status') as HTMLCollectionOf<HTMLTableCellElement>;
@@ -134,15 +127,20 @@ function FlightList() {
       }
     }
   }
-  checkStatus();
-  // findDepartures();
+
+  useEffect(() => {
+    checkStatus();
+  }, [filteredlist]);
+
+  useEffect(() => {
+    findArrivals();
+  }, [])
 
   return (
-
     <div className={styles.mainDiv}>
       <div className={styles.filter}>
-        <button onClick={findDepartures}>המראות</button>
-        <button onClick={findArrivals}>נחיתות</button><br/>
+        <button id='findDepartures' onClick={findDepartures}>המראות</button>
+        <button id='findArrivals' onClick={findArrivals}>נחיתות</button><br />
         <input type="text" placeholder='הזן טקסט לחיפוש' />
       </div>
       <table id='mainTable'>
@@ -155,8 +153,8 @@ function FlightList() {
             <th>מתוכננת</th>
             <th>עדכנית</th>
             <th>בידוק</th>
-            <th>איזור צ'ק אין</th>
-            <th>דלפק</th>
+            {!hideColumns && <th>איזור צ'ק אין</th>}
+            {!hideColumns && <th>דלפק</th>}
             <th>סטטוס</th>
           </tr>
         </thead>
@@ -171,8 +169,8 @@ function FlightList() {
                 <td >{formatTime(flight.CHSTOL)}</td>
                 <td >{formatTime(flight.CHPTOL)}</td>
                 <td >{flight.CHAORD}</td>
-                <td className='toHide'>{flight.CHCKZN}</td>
-                <td className='toHide'>{flight.CHCINT}</td>
+                {!hideColumns && <td>{flight.CHCKZN}</td>}
+                {!hideColumns && <td>{flight.CHCINT}</td>}
                 <td className='status'>{flight.CHRMINH}</td>
               </tr>
             ))}
