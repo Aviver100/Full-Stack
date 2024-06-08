@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import styles from './FlightList.module.scss'
-// import scrapper from 'airline-logo-scapper';
+import FlightCard from './FlightCard/FlightCard';
+import FlightLandIcon from '@mui/icons-material/FlightLand';
 
 
 interface flightProps {
@@ -45,11 +46,23 @@ function FlightList() {
   const [list, setList] = useState<flightProps[]>([]);
   const [filteredlist, setFilteredList] = useState<flightProps[]>([]);
   const [hideColumns, setHideColumns] = useState(false)
+  const [search, setSearch] = useState('');
+
+  const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSearch(event.target.value)
+  }
+
+  const searchFlight = Object.keys(list).filter((flightText) =>
+    flightText.toLowerCase().includes(search))
+
+  // const data = {
+  //   nodes: list.filter((item) => item.CHLOCCT.includes(search))
+  // }
 
   useEffect(() => {
     document.title = 'Flights Board';
     const getData = async () => {
-      const response = await fetch('https://data.gov.il/api/3/action/datastore_search?resource_id=e83f763b-b7d7-479e-b172-ae981ddc6de5&limit=1500')
+      const response = await fetch('https://data.gov.il/api/3/action/datastore_search?resource_id=e83f763b-b7d7-479e-b172-ae981ddc6de5&limit=1000')
       const data = await response.json();
       setList(data.result.records);
       setFilteredList(data.result.records);
@@ -71,7 +84,7 @@ function FlightList() {
     setHideColumns(true)
 
     const departuresButton = document.getElementById('findDepartures') as HTMLButtonElement;
-    departuresButton.style.backgroundColor = 'yellow'
+    departuresButton.style.backgroundColor = '#D3D3D3'
 
     const arrivalsButton = document.getElementById('findArrivals') as HTMLButtonElement;
     arrivalsButton.style.backgroundColor = 'red'
@@ -95,7 +108,7 @@ function FlightList() {
     departuresButton.style.backgroundColor = 'red'
 
     const arrivalsButton = document.getElementById('findArrivals') as HTMLButtonElement;
-    arrivalsButton.style.backgroundColor = 'yellow'
+    arrivalsButton.style.backgroundColor = '#D3D3D3'
 
   }
 
@@ -139,9 +152,14 @@ function FlightList() {
   return (
     <div className={styles.mainDiv}>
       <div className={styles.filter}>
-        <button id='findDepartures' onClick={findDepartures}>המראות</button>
-        <button id='findArrivals' onClick={findArrivals}>נחיתות</button><br />
-        <input type="text" placeholder='הזן טקסט לחיפוש' />
+        <button id='findDepartures' onClick={findDepartures}>המראות
+        <img src="https://www.svgrepo.com/show/31354/departure.svg" alt="" />
+        </button>
+        <button id='findArrivals' onClick={findArrivals}>נחיתות
+        <img src="https://cdn-icons-png.freepik.com/512/192/192150.png" alt="" />
+        </button><br />
+        
+        <input id='search' onChange={handleSearch} type="text" placeholder='הזן טקסט לחיפוש' />
       </div>
       <table id='mainTable'>
         <thead>
