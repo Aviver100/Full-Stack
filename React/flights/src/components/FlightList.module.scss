@@ -2,14 +2,16 @@ body {
     direction: rtl;
 
     .mainDiv {
-        justify-content: center;
-        align-items: center;
-
+        // justify-content: center;
+        // align-items: center;
+        // display: flex;
+        // flex-direction: column;
+        // margin-right: 0;
 
         .filter {
             justify-content: center;
-            margin-top: 50px;
-            margin-right: 550px;
+            margin-top: 3rem;
+            margin-right: 35rem;
 
             button {
                 width: 370px;
@@ -17,20 +19,20 @@ body {
                 font-size: 25px;
 
                 img {
-                    height: 50px;
-                    width: 50px;
+                    height: 3rem;
+                    width: 3rem;
                     position: absolute;
-                    margin-top: -10px;
-                    margin-right: 20px;
+                    margin-top: -0.6rem;
+                    margin-right: 1.25rem;
                     transform: scaleX(-1);
                 }
             }
 
             input {
-                width: 365px;
-                margin-right: 180px;
-                margin-top: 15px;
-                height: 25px;
+                width: 23rem;
+                margin-right: 11rem;
+                margin-top: 1rem;
+                height: 1.5rem;
             }
         }
     }
@@ -39,9 +41,10 @@ body {
 }
 
 table {
-    width: 150vh;
-    margin-right: 250px;
-    margin-top: 30px;
+    width: 80vw;
+    margin-left: 5rem;
+    margin-right: 11rem;
+    margin-top: 2rem;
     direction: rtl;
     border-spacing: 0;
     border-collapse: separate;
@@ -69,22 +72,28 @@ table {
 
 @media screen and (max-width: 767px) {
     .mainDiv {
-        width: auto;
-        margin: 0 auto;
+        // width: auto;
+        // margin: 0 auto;
     }
 
     .filter {
-        width: 150px;
+        // width: 10rem;
+        margin-left: 12rem;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+
     }
 
     button {
-        // display: block;
-        width: 10px;
-        height: 10px;
-        // margin-bottom: 10px;
+        // width: 1rem;
+        // height: 1rem;
     }
 
     table {
-        width: 150px;
+        // margin-left: 2rem;
+        margin-right: 32rem;
+        max-width: 100%;
     }
 }
