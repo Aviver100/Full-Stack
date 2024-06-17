@@ -1,4 +1,4 @@
-import mongoose, {Schema} from 'mongoose';
+import mongoose, { Schema } from 'mongoose';
 
 const ActivitySchema = new Schema({
     name: {
@@ -19,5 +19,5 @@ const ActivitySchema = new Schema({
     }
 });
 
-// module.exports = mongoose.model('Activity', ActivitySchema);
-export default ActivitySchema;
+const Activity = mongoose.model('Activity', ActivitySchema);
+export default Activity;

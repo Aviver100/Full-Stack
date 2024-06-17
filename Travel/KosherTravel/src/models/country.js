@@ -1,27 +1,27 @@
-import mongoose, {Schema} from 'mongoose';
-import HotelSchema from './hotel'
-import RestaurantSchema from './restaurant'
-import SynagogueSchema from './synagogue'
-import ActivitySchema from './activity'
+import mongoose, { Schema } from 'mongoose';
 
 const CountrySchema = new Schema({
     name: {
         type: String,
         required: true,
     },
-    hotels: {
-        type: [HotelSchema]
-    },
-    Restaurants:{
-        type:[RestaurantSchema]
-    },
-    Synagogue:{
-        type:[SynagogueSchema]
-    },
-    Activity:{
-        type:[ActivitySchema]
-    }
+    hotels: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Hotel'
+    }],
+    restaurants: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Restaurant'
+    }],
+    synagogues: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Synagogue'
+    }],
+    activities: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Activity'
+    }]
 });
 
 const Country = mongoose.model('Country', CountrySchema);
-export default Country; // Ensure this line is present
+export default Country;

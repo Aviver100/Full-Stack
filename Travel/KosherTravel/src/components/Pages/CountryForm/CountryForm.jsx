@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { createCountry } from '../services/api';
+import { createCountry } from '../../../controllers/countryController';
 
 const CountryForm = ({ onCountryCreated }) => {
     const [name, setName] = useState('');

@@ -1,4 +1,4 @@
-import Synagogue from '../models/synagogue';
+import Synagogue from '../models/synagogue.js'
 
 export const createSynagogue = async (req, res) => {
     try {

@@ -1,6 +1,7 @@
 import React from 'react'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import CountryList from '../Pages/CountryList/CountryList'
+import CountryForm from '../Pages/CountryForm/CountryForm'
 import Times from '../Pages/Times/Times'
 import Home from '../Pages/HomePage/HomePage'
 
@@ -17,6 +18,10 @@ function Routes() {
     {
         path: "/",
         element: <Home/>
+    },
+    {
+        path: "/addCountry",
+        element: <CountryForm/>
     }
     ])
     return (
