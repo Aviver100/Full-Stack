@@ -1,10 +1,10 @@
 import mongoose, {Schema} from 'mongoose';
-import HotelSchema from './hotel'
-import RestaurantSchema from './restaurant'
-import SynagogueSchema from './synagogue'
-import ActivitySchema from './activity'
+import HotelSchema from './hotel.js'
+import RestaurantSchema from './restaurant.js'
+import SynagogueSchema from './synagogue.js'
+import ActivitySchema from './activity.js'
 
-const CountrySchema = new Schema({
+const DestinationSchema = new mongoose.Schema({
     name: {
         type: String,
         required: true,
@@ -23,5 +23,5 @@ const CountrySchema = new Schema({
     }
 });
 
-const Country = mongoose.model('Country', CountrySchema);
-export default Country; // Ensure this line is present
+const destination = mongoose.model('Destination', DestinationSchema);
+export default destination;

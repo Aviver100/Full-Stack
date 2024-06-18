@@ -1,6 +1,6 @@
 import mongoose, { Schema } from 'mongoose';
 
-const SynagogueSchema = new Schema({
+const SynagogueSchema = new mongoose.Schema({
     name: {
         type: String,
         required: true,
@@ -20,4 +20,4 @@ const SynagogueSchema = new Schema({
 });
 
 const Synagogue = mongoose.model('Synagogue', SynagogueSchema);
-export default Synagogue;
+export default SynagogueSchema;

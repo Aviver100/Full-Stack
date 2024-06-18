@@ -1,6 +1,6 @@
 import mongoose, {Schema} from 'mongoose';
 
-const ActivitySchema = new Schema({
+const ActivitySchema = new mongoose.Schema({
     name: {
         type: String,
         required: true,
@@ -19,5 +19,5 @@ const ActivitySchema = new Schema({
     }
 });
 
-// module.exports = mongoose.model('Activity', ActivitySchema);
+const Activity = mongoose.model('Activity', ActivitySchema);
 export default ActivitySchema;

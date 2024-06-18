@@ -1,14 +1,14 @@
 import React from 'react'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
-import CountryList from '../Pages/CountryList/CountryList'
-import Times from '../Pages/Times/Times'
-import Home from '../Pages/HomePage/HomePage'
-
+import DestinationList from '../src/Pages/DestinationList/DestinationList'
+import Times from '../src/Pages/Times/Times'
+import Home from '../src/Pages/HomePage/HomePage'
+import DestinationForm from '../src/Admin/DestinationForm/DestinationForm'
 
 function Routes() {
     const router = createBrowserRouter([{
         path: "/Destinations",
-        element: <CountryList />
+        element: <DestinationList />
     },
     {
         path: "/Times",
@@ -17,6 +17,10 @@ function Routes() {
     {
         path: "/",
         element: <Home/>
+    },
+    {
+        path: "/AddDestination",
+        element: <DestinationForm/>
     }
     ])
     return (

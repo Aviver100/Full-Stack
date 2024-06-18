@@ -1,6 +1,6 @@
-import mongoose, {Schema} from 'mongoose';
+import mongoose from 'mongoose';
 
-const HotelSchema = new Schema({
+const HotelSchema = new mongoose.Schema({
     name: {
         type: String,
         required: true,
@@ -17,6 +17,6 @@ const HotelSchema = new Schema({
     }
 });
 
-// module.exports = mongoose.model('Hotel', HotelSchema);
+const Hotel = mongoose.model('Hotel', HotelSchema);
 export default HotelSchema;
 // export default mongoose.model('Hotel', HotelSchema);

@@ -1,17 +1,17 @@
 import React, { useState } from 'react';
-import { createCountry } from '../services/api';
+import  createDestination  from '../../../controllers/DestinationController';
 
-const CountryForm = ({ onCountryCreated }) => {
+const DestinationForm = ({ onCountryCreated }) => {
     const [name, setName] = useState('');
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const newCountry = await createCountry({ name });
-            onCountryCreated(newCountry);
+            const newDestinations = await createDestination({ name });
+            onCountryCreated(newDestinations);
             setName('');
         } catch (error) {
-            console.error('Error creating country', error);
+            console.error('Error creating Destination', error);
         }
     };
 
@@ -21,7 +21,7 @@ const CountryForm = ({ onCountryCreated }) => {
                 type="text"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                placeholder="Country Name"
+                placeholder="Destination Name"
                 required
             />
             <button type="submit">Add Country</button>
@@ -29,4 +29,4 @@ const CountryForm = ({ onCountryCreated }) => {
     );
 };
 
-export default CountryForm;
+export default DestinationForm;
