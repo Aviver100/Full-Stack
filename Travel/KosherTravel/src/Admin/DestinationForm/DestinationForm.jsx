@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
-<<<<<<<< HEAD:Travel/KosherTravel/src/Admin/DestinationForm/DestinationForm.jsx
-import  createDestination  from '../../../controllers/DestinationController';
-========
-import { createCountry } from '../../../controllers/countryController';
->>>>>>>> 6ccff89e9cb63b4d581240c611c069822be175c5:Travel/KosherTravel/src/Admin/DestinationForm/CountryForm.jsx
+import createDestination from '../../../controllers/DestinationController';
+import NavBar from '../../components/NavBar/NavBar';
+
 
 const DestinationForm = ({ onCountryCreated }) => {
     const [name, setName] = useState('');
@@ -20,16 +18,19 @@ const DestinationForm = ({ onCountryCreated }) => {
     };
 
     return (
-        <form onSubmit={handleSubmit}>
-            <input
-                type="text"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                placeholder="Destination Name"
-                required
-            />
-            <button type="submit">Add Country</button>
-        </form>
+        <>
+            <NavBar />
+            <form onSubmit={handleSubmit}>
+                <input
+                    type="text"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    placeholder="Destination Name"
+                    required
+                />
+                <button type="submit">Add Country</button>
+            </form>
+        </>
     );
 };
 

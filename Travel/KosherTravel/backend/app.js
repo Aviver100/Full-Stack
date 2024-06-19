@@ -5,7 +5,9 @@ import  creatDestination  from '../controllers/DestinationController.js';
 const app = express();
 app.use(express.json());
 
-mongoose.connect('mongodb://localhost:27017/KosherTravel', { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect('mongodb://localhost:27017/KosherTravel', { useNewUrlParser: true, useUnifiedTopology: true })
+.then(()=>(console.log('MongoDB connected...')))
+.catch(err =>(err))
 
 app.post('/addDestination', creatDestination);
 // app.get('/countries', getCountries);
