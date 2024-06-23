@@ -1,33 +1,40 @@
 import React, { useEffect, useState } from 'react';
 import NavBar from '../../components/NavBar/NavBar';
-// import {getCountries} from '../../../backend/controllers/countryController';
+import axios from 'axios';
+import { baseURL } from '../../../Routes/router';
+import Styles from './DestinationList.module.css'
+
 const DestinationList = () => {
-    const [countries, setCountries] = useState([]);
+    const [destinationsList, setDestinationsList] = useState([]);
+
+    async function fetchDestinations() {
+        try {
+            const response = await axios.get(`${baseURL}/destinations`);
+            setDestinationsList(response.data);
+        } catch (error) {
+            console.error('Error fetchin destinations', error);
+        }
+    }
 
     useEffect(() => {
-        const fetchCountries = async () => {
-            try {
-                const countries = await getCountries();
-                setCountries(countries);
-            } catch (error) {
-                console.error('Error fetching countries', error);
-            }
-        };
-        
-        fetchCountries();
-    }, []);
-
+        fetchDestinations();
+    }, [])
     return (
         <>
             <NavBar />
             <div>
                 <h1>Destination</h1>
-                <ul>
-                    {countries.map(country => (
-                        <li key={country._id}>{country.name}</li>
+                <div className={Styles.mainDestBoxes}>
+                    {destinationsList.map(dest => (
+                        <div className={Styles.destBox} key={dest._id}>
+                            <h5>
+                                {dest.name}
+                            </h5>
+                        </div>
                     ))}
-                </ul>
+                </div>
             </div>
+            <div></div>
         </>
     );
 };

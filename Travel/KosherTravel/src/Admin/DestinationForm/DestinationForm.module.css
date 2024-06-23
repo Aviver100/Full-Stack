@@ -1,0 +1,21 @@
+#root {
+    height: 80rem;
+    position: relative;
+  }
+body, html{
+    direction: rtl;
+}
+table, tr, td{
+    border: 1px solid black;
+}
+.formDiv{
+    width: 80rem;
+    margin-top: 0px;
+    position: relative;
+}
+tr{
+    width: 55px;
+}
+td{
+    font-size: 20px;
+}

@@ -1,0 +1,12 @@
+.mainDestBoxes {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.destBox {
+    border: 1px black solid;
+    margin-right: 2rem;
+    height: 150px;
+    width: 250px;
+    margin-top: 15px;
+}

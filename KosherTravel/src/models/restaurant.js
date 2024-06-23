@@ -1,6 +1,4 @@
-import mongoose, {
-    Schema
-} from 'mongoose';
+import mongoose, {Schema} from 'mongoose';
 
 const RestaurantSchema = new Schema({
     name: {
@@ -11,16 +9,17 @@ const RestaurantSchema = new Schema({
         type: String,
         required: true,
     },
+    cuisine: {
+        type: String,
+        required: true,
+    },
+    rating: {
+        type: Number,
+        required: true,
+        min: 1,
+        max: 5
+    },
     openingHours: {
-        type: String,
-        required: true,
-    },
-
-    description: {
-        type: String,
-        required: true,
-    },
-    imgUrl: {
         type: String,
         required: true,
     }
