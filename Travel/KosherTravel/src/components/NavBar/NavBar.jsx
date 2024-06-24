@@ -28,11 +28,10 @@ const NavBar = () => {
                             Dropdown
                         </a>
                         <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <Link className="dropdown-item" to="/AddDestination">Add Destination</Link>
-                            <Link className="dropdown-item" to="/AddRestaurant">Add Restaurant</Link>
-                            {/* <Link className="dropdown-item" to="/AnotherAction">Another action</Link> */}
-                            {/* <div className="dropdown-divider"></div> */}
-                            {/* <Link className="dropdown-item" to="/SomethingElseHere">Something else here</Link> */}
+                            <Link className="dropdown-item" to="/adddestination">add Destination</Link>
+                            <Link className="dropdown-item" to="/AnotherAction">Another action</Link>
+                            <div className="dropdown-divider"></div>
+                            <Link className="dropdown-item" to="/SomethingElseHere">Something else here</Link>
                         </div>
                     </li>
                 </ul>
