@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>print to console</title>
+<style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        form {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        input, select {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <form id="myForm">
+        <label for="name">שם:</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="email">אימייל:</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="age">גיל:</label>
+        <input type="number" id="age" name="age" required>
+
+        <label for="gender">מגדר:</label>
+        <select id="gender" name="gender">
+            <option value="male">זכר</option>
+            <option value="female">נקבה</option>
+            <option value="other">אחר</option>
+        </select>
+
+        <button name="send" type="button" onclick="printFormToConsole()">שלח והדפס ל-Console</button>
+    </form>
+
+    <script>
+        function printFormToConsole() {
+            const form = document.getElementById('myForm');
+            const formData = new FormData(form);
+            const formObject = Object.fromEntries(formData);
+            console.log(formObject);
+        }
+    </script>
+</body>
+</html>
