@@ -1,0 +1,216 @@
+<!-- <!DOCTYPE html>
+<html lang="he">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>מחשבון פרדוקס אכילס והצב</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            direction: rtl;
+        }
+
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        label {
+            margin-top: 10px;
+        }
+
+        input {
+            margin-top: 5px;
+            padding: 5px;
+            width: 200px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .results {
+            margin-top: 20px;
+        }
+
+        p {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>מחשבון פרדוקס אכילס והצב</h1>
+        <form id="calculatorForm">
+            <label for="achillesDistance">מרחק התקדמות אכילס:</label>
+            <input type="number" id="achillesDistance" name="achillesDistance" step="0.01" required>
+
+            <button type="button" onclick="calculateProgress()">חשב</button>
+        </form>
+        <div class="results">
+            <h2>תוצאות:</h2>
+            <p>התקדמות הצב: <span id="turtleOutput">100</span> מטרים</p>
+            <p>התקדמות אכילס: <span id="achillesOutput">0</span> מטרים</p>
+        </div>
+    </div>
+    <script>
+        function calculateProgress() {
+            // const achillesDistance = parseFloat(document.getElementById('achillesDistance').value);
+            const achillesDistance = (document.getElementById('achillesDistance').value);
+
+            if (isNaN(achillesDistance) || achillesDistance <= 0) {
+                alert('אנא הזן ערכים תקינים');
+                return;
+            }
+
+            const initialTurtleDistance = 100;  // הצב מתחיל 100 מטר לפני אכילס
+            const turtleDistance = initialTurtleDistance + (achillesDistance * 0.1);
+            const achillesTotalDistance = achillesDistance;
+
+            document.getElementById('turtleOutput').textContent = turtleDistance.toFixed(2);
+            document.getElementById('achillesOutput').textContent = achillesTotalDistance.toFixed(2);
+        }
+    </script>
+</body>
+</html> -->
+
+
+<!DOCTYPE html>
+<html lang="he">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>מחשבון פרדוקס אכילס והצב</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            direction: rtl;
+        }
+
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        label {
+            margin-top: 10px;
+        }
+
+        input {
+            margin-top: 5px;
+            padding: 5px;
+            width: 200px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .results {
+            margin-top: 20px;
+        }
+
+        p {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>מחשבון פרדוקס אכילס והצב</h1>
+        <form id="calculatorForm">
+            <label for="achillesDistance">מרחק התקדמות אכילס:</label>
+            <input type="number" id="achillesDistance" name="achillesDistance" step="0.01" required>
+
+            <button type="button" onclick="calculateProgress()">חשב</button>
+        </form>
+        <div class="results">
+            <h2>תוצאות:</h2>
+            <p>התקדמות הצב: <span id="turtleOutput">0</span> מטרים</p>
+            <p>התקדמות אכילס: <span id="achillesOutput">0</span> מטרים</p>
+        </div>
+    </div>
+    <script>
+        function calculateProgress() {
+            const achillesDistanceStr = document.getElementById('achillesDistance').value;
+
+            if (!achillesDistanceStr || isNaN(achillesDistanceStr) || achillesDistanceStr <= 0) {
+                alert('אנא הזן ערכים תקינים');
+                return;
+            }
+
+            const initialTurtleDistance = 100;  // הצב מתחיל 100 מטר לפני אכילס
+            const achillesDistance = Number(achillesDistanceStr);
+            const turtleDistance = initialTurtleDistance + (achillesDistance * 0.1);
+            const achillesTotalDistance = achillesDistance;
+
+            document.getElementById('turtleOutput').textContent = turtleDistance;
+            document.getElementById('achillesOutput').textContent = achillesTotalDistance;
+        }
+    </script>
+</body>
+</html>
