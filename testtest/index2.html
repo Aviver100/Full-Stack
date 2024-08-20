@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="he">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>מחשבון דירוג כיתות</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            direction: rtl;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .calculator {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+        }
+        .calculator h1 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+        .form-group select {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #4caf50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+        }
+        .result {
+            margin-top: 20px;
+            font-size: 1.2rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <h1>מחשבון דירוג כיתות</h1>
+        <div class="form-group">
+            <label for="category">בחר נושא:</label>
+            <select id="category" onchange="updateForm()">
+                <option value="3">נושא 3</option>
+                <option value="24">נושא 24</option>
+                <option value="32">נושא 32</option>
+            </select>
+        </div>
+        <div class="form-group" id="group1">
+            <label for="param1">מקרים בחודש:</label>
+            <input type="number" id="param1">
+        </div>
+        <div class="form-group" id="group2">
+            <label for="param2">מקרים בחצי השנה שקדמו לה (ממוצע חודשי):</label>
+            <input type="number" id="param2">
+        </div>
+        <div class="form-group" id="group3">
+            <label for="param3">מספר ימים חריגה:</label>
+            <input type="number" id="param3">
+        </div>
+        <button class="btn" onclick="calculate()">חשב</button>
+        <div class="result" id="result"></div>
+    </div>
+
+    <script>
+        function updateForm() {
+            const category = document.getElementById('category').value;
+            const param1Label = document.getElementById('group1').querySelector('label');
+            const param2Label = document.getElementById('group2').querySelector('label');
+            const param3Group = document.getElementById('group3');
+
+            if (category === "3") {
+                param1Label.textContent = 'מקרים בחודש:';
+                param2Label.textContent = 'מקרים בחצי השנה שקדמו לה (ממוצע חודשי):';
+                param3Group.style.display = 'none';
+            } else if (category === "24") {
+                param1Label.textContent = 'מספר המורים המתפטרים החודש האחרון:';
+                param2Label.textContent = 'ממוצע המונים בחצי השנה האחרונה:';
+                param3Group.style.display = 'none';
+            } else if (category === "32") {
+                param1Label.textContent = 'מספר התלמידים שנדרשו לעבור:';
+                param2Label.textContent = 'מספר התלמידים בפועל:';
+                param3Group.style.display = 'block';
+                param3Group.querySelector('label').textContent = 'מספר ימים חריגה:';
+            }
+        }
+
+        function calculate() {
+            const category = document.getElementById('category').value;
+            const param1 = parseFloat(document.getElementById('param1').value);
+            const param2 = parseFloat(document.getElementById('param2').value);
+            let score = 0;
+            let weight = 0;
+
+            if (category === "3") {
+                weight = 0.77;
+                score = (param1 / param2) * weight;
+            } else if (category === "24") {
+                weight = 0.75;
+                score = (1 - (param1 / param2)) * weight;
+            } else if (category === "32") {
+                const param3 = parseFloat(document.getElementById('param3').value);
+                weight = 1.35;
+                if (param3 === 1) {
+                    score = 0.7;
+                } else if (param3 === 2) {
+                    score = 0.5;
+                } else if (param3 > 2) {
+                    score = 0;
+                }
+                score = (param1 / param2) * score * weight;
+            }
+
+            document.getElementById('result').innerText = `הציון הוא: ${score.toFixed(2)}`;
+        }
+
+        window.onload = function() {
+            updateForm();
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="he">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>מחשבון דירוג כיתות</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            direction: rtl;
+            text-align: right;
+            margin: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .input-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        input[type="number"], select {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .result {
+            margin-top: 20px;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>מחשבון דירוג כיתות</h1>
+
+        <div class="input-group">
+            <label for="transition-type">סוג מעבר</label>
+            <select id="transition-type">
+                <option value="class">כיתה</option>
+                <option value="grade">שכבה</option>
+                <option value="school">בית ספר</option>
+            </select>
+        </div>
+
+        <div class="input-group">
+            <label for="total-students">מספר התלמידים הנזקקים למעבר</label>
+            <input type="number" id="total-students" min="1">
+        </div>
+
+        <div class="input-group">
+            <label for="students-overdue">מספר התלמידים בחריגה</label>
+            <input type="number" id="students-overdue" min="0">
+        </div>
+
+        <div class="input-group">
+            <label for="days-overdue">מספר ימי החריגה</label>
+            <input type="number" id="days-overdue" min="0">
+        </div>
+
+        <button onclick="calculate()">חשב</button>
+
+        <div class="result" id="result"></div>
+    </div>
+
+    <script>
+        function calculate() {
+            const transitionType = document.getElementById('transition-type').value;
+            const totalStudents = parseFloat(document.getElementById('total-students').value);
+            const studentsOverdue = parseFloat(document.getElementById('students-overdue').value);
+            const daysOverdue = parseFloat(document.getElementById('days-overdue').value);
+
+            let factor = 0;
+
+            if (transitionType === 'class') {
+                if (daysOverdue === 1) {
+                    factor = 0.7;
+                } else if (daysOverdue === 2) {
+                    factor = 0.5;
+                } else if (daysOverdue > 4) {
+                    factor = 0;
+                }
+            } else if (transitionType === 'grade') {
+                if (daysOverdue === 1) {
+                    factor = 0.7;
+                } else if (daysOverdue === 2) {
+                    factor = 0.2;
+                } else if (daysOverdue > 3) {
+                    factor = 0;
+                }
+            } else if (transitionType === 'school') {
+                if (daysOverdue === 1) {
+                    factor = 0.8;
+                } else if (daysOverdue === 4) {
+                    factor = 0.5;
+                } else if (daysOverdue > 7) {
+                    factor = 0;
+                }
+            }
+
+            let score = 100 * (1 - (studentsOverdue * factor) / totalStudents);
+            score = score.toFixed(8); // מספר סופי לשני מקומות אחרי הנקודה העשרונית
+
+            document.getElementById('result').innerText = `הציון הוא: ${score}`;
+        }
+    </script>
+</body>
+</html>
