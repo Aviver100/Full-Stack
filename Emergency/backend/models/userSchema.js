@@ -13,6 +13,23 @@ const UserSchema = new mongoose.Schema({
     password: {
         type: String,
         required: true
+    },
+    admin: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "admin"
+    },
+    isAdmin: {
+        Boolean,
+        default: false
+    },
+    manager: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'users',
+        default: null
+    },
+    subordinates: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'users',
     }
 });
 
