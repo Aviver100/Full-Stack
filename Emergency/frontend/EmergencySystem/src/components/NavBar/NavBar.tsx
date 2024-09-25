@@ -5,16 +5,27 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useEffect, useState } from 'react';
 import { Button } from 'react-bootstrap';
+import Cookies from "universal-cookie";
 
-function BasicExample() {
 
+
+function NavBar() {
     const [userName, setUserName] = useState<string | null>(null);
+    const cookies = new Cookies();
+
     useEffect(() => {
         const name = localStorage.getItem("userName");
         if (name) {
             setUserName(name);
         }
-    })
+    },[])
+    
+    function logout() {
+        cookies.remove("TOKEN", { path: "/" });
+        localStorage.removeItem("userName");
+        setUserName(null);
+        window.location.href = "/";
+    }
 
     return (
         <Navbar expand="lg" className="bg-body-tertiary fixed-top">
@@ -26,6 +37,7 @@ function BasicExample() {
                         <Nav.Link href="/">Home</Nav.Link>
                         <Nav.Link href="/signup">Register</Nav.Link>
                         <Nav.Link href="/login">Login</Nav.Link>
+                        <Nav.Link href="/managegroup">Manage Group</Nav.Link>
                         <NavDropdown title="Dropdown" id="basic-nav-dropdown">
                             <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
                             <NavDropdown.Item href="#action/3.2">
@@ -39,8 +51,8 @@ function BasicExample() {
                         </NavDropdown>
                     </Nav>
                 </Navbar.Collapse>
-                <a href="">{userName}</a>
-                <Button type="submit" variant="danger" onClick={() => logout()}>
+                {!userName ? "" : <a href="">Hello {userName}</a>}
+                <Button onClick={() => logout()}>
                     Logout
                 </Button>
             </Container>
@@ -48,4 +60,4 @@ function BasicExample() {
     );
 }
 
-export default BasicExample;
+export default NavBar;

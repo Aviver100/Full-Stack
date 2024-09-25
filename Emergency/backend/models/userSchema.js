@@ -10,28 +10,25 @@ const UserSchema = new mongoose.Schema({
         required: true,
         unique: true
     },
+    phone: {
+        type: Number,
+        required: true,
+        unique: true
+    },
     password: {
         type: String,
         required: true
     },
-    admin: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "admin"
+    role: {
+        type: String,
+        enum: ['admin', 'member'],
+        default: 'member',
     },
-    isAdmin: {
-        Boolean,
-        default: false
-    },
-    manager: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'users',
-        default: null
-    },
-    subordinates: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'users',
+    createdAt: {
+        type: Date,
+        default: Date.now,
     }
 });
 
-const UserModel = mongoose.model("users", UserSchema);
+const UserModel = mongoose.model("Users", UserSchema);
 export default UserModel;

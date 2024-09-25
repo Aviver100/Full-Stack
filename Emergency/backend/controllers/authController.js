@@ -1,5 +1,5 @@
 import bcrypt from 'bcrypt';
-import UserModel from '../models/userSchema.js'
+import UserModel from '../models/userSchema.js';
 import jwt from 'jsonwebtoken'
 
 // import mongoose from 'mongoose';
@@ -32,6 +32,7 @@ export async function login(req, res) {
     try {
         //find the user by email
         const user = await UserModel.findOne({email: req.body.email})
+        
         if(!user){
             return res.status(404).json({message: "Email not found"});
         }
@@ -48,6 +49,8 @@ export async function login(req, res) {
             {expiresIn: "24h"}
         );
 
+        
+
         res.status(200).send({message: "Login successful", name: user.name, email: user.email, token})
     } catch (error) {
         res.status(500).json({
@@ -56,9 +59,19 @@ export async function login(req, res) {
         })
     }
 }
-export async function logout() {
-        cookies.remove("TOKEN", {path:"/"})
+
+export async function freeEndpoint(req, res) {
+    res.json({message: "You are free to access me anytime"});
 }
+
+export async function authEndpoint(req, res) {
+    res.json({message: "You are authorized to access me anytime"});
+}
+
+// export async function logout() {
+//         cookies.remove("TOKEN", {path:"/"});
+//         window.location.href = "/";
+// }
 export async function getUsers() {
         try {
             const users = await UserModel.find();

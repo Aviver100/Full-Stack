@@ -1,11 +1,13 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Axios from 'axios'
 import './login.scss'
+import Cookies from "universal-cookie";
 
 function login() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [login, setLogin] = useState(false);
+    const cookies = new Cookies();
 
 
     function handleLogin(e: React.FormEvent) {
@@ -20,7 +22,13 @@ function login() {
                 setEmail('');
                 setPassword('');
                 setLogin(true);
+
                 localStorage.setItem('userName', response.data.name);
+                localStorage.setItem('userId', response.data._id);
+                cookies.set("TOKEN", response.data.token, {
+                    path: "/",
+                });
+
             })
             .catch(error => {
                 console.error("Error login user", error);

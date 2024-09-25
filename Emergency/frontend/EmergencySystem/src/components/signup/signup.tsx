@@ -11,7 +11,7 @@ function signup() {
     function handleSubmit(e: React.FormEvent) {
         e.preventDefault();
 
-        Axios.post('http://localhost:3001/insert', {
+        Axios.post('http://localhost:3001/insertuser', {
             name: name,
             email: email,
             password: password,

@@ -6,6 +6,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Signup from './components/signup/signup.tsx';
 import Login from './components/login/login.tsx';
 import Layout from './components/Layout/Layout.tsx';
+import ManageGroup from './components/manageGroup/manageGroup.tsx';
 
 
 const router = createBrowserRouter([
@@ -16,6 +17,7 @@ const router = createBrowserRouter([
     { index: true, element: <App />},
     { path: "signup", element: <Signup />},
     { path: "login", element: <Login />},
+    { path: "manageGroup", element: <ManageGroup />},
     ]
   }
 ]);
