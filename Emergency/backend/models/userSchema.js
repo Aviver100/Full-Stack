@@ -10,11 +10,11 @@ const UserSchema = new mongoose.Schema({
         required: true,
         unique: true
     },
-    phone: {
-        type: Number,
-        required: true,
-        unique: true
-    },
+    // phone: {
+    //     type: Number,
+    //     // required: true,
+    //     unique: true
+    // },
     password: {
         type: String,
         required: true
@@ -24,6 +24,14 @@ const UserSchema = new mongoose.Schema({
         enum: ['admin', 'member'],
         default: 'member',
     },
+    managedGroups: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Group'
+    }],
+    memberGroups: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Group'
+    }],
     createdAt: {
         type: Date,
         default: Date.now,

@@ -6,16 +6,19 @@ const GroupSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    description: {
+        type: String
+    },
     mebers: [{
         type: mongoose.Schema.Types.ObjectId,
-        ref:'User',
+        ref: 'Users',
     }],
-    createdBy:{ 
+    createdBy: {
         type: mongoose.Schema.Types.ObjectId,
-        ref:'User',
-        require:true,
+        ref: 'Users',
+        require: true,
     },
-    createdAt:{
+    createdAt: {
         type: Date,
         default: Date.now,
     }
