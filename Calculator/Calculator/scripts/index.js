@@ -3,11 +3,12 @@ let a = Number(0);
 let b = Number(0);
 var calcHistory = [];
 
+window.onload = btnClick;
+
 function btnAction(event) {
     let btn = event.target;
     let clickedButton = btn.innerText;
 
-    // console.log(clickedButton);
     if (clickedButton != "C" && clickedButton != "=" && clickedButton != "+") {
         document.getElementById("screen").innerText += clickedButton;
     }
@@ -22,14 +23,22 @@ function btnClick() {
 function plus() {
     a = Number(document.getElementById("screen").innerText);
     calcHistory.push(a)
-    // console.log(calcHistory);
+    console.log(calcHistory);
+    cleanScreen();
+}
+
+function division() {
+    a = Number(document.getElementById("screen").innerText);
+    calcHistory.push(a)
+    console.log(calcHistory);
     cleanScreen();
 }
 
 function equals() {
-    // b = Number(document.getElementById("screen").innerText);
+    a = Number(document.getElementById("screen").innerText);
+    calcHistory.push(a)
     calcHistory.forEach((el)=> sum += el);
-    
+    console.log(calcHistory);
     document.getElementById("screen").innerText = sum;
 }
 
