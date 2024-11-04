@@ -1,36 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="dist/style.css">
-    <title>Compound Interest Calculator</title>
+    <title>Document</title>
+    <link rel="stylesheet" href="styles/styles.css">
+    <script src="scripts/index.js" dist></script>
 </head>
-<body dir="rtl">
-    <div class="container">
-        <h2>מחשבון ריבית דריבית</h2>
-        <form id="calculatorForm">
-            <label for="initialDeposit">סכום הפקדה ראשוני:</label>
-            <input type="number" id="initialDeposit" name="initialDeposit" required>
 
-            <label for="monthlyDeposit">סכום הפקדה חודשי::</label>
-            <input type="number" id="monthlyDeposit" name="monthlyDeposit" required>
-
-            <label for="annualInterest">ריבית שנתית באחוזים:</label>
-            <input type="number" id="annualInterest" name="annualInterest" required>
-
-            <label for="numberOfYears">מספר שנות הפקדה:</label>
-            <input type="number" id="numberOfYears" name="numberOfYears" required>
-
-            <label for="monthlyDepositYears">Number of Years for Monthly Deposits:</label>
-            <input type="number" id="monthlyDepositYears" name="monthlyDepositYears" required>
-
-            <button type="button" onclick="calculateCompoundInterest()">Calculate</button>
-        </form>
-
-        <div class="result" id="result"></div>
+<body>
+    <div class="main">
+        <div class="screenCalc">
+            <label id="screen" class="screen"></label>
+        </div>
+        <div class="buttons">
+            <button onclick="btnClick()" id="button">1</button>
+            <button onclick="btnClick()" id="button">2</button>
+            <button onclick="btnClick()" id="button">3</button>
+            <button onclick="btnClick()" id="button">4</button>
+            <button onclick="btnClick()" id="button">5</button>
+            <button onclick="btnClick()" id="button">6</button>
+            <button onclick="btnClick()" id="button">7</button>
+            <button onclick="btnClick()" id="button">8</button>
+            <button onclick="btnClick()" id="button">9</button>
+            <button onclick="btnClick()" id="button">0</button>
+            <button onclick="btnClick()" id="button">/</button>
+            <button onclick="btnClick()" id="button">*</button>
+            <button onclick="btnClick()" id="button">-</button>
+            <button onclick="btnClick(); plus()" id="button">+</button>
+            <button onclick="btnClick();  equals()" id="button">=</button>
+            <button onclick="cleanScreen()" id="button" class="c">C</button>
+        </div>
     </div>
-
-    <script src="dist/script.js"></script>
 </body>
+
 </html>
