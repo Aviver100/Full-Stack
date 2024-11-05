@@ -1,15 +1,13 @@
-let sum = Number(0);
-let a = Number(0);
-let b = Number(0);
-var calcHistory = [];
+let runningTotal = Number(0);
+let currentNumber = Number(0);
+let lastOperator = null;
 
 window.onload = btnClick;
 
 function btnAction(event) {
     let btn = event.target;
     let clickedButton = btn.innerText;
-
-    if (clickedButton != "C" && clickedButton != "=" && clickedButton != "+") {
+    if (!["C", "=", "+", "/", "*", "-", "."].includes(clickedButton)) {
         document.getElementById("screen").innerText += clickedButton;
     }
 }
@@ -21,32 +19,74 @@ function btnClick() {
 }
 
 function plus() {
-    a = Number(document.getElementById("screen").innerText);
-    calcHistory.push(a)
-    console.log(calcHistory);
+    currentNumber = Number(document.getElementById("screen").innerText);
+    if (runningTotal == 0) {
+        runningTotal = currentNumber;
+    } else if (lastOperator = "equals") {
+        runningTotal = currentNumber;
+    } else {
+        runningTotal = runningTotal + currentNumber;
+    }
+    lastOperator = "add";
+    cleanScreen();
+}
+
+function multiplication() {
+    currentNumber = Number(document.getElementById("screen").innerText);
+    if (runningTotal == 0) {
+        runningTotal = currentNumber;
+    } else if (lastOperator = "equals") {
+        runningTotal = currentNumber;
+    } else {
+        runningTotal = runningTotal * currentNumber;
+    }
+    lastOperator = "multiplication";
     cleanScreen();
 }
 
 function division() {
-    a = Number(document.getElementById("screen").innerText);
-    calcHistory.push(a)
-    console.log(calcHistory);
+    currentNumber = Number(document.getElementById("screen").innerText);
+    if (runningTotal == 0) {
+        runningTotal = currentNumber;
+    } else if (lastOperator = "equals") {
+        runningTotal = currentNumber;
+    } else {
+        runningTotal = runningTotal / currentNumber;
+    }
+    lastOperator = "division";
+    cleanScreen();
+}
+
+function subtraction() {
+    currentNumber = Number(document.getElementById("screen").innerText);
+    if (runningTotal == 0) {
+        runningTotal = currentNumber;
+    } else if (lastOperator = "equals") {
+        runningTotal = currentNumber;
+    } else {
+        runningTotal = runningTotal - currentNumber;
+    }
+    lastOperator = "subtraction";
     cleanScreen();
 }
 
 function equals() {
-    a = Number(document.getElementById("screen").innerText);
-    calcHistory.push(a)
-    calcHistory.forEach((el)=> sum += el);
-    console.log(calcHistory);
-    document.getElementById("screen").innerText = sum;
+    currentNumber = Number(document.getElementById("screen").innerText);
+    if (lastOperator == "add") {
+        runningTotal = runningTotal + currentNumber;
+    } else if (lastOperator == "division") {
+        runningTotal = runningTotal / currentNumber;
+    } else if (lastOperator == "multiplication") {
+        runningTotal = runningTotal * currentNumber;
+    } else if (lastOperator == "subtraction") {
+        runningTotal = runningTotal - currentNumber;
+    } else {
+        runningTotal = currentNumber
+    }
+    document.getElementById("screen").innerText = runningTotal;
+    lastOperator = "equals";
 }
 
 function cleanScreen() {
     document.getElementById("screen").innerText = "";
 }
-
-
-
-
-

@@ -1,8 +1,9 @@
-.main {
+/* .main {
     background-color: rgb(119, 187, 192);
     height: 19rem;
     width: 10rem;
-    margin: 200px;
+    margin-left: 600px;
+    margin-top: 200px;
 }
 
 .screenCalc {
@@ -21,4 +22,78 @@ button {
 
 .c {
     width: 95%;
+} */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f0f0f0;  /* רקע בהיר לדף */
+}
+
+.main {
+    background-color: #333;  /* רקע כהה רק למחשבון */
+    padding: 10px;
+    border-radius: 10px;
+    width: 280px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);  /* הוספתי צל */
+}
+
+.screenCalc {
+    background-color: #fff;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    text-align: right;
+    min-height: 60px;
+}
+
+.screen {
+    font-size: 28px;
+    font-family: 'Arial', sans-serif;
+    color: #333;
+}
+
+.buttons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+}
+
+button {
+    aspect-ratio: 1;
+    font-size: 24px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    background-color: #fff;
+    color: #333;
+    transition: all 0.2s ease;
+}
+
+/* אופרטורים */
+button:nth-child(4n) {
+    background-color: #fff;
+}
+
+/* כפתור = */
+.equals {
+    background-color: #ff9500 !important;
+    color: white;
+}
+
+/* הובר אפקטים */
+button:hover {
+    opacity: 0.8;
+}
+
+button:active {
+    transform: scale(0.95);
 }
