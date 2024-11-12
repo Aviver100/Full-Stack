@@ -1,0 +1,32 @@
+{
+  "expo": {
+    "name": "stopwatch",
+    "slug": "stopwatch",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.aviver.stopwatch"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#ffffff"
+      },
+      "package": "com.aviver.stopwatch",
+      "versionCode": 1
+    },
+    "extra": {
+      "eas": {
+        "projectId": "44182087-8e7c-4f7f-bfac-1c4f190b0375"
+      }
+    }
+  }
+}

@@ -1,24 +1,26 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Axios from 'axios'
 import 'bootstrap/dist/css/bootstrap.css';
 import './managegroup.scss'
+import axios from 'axios';
 
 function addMembers() {
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
     const [phone, setPhone] = useState('')
+    const [members, setMembers] = useState('')
     // const [address, setAddress] = useState('')
 
     function handleSubmit(e: React.FormEvent) {
         e.preventDefault();
 
-        const adminId:string | null = localStorage.getItem('userId');
+        const adminId: string | null = localStorage.getItem('userId');
 
         if (!adminId) {
             console.error('admin ID mot found on localStorage')
             return;
         }
-        Axios.post('http://localhost:3001/insertmember', {
+        Axios.post('http://localhost:3001/getUsers', {
             name,
             email,
             phone,
@@ -36,6 +38,20 @@ function addMembers() {
                 console.error("Error inserting member", error);
             });
     }
+
+    useEffect(() => {
+        const fetchData = async () => {
+            await Axios.get('http://localhost:3001/getUsers')
+                .then(res => {
+                    setMembers(res.data);
+                    console.log(members);
+                })
+        }
+        fetchData();
+    }, [])
+    // function getUsers(){
+    //     Axios.get('http://localhost:3001/getusers',)
+    // }
     return (
         <>
             <h4>Add Member</h4>

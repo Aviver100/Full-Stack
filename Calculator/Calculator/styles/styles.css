@@ -23,7 +23,6 @@ button {
 .c {
     width: 95%;
 } */
-
 * {
     margin: 0;
     padding: 0;
@@ -35,15 +34,15 @@ body {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background-color: #f0f0f0;  /* רקע בהיר לדף */
+    background-color: #f0f0f0;
 }
 
 .main {
-    background-color: #333;  /* רקע כהה רק למחשבון */
+    background-color: #333;
     padding: 10px;
     border-radius: 10px;
     width: 280px;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);  /* הוספתי צל */
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
 }
 
 .screenCalc {
@@ -65,6 +64,12 @@ body {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 8px;
+    grid-template-areas: 
+        "num num num op"
+        "num num num op"
+        "num num num op"
+        "num num num op"
+        "equals equals equals equals";
 }
 
 button {
@@ -78,18 +83,21 @@ button {
     transition: all 0.2s ease;
 }
 
-/* אופרטורים */
+/* Operators */
 button:nth-child(4n) {
     background-color: #fff;
 }
 
-/* כפתור = */
+/* Equals button */
 .equals {
     background-color: #ff9500 !important;
     color: white;
+    grid-column: span 4;
+    aspect-ratio: auto;
+    height: 50px;
 }
 
-/* הובר אפקטים */
+/* Hover effects */
 button:hover {
     opacity: 0.8;
 }
